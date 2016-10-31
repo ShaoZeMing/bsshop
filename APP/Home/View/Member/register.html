@@ -1,0 +1,208 @@
+<extend name="Common/common" />
+<block name="js">
+    <script src="__PUBLIC__/Back/validate/jquery.validate.min.js"></script>
+    <script src="__PUBLIC__/Back/validate/additional-methods.min.js"></script>
+    <script src="__PUBLIC__/Back/validate/localization/messages_zh.min.js"></script>
+</block>
+<block name="title"><title>用户登陆-巴蜀街</title></block>
+<block name="content">
+<div class="container">
+    <ul class="breadcrumb">
+        <li>
+            <a href="">
+                <i class="fa fa-home"></i>
+            </a>
+        </li>
+        <li>
+            <a href="">我的账户</a>
+        </li>
+        <li>
+            <a href="">用户注册</a>
+        </li>
+    </ul>
+    <div class="row">
+        <div id="content" class="col-sm-9">
+            <h1>用户注册</h1>
+            <p>
+                欢迎来到我们网站，如果您是新用户，请填写下面的表单进行注册。如果您已经是本站的会员，请您直接
+                <a href="{:U('/login')}">登录</a>
+                。
+            </p>
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#tab-email-register" data-toggle="tab">E-Mail 注册</a>
+                </li>
+                <li>
+                    <a href="#tab-telephone-register" data-toggle="tab">手机号码注册</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab-email-register">
+                    <form action="{:U('/register')}" method="post"
+                          enctype="multipart/form-data" class="form-horizontal">
+                        <fieldset id="account">
+                            <input type="hidden" name="register_type" value="email">
+                            <div class="form-group required" style="display: none;">
+                                <label class="col-sm-2 control-label">公司类型</label>
+                                <div class="col-sm-10">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="customer_group_id" value="1" checked="checked"/>
+                                            Default
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group required">
+                                <label class="col-sm-2 control-label" for="input-email">电子邮箱</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="member_email" value="" placeholder="电子邮箱" id="input-email"
+                                           class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="input-firstname">您的姓名</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="member_name" value="" placeholder="您的姓名" id="input-firstname"
+                                           class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group required">
+                                <label class="col-sm-2 control-label" for="input-password">输入密码</label>
+                                <div class="col-sm-10">
+                                    <input type="password" name="member_pwd" value="" placeholder="输入密码"
+                                           id="input-password" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group required">
+                                <label class="col-sm-2 control-label" for="input-confirm">确认密码</label>
+                                <div class="col-sm-10">
+                                    <input type="password" name="pwd" value="" placeholder="确认密码" id="input-confirm"
+                                           class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                            <label class="col-sm-2 control-label" for="input-verify">验证码</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="verify" value="" placeholder="输入图片中点数字" id="input-verify"
+                                       class="form-control"/>
+                            </div>
+                            <div class="col-sm-6">
+                                <img src="{:U('/verify')}" onclick="this.src='__CONTROLLER__/verify/'+Math.random();">
+                            </div>
+                        </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">订阅信息</label>
+                                <div class="col-sm-10">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="member__isdy" value="1"/>
+                                        是
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="member__isdy" value="0" checked="checked"/>
+                                        否
+                                    </label>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="buttons">
+                            <div class="pull-right">
+                                我已经阅读并同意
+                                <a href="" class="agree"> <b>隐私政策</b>
+                                </a>
+                                <input type="checkbox" name="agree" value="1"/>
+                                &nbsp;
+                                <input type="submit" value="继续" class="btn btn-primary"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-pane " id="tab-telephone-register">
+                    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                        <fieldset id="tel-account">
+                            <input type="hidden" name="register_type" value="telephone">
+                            <div class="form-group required" style="display: none;">
+                                <label class="col-sm-2 control-label">公司类型</label>
+                                <div class="col-sm-10">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="customer_group_id" value="1" checked="checked"/>
+                                            Default
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group required">
+                                <label class="col-sm-2 control-label" for="input-tel-telephone">联系电话</label>
+                                <div class="col-sm-10">
+                                    <input type="tel" name="member_phone" value="" placeholder="联系电话"
+                                           id="input-tel-telephone" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="input-tel-firstname">您的姓名</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="member_user" value="" placeholder="您的姓名"
+                                           id="input-tel-firstname" class="form-control"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group required">
+                                <label class="col-sm-2 control-label" for="input-tel-password">输入密码</label>
+                                <div class="col-sm-10">
+                                    <input type="password" name="member_pwd" value="" placeholder="输入密码"
+                                           id="input-tel-password" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group required">
+                                <label class="col-sm-2 control-label" for="input-tel-confirm">确认密码</label>
+                                <div class="col-sm-10">
+                                    <input type="password" name="pwd" value="" placeholder="确认密码"
+                                           id="input-tel-confirm" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group required">
+                                <label class="col-sm-2 control-label" for="input-message-code">短信验证码</label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="message_code" value="" placeholder="短信验证码" checked
+                                           id="input-message-code" class="form-control"/>
+                                </div>
+                                <div class="col-sm-5">
+                                    <span  class="btn btn-default">免费获取验证码</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="buttons">
+                            <div class="pull-right">
+                                我已经阅读并同意
+                                <a href="" class="agree"> <b>隐私政策</b>
+                                </a>
+                                <input type="checkbox" name="agree" value="1"/>
+                                &nbsp;
+                                <input type="submit" value="继续" class="btn btn-primary"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <aside id="column-right" class="col-sm-3 hidden-xs">
+            <div class="list-group sidebar-list-group">
+                <a href="" class="list-group-item">会员登录</a>
+                <a href="" class="list-group-item">会员注册</a>
+                <a href="" class="list-group-item">忘记密码</a>
+                <a href="" class="list-group-item">我的账户</a>
+                <a href="" class="list-group-item">收货地址</a>
+                <a href="" class="list-group-item">收藏列表</a>
+                <a href="" class="list-group-item">历史订单</a>
+                <a href="" class="list-group-item">下载文件</a>
+                <a href="" class="list-group-item hidden">分期付款</a>
+                <a href="" class="list-group-item">奖励积分</a>
+                <a href="" class="list-group-item">商品退换</a>
+                <a href="" class="list-group-item">我的余额</a>
+                <a href="" class="list-group-item">订阅咨询</a>
+            </div>
+        </aside>
+    </div>
+</div>
+</block>

@@ -1,0 +1,117 @@
+<Extend name="Layout/Back" />
+
+<block name="content">
+<div id="content">
+    <div class="page-header">
+      <div class="container-fluid">
+        <div class="pull-right">
+          <button type="submit" form="form-brand" data-toggle="tooltip" title="保存" class="btn btn-primary">
+            <i class="fa fa-save"></i>
+          </button>
+          <a href="{:U('lists')}" data-toggle="tooltip" title="取消" class="btn btn-default">
+            <i class="fa fa-reply"></i>
+          </a>
+        </div>
+        <h1>品牌</h1>
+        <ul class="breadcrumb">
+          <li>
+            <a href="{:U('Manage/index')}">首页</a>
+          </li>
+          <li>
+            <a href="">品牌</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <i class="fa fa-pencil"></i>
+            编辑品牌
+          </h3>
+        </div>
+        <div class="panel-body">
+          <form action="{:U('edit')}" method="post" enctype="multipart/form-data" id="form-brand" class="form-horizontal">
+
+            <input type="hidden" name="brand_id" id="input-brand_id" value="{$row['brand_id']}" >
+            <ul class="nav nav-tabs">
+              <li class="active">
+                <a href="#tab-general" data-toggle="tab">基本信息</a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab-general">
+                <div class="form-group required">
+                  <label class="col-sm-2 control-label" for="input-brand_name">品牌</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="brand_name" value="{$row['brand_name']}" placeholder="品牌" id="input-brand_name" class="form-control" />
+                  </div>
+                </div>
+              
+             
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input-brand_sort">排序</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="brand_sort" value="{$row['brand_sort']}" placeholder="排序" id="input-brand_sort" class="form-control" />
+                  </div>
+                </div>
+
+              
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">图片</label>
+                  <div class="col-sm-10">
+                    <input id="input-logo_ori" type="file" name="logo_ori" class="">
+                  </div>
+                </div>
+   
+              </div>
+             
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</block>
+
+<block name="js">
+    <script src="__PUBLIC__/Back/validate/jquery.validate.min.js"></script>
+    <script src="__PUBLIC__/Back/validate/additional-methods.min.js"></script>
+    <script src="__PUBLIC__/Back/validate/localization/messages_zh.min.js"></script>
+
+    <script>
+    $(function() {
+        $('#form-brand').validate({
+            // 规则
+            rules: {
+                brand_name: {
+                    required: true,
+                    remote: {
+                      url: "{:U('ajax')}",
+                      data: {
+                      'operate':'checkBrandUnique',
+                        // 获取当前的品牌ID
+                        'brand_id': $('#input-brand_id').val(),
+                      }
+                    }
+                },
+                brand_sort: {
+                    digits: true,
+                }
+            },
+            // 错误信息
+            messages: {
+                brand_name: {
+                    required: '品牌名称必须填写',
+                    remote: '品牌名称已经存在, 请重新填写',
+                },
+                brand_sort: {
+                    digits: '排序字段要求为整数',
+                },
+            }
+        });
+    });
+
+    </script>
+</block>

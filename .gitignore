@@ -1,0 +1,5 @@
+.htaccess
+APP/Runtime/
+.idea/
+APP/Common/Conf/db.php
+ThinkPHP/

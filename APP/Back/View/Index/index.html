@@ -1,0 +1,177 @@
+<extend name="Layout/Back" />
+
+<block name="content">
+    <div id="content">
+      <div class="page-header">
+        <div class="container-fluid">
+          <h1>控制面板</h1>
+          <ul class="breadcrumb">
+            <li>
+              <a href="">首页</a>
+            </li>
+            <li>
+              <a href="">控制面板</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-3 col-md-3 col-sm-6">
+            <div class="tile">
+              <div class="tile-heading">
+                总订单数
+                <span class="pull-right">0%</span>
+              </div>
+              <div class="tile-body">
+                <i class="fa fa-shopping-cart"></i>
+                <h2 class="pull-right">0</h2>
+              </div>
+              <div class="tile-footer">
+                <a href="">显示详细...</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-6">
+            <div class="tile">
+              <div class="tile-heading">
+                销售总额
+                <span class="pull-right">0%</span>
+              </div>
+              <div class="tile-body">
+                <i class="fa fa-credit-card"></i>
+                <h2 class="pull-right">0</h2>
+              </div>
+              <div class="tile-footer">
+                <a href="">显示详细...</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-6">
+            <div class="tile">
+              <div class="tile-heading">
+                总客户数
+                <span class="pull-right">0%</span>
+              </div>
+              <div class="tile-body">
+                <i class="fa fa-user"></i>
+                <h2 class="pull-right">0</h2>
+              </div>
+              <div class="tile-footer">
+                <a href="">显示详细...</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-6">
+            <div class="tile">
+              <div class="tile-heading">在线客户</div>
+              <div class="tile-body">
+                <i class="fa fa-eye"></i>
+                <h2 class="pull-right">0</h2>
+              </div>
+              <div class="tile-footer">
+                <a href="">显示详细...</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-12 col-sx-12 col-sm-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">
+                  <i class="fa fa-eye"></i>
+                  整体概要
+                </h3>
+              </div>
+              <div class="panel-body">
+                <div id="vmap" style="width: 100%; height: 260px;"></div>
+              </div>
+            </div>
+            <link type="text/css" href="" rel="stylesheet" media="screen" />
+            <script type="text/javascript" src="view/javascript/jquery/jqvmap/jquery.vmap.js"></script>
+            <script type="text/javascript" src="view/javascript/jquery/jqvmap/maps/continents/china-zh.js"></script>
+          </div>
+          <div class="col-lg-6 col-md-12 col-sx-12 col-sm-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <div class="pull-right">
+                  <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-calendar"></i>
+                    <i class="caret"></i>
+                  </a>
+                  <ul id="range" class="dropdown-menu dropdown-menu-right">
+                    <li>
+                      <a href="day">今天</a>
+                    </li>
+                    <li>
+                      <a href="week">本周</a>
+                    </li>
+                    <li class="active">
+                      <a href="month">本月</a>
+                    </li>
+                    <li>
+                      <a href="year">今年</a>
+                    </li>
+                  </ul>
+                </div>
+                <h3 class="panel-title">
+                  <i class="fa fa-bar-chart-o"></i>
+                  销售分析
+                </h3>
+              </div>
+              <div class="panel-body">
+                <div id="chart-sale" style="width: 100%; height: 260px;"></div>
+              </div>
+            </div>
+            <script type="text/javascript" src="view/javascript/jquery/flot/jquery.flot.js"></script>
+            <script type="text/javascript" src="view/javascript/jquery/flot/jquery.flot.resize.min.js"></script>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 col-md-12 col-sm-12 col-sx-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">
+                  <i class="fa fa-calendar"></i>
+                  最近的活动
+                </h3>
+              </div>
+              <ul class="list-group">
+                <li class="list-group-item text-center">没有结果！</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-8 col-md-12 col-sm-12 col-sx-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">
+                  <i class="fa fa-shopping-cart"></i>
+                  最新订单
+                </h3>
+              </div>
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <td class="text-right">订单号</td>
+                      <td>客户名称</td>
+                      <td>状态</td>
+                      <td>生成日期</td>
+                      <td class="text-right">金额</td>
+                      <td class="text-right">管理</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center" colspan="6">没有结果！</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</block>

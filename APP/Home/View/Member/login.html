@@ -1,0 +1,90 @@
+<extend name="Common/common" />
+<block name="title"><title>用户登陆-巴蜀街</title></block>
+<block name="js">
+    <script src="__PUBLIC__/Back/validate/jquery.validate.min.js"></script>
+    <script src="__PUBLIC__/Back/validate/additional-methods.min.js"></script>
+    <script src="__PUBLIC__/Back/validate/localization/messages_zh.min.js"></script>
+</block>
+<block name="content">
+    <div class="container">
+    <ul class="breadcrumb">
+        <li>
+            <a href="">
+                <i class="fa fa-home"></i>
+            </a>
+        </li>
+        <li>
+            <a href="">账户</a>
+        </li>
+        <li>
+            <a href="">登录</a>
+        </li>
+    </ul>
+    <div class="row">
+        <div id="content" class="col-sm-9">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="well">
+                        <h2>会员登录</h2>
+                        <p><strong>如果您已经是本站会员，请直接登录。</strong>
+                        </p>
+                        <form action="{:U('/login')}" method="post"
+                              enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label class="control-label" for="input-email">邮箱地址/手机号码</label>
+                                <input type="text" name="email_phone" value="" placeholder="邮箱地址/手机号码" id="input-email"
+                                       class="form-control"/>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="input-password">密码</label>
+                                <input type="password" name="pwd" value="" placeholder="密码" id="input-password"
+                                       class="form-control"/>
+                                <a href="">忘记密码？</a>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="input-verify">验证码</label>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <input name="verify" value="" placeholder="验证码" id="input-verify" class="form-control" type="verify">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <img src="{:U('/verify')}" onclick="this.src='__CONTROLLER__/verify/'+Math.random();">
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="submit" value="登录" class="btn btn-primary"/>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="well">
+                        <h2>用户注册</h2>
+                        <p><strong>注册账户</strong>
+                        </p>
+                        <p>注册一个账户以便您更快捷地购物， 查看订单状态， 查看订购记录， 和更多的管理项目。</p>
+                        <a href="{:U('/register')}" class="btn btn-primary">继续</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <aside id="column-right" class="col-sm-3 hidden-xs">
+            <div class="list-group sidebar-list-group">
+                <a href="" class="list-group-item">会员登录</a>
+                <a href="" class="list-group-item">会员注册</a>
+                <a href="" class="list-group-item">忘记密码</a>
+                <a href="" class="list-group-item">我的账户</a>
+                <a href="" class="list-group-item">收货地址</a>
+                <a href="" class="list-group-item">收藏列表</a>
+                <a href="" class="list-group-item">历史订单</a>
+                <a href="" class="list-group-item">下载文件</a>
+                <a href="" class="list-group-item hidden">分期付款</a>
+                <a href="" class="list-group-item">奖励积分</a>
+                <a href="" class="list-group-item">商品退换</a>
+                <a href="" class="list-group-item">我的余额</a>
+                <a href="" class="list-group-item">订阅咨询</a>
+            </div>
+        </aside>
+    </div>
+</div>
+</block>
+

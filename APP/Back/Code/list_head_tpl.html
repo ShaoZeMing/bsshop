@@ -1,0 +1,9 @@
+                                              <td class="text-certer">
+                                                 <if condition="$order['field'] eq '___FIELD_' AND $order['type'] eq 'asc'">
+                                                    <a href="{:U('lists', $filter+['field'=>'___FIELD_', 'type'=>'desc'])}" class="asc">___FIELD_COMMENT_</a>
+                                                     <elseif condition="$order['field'] eq '___FIELD_' AND $order['type'] eq 'desc'"/>
+                                                     <a href="{:U('lists', $filter+['field'=>'___FIELD_', 'type'=>'asc'])}" class="desc">___FIELD_COMMENT_</a>
+                                                     <else/>
+                                                     <a href="{:U('lists', $filter+['field'=>'___FIELD_', 'type'=>'asc'])}" class="">___FIELD_COMMENT_</a>
+                                                 </if>
+                                              </td>

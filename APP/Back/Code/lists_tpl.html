@@ -1,0 +1,95 @@
+<extend name="Layout/Back" />
+
+<block name="content" >
+
+    <div id="content">
+        <div class="page-header">
+            <div class="container-fluid">
+                <div class="pull-right">
+                    <a href="{:U('add')}" data-toggle="tooltip" title="新增" class="btn btn-primary"> <i class="fa fa-plus"></i>
+                    </a>
+
+                    <button type="button" data-toggle="tooltip" title="删除" class="btn btn-danger" onclick="confirm('确认？') ? $('#form-brand').submit() : false;"> <i class="fa fa-trash-o"></i>
+                    </button>
+
+                </div>
+                <h1>___TITLE_管理</h1>
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="{U('___MODULE_/index')}">首页</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">___TITLE_列表</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="fa fa-list"></i>
+                        ___TITLE_列表
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <form action="{:U('lists')}" method="GET">
+                    <div class="well">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label" for="input-title">___TITLE_名称</label>
+                                    <input type="text" name="filter____TABLEI__name" value="{$filter['filter____TABLEI__name']}" placeholder="___TITLE_名称" id="input-title" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button type="submit" id="button-filter" class="btn btn-primary pull-right">
+                                    <i class="fa fa-search"></i>
+                                    筛选
+                            </button>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+
+                    <form action="{:U('multi')}" method="post" enctype="multipart/form-data" id="form-brand">
+                        <input type="hidden" id="input-operate_type" name="operate_type" value="">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <td style="width: 1px;" class="text-center">
+                                            <input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" />
+                                        </td>
+                                        ___LIST_HEAD_
+                                        <td class="text-right">管理</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <volist name="rows" id="row">
+                                        <tr>
+                                            <td class="text-center">
+                                                <input type="checkbox" name="selected[]" value="{$row['___PK_']}" />
+                                            </td>
+                                            ___LIST_BODY_
+                                            <td class="text-right">
+                                                <a href="{:U('edit', ['___PK_'=>
+                                                    $row['___PK_']])}" data-toggle="tooltip" title="编辑" class="btn btn-primary">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                    <div class="row">{$page_html}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>

@@ -1,0 +1,153 @@
+<extend name="Layout/Back" />
+
+<block name="content">
+  <div id="content">
+    <div class="page-header">
+      <div class="container-fluid">
+        <div class="pull-right">
+          <a href="{:U('add')}" data-toggle="tooltip" title="新增" class="btn btn-primary">
+            <i class="fa fa-plus"></i>
+          </a>
+          <button type="button" data-toggle="tooltip" title="删除" class="btn btn-danger" onclick="confirm('确认？') ? $('#form-product').submit() : false;">
+            <i class="fa fa-trash-o"></i>
+          </button>
+        </div>
+        <h1>分类管理</h1>
+        <ul class="breadcrumb">
+          <li>
+            <a href="{U('Manage/index')}">首页</a>
+          </li>
+          <li>
+            <a href="javascript:;">分类列表</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <i class="fa fa-list"></i>
+            分类列表
+          </h3>
+        </div>
+        <div class="panel-body">
+          <!-- <div class="well">
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label class="control-label" for="input-name">商品名称</label>
+                  <input type="text" name="filter_name" value="" placeholder="商品名称" id="input-name" class="form-control" />
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label class="control-label" for="input-price">销售价格</label>
+                  <input type="text" name="filter_price" value="" placeholder="销售价格" id="input-price" class="form-control" />
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label class="control-label" for="input-status">状态</label>
+                  <select name="filter_status" id="input-status" class="form-control">
+                    <option value="*"></option>
+                    <option value="1">启用</option>
+                    <option value="0">停用</option>
+                  </select>
+                </div>
+                <button type="button" id="button-filter" class="btn btn-primary pull-right">
+                  <i class="fa fa-search"></i>
+                  筛选
+                </button>
+              </div>
+            </div>
+          </div> -->
+          <form action="" method="post" enctype="multipart/form-data" id="form-product">
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <td style="width: 1px;" class="text-center">
+                      <input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" />
+                    </td>
+                    <td class="text-left">
+                      <a href="" class="asc">分类</a>
+                    </td>
+                    <td class="text-center"></td>
+                    <td class="text-right">
+                      <a href="" class="desc">排序</a>
+                    </td>
+                    <td class="text-right">
+                      <a href="">启用否</a>
+                    </td>
+                    <td class="text-right">
+                      <a href="">导航否</a>
+                    </td>
+                    
+                    <td class="text-right">管理</td>
+                  </tr>
+                </thead>
+                <tbody>
+                <volist name="rows" id="row">
+                  <tr>
+                    <td class="text-center">
+                      <input type="checkbox" name="selected[]" value="{$row['category_id']}" />
+                    </td>
+                    <td class="text-left">{:str_repeat('&nbsp;', $row['deep']*8)}{$row['title']}</td>
+                    <td class="text-center">
+                      <img src="__PUBLIC__/Back/image/avatar.png" alt="HEAD" class="img-thumbnail" style="max-width: 40px"/>
+                    </td>
+                    <td class="text-right">{$row['sort_number']}</td>
+                   
+                    <td class="text-right">
+                    <if condition="$row['is_used'] eq '1'" >
+                    是
+                    <else />
+                    否
+                    </if>
+                    </td>
+                    <td class="text-right">
+                    <if condition="$row['is_nav'] eq '1'" >
+                    是
+                    <else />
+                    否
+                    </if>
+                    </td>
+                    <td class="text-right">
+                      <a href="{:U('edit', ['category_id'=>$row['category_id']])}" data-toggle="tooltip" title="编辑" class="btn btn-primary">
+                        <i class="fa fa-pencil"></i>
+                      </a>
+                  </td>
+                </tr>
+                </volist>
+              </tbody>
+            </table>
+          </div>
+        </form>
+        <div class="row">
+          {$page_html}
+        </div>
+        <!-- <div class="row">
+          <div class="col-sm-6 text-left">
+            <ul class="pagination">
+              <li class="active">
+                <span>1</span>
+              </li>
+              <li>
+                <a href="">2</a>
+              </li>
+              <li>
+                <a href="">&gt;</a>
+              </li>
+              <li>
+                <a href="">&gt;|</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-sm-6 text-right">显示开始 1 到 20 之 23 （总 2 页）</div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  </div>
+</block>

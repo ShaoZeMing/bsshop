@@ -1,0 +1,59 @@
+<extend name="Layout/Back" />
+<block name="title"><title>成功提示-巴蜀街</title></block>
+<block name="content">
+	<div id="content">
+		<div class="page-header">
+			<div class="container-fluid">
+				<div class="pull-right">
+					<button type="submit" form="form-make" data-toggle="tooltip" title="保存" class="btn btn-primary">
+						<i class="fa fa-save"></i>
+					</button>
+					<a href="" data-toggle="tooltip" title="取消" class="btn btn-default">
+						<i class="fa fa-reply"></i>
+					</a>
+				</div>
+				<h1 style="color: red">错误信息!</h1>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<i class="fa fa-pencil"></i>
+						生成相应控制器
+					</h3>
+				</div>
+				<div class="panel-body">
+					<div class="system-message">
+						<p class="error">
+							<?php echo $error;?>
+						</p>
+
+						<p class="jump">
+							页面自动
+							<a id="href" href="<?php echo($jumpUrl); ?>">跳转</a>
+							等待时间： <b id="wait"><?php echo($waitSecond); ?></b>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</block>
+<block name="js">
+<script type="text/javascript">
+	window.onload=function() {
+		(function () {
+			var wait = document.getElementById('wait'), href = document.getElementById('href').href;
+			var interval = setInterval(function () {
+				var time = --wait.innerHTML;
+				if (time <= 0) {
+					location.href = href;
+					clearInterval(interval);
+				}
+				;
+			}, 1000);
+		})();
+	}
+</script>
+</block>

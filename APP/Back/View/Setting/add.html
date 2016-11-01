@@ -1,0 +1,162 @@
+<Extend name="Layout/Back"/>
+
+<block name="content">
+    <div id="content">
+        <div class="page-header">
+            <div class="container-fluid">
+                <div class="pull-right">
+                    <button type="submit" form="form-setting" data-toggle="tooltip" title="保存" class="btn btn-primary">
+                        <i class="fa fa-save"></i>
+                    </button>
+                    <a href="{:U('lists')}" data-toggle="tooltip" title="取消" class="btn btn-default">
+                        <i class="fa fa-reply"></i>
+                    </a>
+                </div>
+                <h1>系统配置</h1>
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="{:U('Index/index')}">首页</a>
+                    </li>
+                    <li>
+                        <a href="">系统配置</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="fa fa-pencil"></i>
+                        添加系统配置
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <form action="{:U('add')}" method="post" enctype="multipart/form-data" id="form-setting"
+                          class="form-horizontal">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#tab-general" data-toggle="tab">基本信息</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab-general">
+
+                                                                                     <div class="form-group required">
+                                                         <label class="col-sm-2 control-label" for="input-setting_key">程序使用的key</label>
+                                                         <div class="col-sm-10">
+                                                             <input type="text" name="setting_key"  value="{$row['setting_key']}" placeholder="程序使用的key"
+                                                                    id="input-setting_key" class="form-control"/>
+                                                         </div>
+                                                     </div>                                                     <div class="form-group required">
+                                                         <label class="col-sm-2 control-label" for="input-setting_name">配置项名称</label>
+                                                         <div class="col-sm-10">
+                                                             <input type="text" name="setting_name"  value="{$row['setting_name']}" placeholder="配置项名称"
+                                                                    id="input-setting_name" class="form-control"/>
+                                                         </div>
+                                                     </div>                                                     <div class="form-group required">
+                                                         <label class="col-sm-2 control-label" for="input-setting_value">配置项的值</label>
+                                                         <div class="col-sm-10">
+                                                             <input type="text" name="setting_value"  value="{$row['setting_value']}" placeholder="配置项的值"
+                                                                    id="input-setting_value" class="form-control"/>
+                                                         </div>
+                                                     </div>                                                     <div class="form-group required">
+                                                         <label class="col-sm-2 control-label" for="input-setting_type_id">输入框类型id</label>
+                                                         <div class="col-sm-10">
+                                                             <input type="text" name="setting_type_id"  value="{$row['setting_type_id']}" placeholder="输入框类型id"
+                                                                    id="input-setting_type_id" class="form-control"/>
+                                                         </div>
+                                                     </div>                                                     <div class="form-group required">
+                                                         <label class="col-sm-2 control-label" for="input-setting_group_id">分组id</label>
+                                                         <div class="col-sm-10">
+                                                             <input type="text" name="setting_group_id"  value="{$row['setting_group_id']}" placeholder="分组id"
+                                                                    id="input-setting_group_id" class="form-control"/>
+                                                         </div>
+                                                     </div>                                                     <div class="form-group required">
+                                                         <label class="col-sm-2 control-label" for="input-setting_sort">排序</label>
+                                                         <div class="col-sm-10">
+                                                             <input type="text" name="setting_sort"  value="{$row['setting_sort']}" placeholder="排序"
+                                                                    id="input-setting_sort" class="form-control"/>
+                                                         </div>
+                                                     </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">图片</label>
+                                    <div class="col-sm-10">
+                                        <input id="input-logo_ori" type="file" name="logo_ori" class="">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+
+<block name="js">
+    <script src="__PUBLIC__/Back/validate/jquery.validate.min.js"></script>
+    <script src="__PUBLIC__/Back/validate/additional-methods.min.js"></script>
+    <script src="__PUBLIC__/Back/validate/localization/messages_zh.min.js"></script>
+
+    <script>
+        $(function () {
+            $('#form-setting').validate({
+                // 规则
+                rules: {
+                                            setting_key: {
+                        required: true,
+                        remote: {
+                        'url': "{:U('ajax')}",
+                        'data': {'operate': 'checksetting_key',
+                        '___PK_': $('#input____PK_').val()}
+                           }
+                        },
+                        setting_name: {
+                        required: true,
+                        remote: {
+                        'url': "{:U('ajax')}",
+                        'data': {'operate': 'checksetting_name',
+                        '___PK_': $('#input____PK_').val()}
+                           }
+                        },
+                        setting_value: {
+                        required: true,
+                        remote: {
+                        'url': "{:U('ajax')}",
+                        'data': {'operate': 'checksetting_value',
+                        '___PK_': $('#input____PK_').val()}
+                           }
+                        },
+
+                    event_sort: {
+                digits: true
+            }
+        },
+            // 错误信息
+            messages: {
+
+                                 setting_key: {
+                 required: '不能为空',
+                 remote: '已经存在, 请重新填写'
+                 },
+                 setting_name: {
+                 required: '不能为空',
+                 remote: '已经存在, 请重新填写'
+                 },
+                 setting_value: {
+                 required: '不能为空',
+                 remote: '已经存在, 请重新填写'
+                 },
+
+                event_sort: {
+                    digits: '排序字段要求为整数'
+                }
+            }
+            });
+        });
+
+    </script>
+</block>

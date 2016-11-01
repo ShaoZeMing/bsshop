@@ -1,22 +1,24 @@
-<extend name="Layout/Back" />
+<extend name="Layout/Back"/>
 
-<block name="content" >
+<block name="content">
 
     <div id="content">
         <div class="page-header">
             <div class="container-fluid">
                 <div class="pull-right">
-                    <a href="{:U('add')}" data-toggle="tooltip" title="新增" class="btn btn-primary"> <i class="fa fa-plus"></i>
+                    <a href="{:U('add')}" data-toggle="tooltip" title="新增" class="btn btn-primary"> <i
+                            class="fa fa-plus"></i>
                     </a>
 
-                    <button type="button" data-toggle="tooltip" title="删除" class="btn btn-danger" onclick="confirm('确认？') ? $('#form-brand').submit() : false;"> <i class="fa fa-trash-o"></i>
+                    <button type="button" data-toggle="tooltip" title="删除" class="btn btn-danger"
+                            onclick="confirm('确认？') ? $('#form-brand').submit() : false;"><i class="fa fa-trash-o"></i>
                     </button>
 
                 </div>
                 <h1>系统配置管理</h1>
                 <ul class="breadcrumb">
                     <li>
-                        <a href="{U('Back/index')}">首页</a>
+                        <a href="{:U('Index/index')}">首页</a>
                     </li>
                     <li>
                         <a href="javascript:;">系统配置列表</a>
@@ -34,25 +36,27 @@
                 </div>
                 <div class="panel-body">
                     <form action="{:U('lists')}" method="GET">
-                    <div class="well">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label class="control-label" for="input-title">系统配置名称</label>
-                                    <input type="text" name="filter_setting_name" value="{$filter['filter_setting_name']}" placeholder="系统配置名称" id="input-title" class="form-control" />
+                        <div class="well">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label class="control-label" for="input-title">搜索关键字</label>
+                                        <input type="text" name="filter_setting_name"
+                                               value="{$filter['filter_setting_name']}" placeholder="搜索内容"
+                                               id="input-title" class="form-control"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <button type="submit" id="button-filter" class="btn btn-primary pull-right">
+                                        <i class="fa fa-search"></i>
+                                        筛选
+                                    </button>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <button type="submit" id="button-filter" class="btn btn-primary pull-right">
-                                    <i class="fa fa-search"></i>
-                                    筛选
-                            </button>
-                            </div>
-                        </div>
-                    </div>
                     </form>
 
                     <form action="{:U('multi')}" method="post" enctype="multipart/form-data" id="form-brand">
@@ -60,20 +64,13 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">
                                 <thead>
-                                    <tr>
-                                        <td style="width: 1px;" class="text-center">
-                                            <input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" />
-                                        </td>
-                                                                                      <td class="text-certer">
-                                                 <if condition="$order['field'] eq 'setting_id' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'setting_id', 'type'=>'desc'])}" class="asc">主键</a>
-                                                     <elseif condition="$order['field'] eq 'setting_id' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'setting_id', 'type'=>'asc'])}" class="desc">主键</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'setting_id', 'type'=>'asc'])}" class="">主键</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-certer">
+                                <tr>
+                                    <td style="width: 1px;" class="text-center">
+                                        <input type="checkbox"
+                                               onclick="$('input[name*=\'selected\']').prop('checked', this.checked);"/>
+                                    </td>
+                                    <td class="text-center">序号</td>
+                                                                                  <td class="text-center">
                                                  <if condition="$order['field'] eq 'setting_key' AND $order['type'] eq 'asc'">
                                                     <a href="{:U('lists', $filter+['field'=>'setting_key', 'type'=>'desc'])}" class="asc">程序使用的key</a>
                                                      <elseif condition="$order['field'] eq 'setting_key' AND $order['type'] eq 'desc'"/>
@@ -82,7 +79,7 @@
                                                      <a href="{:U('lists', $filter+['field'=>'setting_key', 'type'=>'asc'])}" class="">程序使用的key</a>
                                                  </if>
                                               </td>
-                                              <td class="text-certer">
+                                              <td class="text-center">
                                                  <if condition="$order['field'] eq 'setting_name' AND $order['type'] eq 'asc'">
                                                     <a href="{:U('lists', $filter+['field'=>'setting_name', 'type'=>'desc'])}" class="asc">配置项名称</a>
                                                      <elseif condition="$order['field'] eq 'setting_name' AND $order['type'] eq 'desc'"/>
@@ -91,7 +88,7 @@
                                                      <a href="{:U('lists', $filter+['field'=>'setting_name', 'type'=>'asc'])}" class="">配置项名称</a>
                                                  </if>
                                               </td>
-                                              <td class="text-certer">
+                                              <td class="text-center">
                                                  <if condition="$order['field'] eq 'setting_value' AND $order['type'] eq 'asc'">
                                                     <a href="{:U('lists', $filter+['field'=>'setting_value', 'type'=>'desc'])}" class="asc">配置项的值</a>
                                                      <elseif condition="$order['field'] eq 'setting_value' AND $order['type'] eq 'desc'"/>
@@ -100,7 +97,7 @@
                                                      <a href="{:U('lists', $filter+['field'=>'setting_value', 'type'=>'asc'])}" class="">配置项的值</a>
                                                  </if>
                                               </td>
-                                              <td class="text-certer">
+                                              <td class="text-center">
                                                  <if condition="$order['field'] eq 'setting_type_id' AND $order['type'] eq 'asc'">
                                                     <a href="{:U('lists', $filter+['field'=>'setting_type_id', 'type'=>'desc'])}" class="asc">输入框类型id</a>
                                                      <elseif condition="$order['field'] eq 'setting_type_id' AND $order['type'] eq 'desc'"/>
@@ -109,7 +106,7 @@
                                                      <a href="{:U('lists', $filter+['field'=>'setting_type_id', 'type'=>'asc'])}" class="">输入框类型id</a>
                                                  </if>
                                               </td>
-                                              <td class="text-certer">
+                                              <td class="text-center">
                                                  <if condition="$order['field'] eq 'setting_group_id' AND $order['type'] eq 'asc'">
                                                     <a href="{:U('lists', $filter+['field'=>'setting_group_id', 'type'=>'desc'])}" class="asc">分组id</a>
                                                      <elseif condition="$order['field'] eq 'setting_group_id' AND $order['type'] eq 'desc'"/>
@@ -118,7 +115,7 @@
                                                      <a href="{:U('lists', $filter+['field'=>'setting_group_id', 'type'=>'asc'])}" class="">分组id</a>
                                                  </if>
                                               </td>
-                                              <td class="text-certer">
+                                              <td class="text-center">
                                                  <if condition="$order['field'] eq 'setting_sort' AND $order['type'] eq 'asc'">
                                                     <a href="{:U('lists', $filter+['field'=>'setting_sort', 'type'=>'desc'])}" class="asc">排序</a>
                                                      <elseif condition="$order['field'] eq 'setting_sort' AND $order['type'] eq 'desc'"/>
@@ -128,18 +125,18 @@
                                                  </if>
                                               </td>
 
-                                        <td class="text-right">管理</td>
-                                    </tr>
+                                    <td class="text-right">管理</td>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    <volist name="rows" id="row">
-                                        <tr>
-                                            <td class="text-center">
-                                                <input type="checkbox" name="selected[]" value="{$row['setting_id']}" />
-                                            </td>
-                                                                                             <td class="text-center">{$row['setting_id']}</td>
+                                <volist name="rows" id="row">
+                                    <tr>
+                                        <td class="text-center">
+                                            <input type="checkbox" name="selected[]" value="{$row['setting_id']}"/>
+                                        </td>
+                                        <td class="text-center">{$i}</td>
 
-                                                 <td class="text-center">{$row['setting_key']}</td>
+                                                                                         <td class="text-center">{$row['setting_key']}</td>
 
                                                  <td class="text-center">{$row['setting_name']}</td>
 
@@ -152,14 +149,15 @@
                                                  <td class="text-center">{$row['setting_sort']}</td>
 
 
-                                            <td class="text-right">
-                                                <a href="{:U('edit', ['setting_id'=>
-                                                    $row['setting_id']])}" data-toggle="tooltip" title="编辑" class="btn btn-primary">
-                                                    <i class="fa fa-pencil"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    </volist>
+                                        <td class="text-right">
+                                            <a href="{:U('edit', ['setting_id'=>
+                                                    $row['setting_id']])}" data-toggle="tooltip" title="编辑"
+                                               class="btn btn-primary">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </volist>
                                 </tbody>
                             </table>
                         </div>

@@ -3,3 +3,4 @@ APP/Runtime/
 .idea/
 APP/Common/Conf/db.php
 ThinkPHP/
+text/

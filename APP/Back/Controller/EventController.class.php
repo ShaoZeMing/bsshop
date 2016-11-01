@@ -14,14 +14,14 @@ class EventController extends Controller
         // 判断是否为POST数据提交
         if (IS_POST) {
             // 数据处理
-            // $model = M('event_id');
             $model = D('Event');
-            $result = $model->create();
+            $result = $model->create();    //创建数据对象
 
             if (!$result) {
                 $this->error('数据添加失败: ' . $model->getError(), U('add'));
             }
 
+            //添加数据
             $result = $model->add();
             if (!$result) {
                 $this->error('数据添加失败:' . $model->getError(), U('add'));
@@ -40,8 +40,7 @@ class EventController extends Controller
      */
     public function lists()
     {
-
-        $model = M('Event');
+        $model = D('Event');
 
         // 分页, 搜索, 排序等
         // 搜索, 筛选, 过滤
@@ -49,9 +48,18 @@ class EventController extends Controller
         // $filter 表示用户输入的内容
         // $cond 表示用在模型中查询条件
         $cond = [];// 初始条件
-        $filter['filter_event_name'] = I('get.filter_event_name', '', 'trim');
-        if($filter['filter_event_name'] !== '') {
-            $cond['event_name'] = ['like', '%'.$filter['filter_event_name'].'%'];// 适当考虑索引问题
+
+        //搜索处理
+        $filter['filter_event_name'] = I('get.filter_event_name', '', 'trim');   //获取搜索关键词
+        if ($filter['filter_event_name'] !== '') {
+
+            //需要搜索的字段event_name
+            $fd = explode(',', "event_name");
+            $cond['_logic'] = 'or';       //搜索条件之间为or（或）
+            //遍历模糊搜索条件
+            foreach ($fd as $f) {
+                $cond[$f] = ['like', '%' . $filter['filter_event_name'] . '%'];// 适当考虑索引问题
+            }
         }
         // 分配筛选数据, 到模板, 为了展示搜索条件
         $this->assign('filter', $filter);
@@ -82,7 +90,7 @@ class EventController extends Controller
         // 生成HTML代码
         $page_html = $t_page->show();
         $this->assign('page_html', $page_html);
-          
+
         $rows = $model->where($cond)->order($sort)->page("$page, $pagesize")->select();
         $this->assign('rows', $rows);
 
@@ -153,18 +161,22 @@ class EventController extends Controller
      */
     public function ajax()
     {
+//        p($_REQUEST);
         $operate = I('request.operate', null, 'trim');
 
         if (is_null($operate)) {
-            return ;
+            return;
         }
+        //需要搜索的字段event_name
+        $fd = explode(',', "event_name");
 
-        switch ($operate) {
-            // 验证品牌名称唯一的操作
-            case 'checkBrandUnique':
+        //循环生成多个if判断语句针对ajax异步验证
+        foreach ($fd as $v){
+            if ($operate=='check'.$v) {
+                // 验证品牌名称唯一的操作
                 // 获取填写的品牌名称
-                $title = I('request.Event_name', '');
-                $cond['Event_name'] = $title;
+                $title = I('request.'.$v, '');
+                $cond[$v] = $title;
                 // 判断是否传递了event_id
                 $event_id = I('request.event_id', null);
                 if (!is_null($event_id)) {
@@ -172,10 +184,11 @@ class EventController extends Controller
                     $cond['event_id'] = ['neq', $event_id];
                 }
                 // 获取模型后, 利用条件获取匹配的记录数
-                $count = M('event_id')->where($cond)->count();
+                $count = M('Event')->where($cond)->count();
                 // 如果记录数>0, 条件为真, 说明存在记录, 重复, 验证未通过, 响应false
                 echo $count ? 'false' : 'true';
-            break;
+            }
         }
+
     }
 }

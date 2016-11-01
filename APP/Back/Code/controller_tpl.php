@@ -14,14 +14,14 @@ class ___TABLE_Controller extends Controller
         // 判断是否为POST数据提交
         if (IS_POST) {
             // 数据处理
-            // $model = M('___PK_');
             $model = D('___TABLE_');
-            $result = $model->create();
+            $result = $model->create();    //创建数据对象
 
             if (!$result) {
                 $this->error('数据添加失败: ' . $model->getError(), U('add'));
             }
 
+            //添加数据
             $result = $model->add();
             if (!$result) {
                 $this->error('数据添加失败:' . $model->getError(), U('add'));
@@ -40,7 +40,6 @@ class ___TABLE_Controller extends Controller
      */
     public function lists()
     {
-
         $model = D('___TABLE_');
 
         // 分页, 搜索, 排序等
@@ -49,16 +48,25 @@ class ___TABLE_Controller extends Controller
         // $filter 表示用户输入的内容
         // $cond 表示用在模型中查询条件
         $cond = [];// 初始条件
-        $filter['filter____TABLEI__name'] = I('get.filter____TABLEI__name', '', 'trim');
-        if($filter['filter____TABLEI__name'] !== '') {
-            $cond['___TABLEI__name'] = ['like', '%'.$filter['filter____TABLEI__name'].'%'];// 适当考虑索引问题
+
+        //搜索处理
+        $filter['filter____TABLEI__name'] = I('get.filter____TABLEI__name', '', 'trim');   //获取搜索关键词
+        if ($filter['filter____TABLEI__name'] !== '') {
+
+            //需要搜索的字段___FD_
+            $fd = explode(',', "___FD_");
+            $cond['_logic'] = 'or';       //搜索条件之间为or（或）
+            //遍历模糊搜索条件
+            foreach ($fd as $f) {
+                $cond[$f] = ['like', '%' . $filter['filter____TABLEI__name'] . '%'];// 适当考虑索引问题
+            }
         }
         // 分配筛选数据, 到模板, 为了展示搜索条件
         $this->assign('filter', $filter);
 
         // 排序
         // 考虑用户所传递的排序方式和字段
-        $order['field'] = I('get.field', '___TABLEI__sort', 'trim');// 初始排序, 字段
+        $order['field'] = I('get.field', '___SORT_', 'trim');// 初始排序, 字段
         $order['type'] = I('get.type', 'asc', 'trim');// 初始排序, 方式
 
         $sort = [$order['field'] => $order['type']];
@@ -82,7 +90,7 @@ class ___TABLE_Controller extends Controller
         // 生成HTML代码
         $page_html = $t_page->show();
         $this->assign('page_html', $page_html);
-          
+
         $rows = $model->where($cond)->order($sort)->page("$page, $pagesize")->select();
         $this->assign('rows', $rows);
 
@@ -153,18 +161,22 @@ class ___TABLE_Controller extends Controller
      */
     public function ajax()
     {
+//        p($_REQUEST);
         $operate = I('request.operate', null, 'trim');
 
         if (is_null($operate)) {
-            return ;
+            return;
         }
+        //需要搜索的字段___FD_
+        $fd = explode(',', "___FD_");
 
-        switch ($operate) {
-            // 验证品牌名称唯一的操作
-            case 'checkBrandUnique':
+        //循环生成多个if判断语句针对ajax异步验证
+        foreach ($fd as $v){
+            if ($operate=='check'.$v) {
+                // 验证品牌名称唯一的操作
                 // 获取填写的品牌名称
-                $title = I('request.___TABLE__name', '');
-                $cond['___TABLE__name'] = $title;
+                $title = I('request.'.$v, '');
+                $cond[$v] = $title;
                 // 判断是否传递了___PK_
                 $___PK_ = I('request.___PK_', null);
                 if (!is_null($___PK_)) {
@@ -172,10 +184,11 @@ class ___TABLE_Controller extends Controller
                     $cond['___PK_'] = ['neq', $___PK_];
                 }
                 // 获取模型后, 利用条件获取匹配的记录数
-                $count = M('___PK_')->where($cond)->count();
+                $count = M('___TABLE_')->where($cond)->count();
                 // 如果记录数>0, 条件为真, 说明存在记录, 重复, 验证未通过, 响应false
                 echo $count ? 'false' : 'true';
-            break;
+            }
         }
+
     }
 }

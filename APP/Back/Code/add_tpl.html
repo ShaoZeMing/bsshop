@@ -1,0 +1,90 @@
+<Extend name="Layout/Back"/>
+
+<block name="content">
+    <div id="content">
+        <div class="page-header">
+            <div class="container-fluid">
+                <div class="pull-right">
+                    <button type="submit" form="form-___TABLEI_" data-toggle="tooltip" title="保存" class="btn btn-primary">
+                        <i class="fa fa-save"></i>
+                    </button>
+                    <a href="{:U('lists')}" data-toggle="tooltip" title="取消" class="btn btn-default">
+                        <i class="fa fa-reply"></i>
+                    </a>
+                </div>
+                <h1>___TITLE_</h1>
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="{:U('Index/index')}">首页</a>
+                    </li>
+                    <li>
+                        <a href="">___TITLE_</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="fa fa-pencil"></i>
+                        添加___TITLE_
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <form action="{:U('add')}" method="post" enctype="multipart/form-data" id="form-___TABLEI_"
+                          class="form-horizontal">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#tab-general" data-toggle="tab">基本信息</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab-general">
+
+                                ___ADD_HTML_
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">图片</label>
+                                    <div class="col-sm-10">
+                                        <input id="input-logo_ori" type="file" name="logo_ori" class="">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+
+<block name="js">
+    <script src="__PUBLIC__/Back/validate/jquery.validate.min.js"></script>
+    <script src="__PUBLIC__/Back/validate/additional-methods.min.js"></script>
+    <script src="__PUBLIC__/Back/validate/localization/messages_zh.min.js"></script>
+
+    <script>
+        $(function () {
+            $('#form-___TABLEI_').validate({
+                // 规则
+                rules: {
+                    ___AJAX_RULES_
+                    event_sort: {
+                digits: true
+            }
+        },
+            // 错误信息
+            messages: {
+
+                ___AJAX_MESSAGE_
+                event_sort: {
+                    digits: '排序字段要求为整数'
+                }
+            }
+            });
+        });
+
+    </script>
+</block>

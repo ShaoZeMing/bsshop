@@ -1,27 +1,24 @@
-<extend name="Layout/Back"/>
+<Extend name="Layout/Back"/>
 
 <block name="content">
-
     <div id="content">
         <div class="page-header">
             <div class="container-fluid">
                 <div class="pull-right">
-                    <a href="{:U('add')}" data-toggle="tooltip" title="新增" class="btn btn-primary"> <i
-                            class="fa fa-plus"></i>
-                    </a>
-
-                    <button type="button" data-toggle="tooltip" title="删除" class="btn btn-danger"
-                            onclick="confirm('确认？') ? $('#form-brand').submit() : false;"><i class="fa fa-trash-o"></i>
+                    <button type="submit" form="form-setting" data-toggle="tooltip" title="保存" class="btn btn-primary">
+                        <i class="fa fa-save"></i>
                     </button>
-
+                    <a href="{:U('lists')}" data-toggle="tooltip" title="取消" class="btn btn-default">
+                        <i class="fa fa-reply"></i>
+                    </a>
                 </div>
-                <h1>系统配置管理</h1>
+                <h1>系统配置</h1>
                 <ul class="breadcrumb">
                     <li>
                         <a href="{:U('Index/index')}">首页</a>
                     </li>
                     <li>
-                        <a href="javascript:;">系统配置列表</a>
+                        <a href="">系统配置</a>
                     </li>
                 </ul>
             </div>
@@ -30,141 +27,128 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                        <i class="fa fa-list"></i>
-                        系统配置列表
+                        <i class="fa fa-pencil"></i>
+                        编辑系统配置
                     </h3>
                 </div>
                 <div class="panel-body">
-                    <form action="{:U('lists')}" method="GET">
-                        <div class="well">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <label class="control-label" for="input-title">搜索关键字</label>
-                                        <input type="text" name="filter_setting_name"
-                                               value="{$filter['filter_setting_name']}" placeholder="搜索内容"
-                                               id="input-title" class="form-control"/>
-                                    </div>
-                                </div>
-                            </div>
+                    <form action="{:U('edit')}" method="post" enctype="multipart/form-data" id="form-setting"
+                          class="form-horizontal">
+                        <input type="hidden" name="setting_id" id="input_setting_id" value="{$row['setting_id']}">
+                        <ul class="nav nav-tabs">
+                            <volist name="setting_group" id="g">
+                                <if condition="$i eq 1">
+                                    <li class="active">
+                                        <else/>
+                                    <li class="">
+                                </if>
+                                <a href="#tab-{$g['setting_group_id']}" data-toggle="tab">{$g['setting_group_name']}</a>
+                                </li>
+                            </volist>
+                        </ul>
 
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <button type="submit" id="button-filter" class="btn btn-primary pull-right">
-                                        <i class="fa fa-search"></i>
-                                        筛选
-                                    </button>
-                                </div>
-                            </div>
+                        <div class="tab-content">
+
+                            <volist name="setting" id="set">
+                                <if condition="$set['setting_group_id'] eq 1">
+                                    <div class="tab-pane active" id="tab-{$set['setting_group_id']}">
+                                        <div class="form-group required">
+                                            <label class="col-sm-2 control-label" for="input-{$set['setting_key']}">{$set['setting_name']}</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" name="setting[{$set['setting_group_id']}]"
+                                                       value="{$set['setting_value']}"
+                                                       placeholder="商城名称"
+                                                       id="input-{$set['setting_key']}" class="form-control"/>
+                                            </div>
+                                        </div>
+                                        <elseif condition="" >
+                                </if>
+
+
+                                <!--<div class="form-group">-->
+                                <!--<label class="col-sm-2 control-label">图片</label>-->
+                                <!--<div class="col-sm-10">-->
+                                <!--<input id="input-logo_ori" type="file" name="logo_ori" class="">-->
+                                <!--</div>-->
+                                <!--</div>-->
+
+                                <!--</div>-->
+                            </volist>
                         </div>
                     </form>
-
-                    <form action="{:U('multi')}" method="post" enctype="multipart/form-data" id="form-brand">
-                        <input type="hidden" id="input-operate_type" name="operate_type" value="">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                <tr>
-                                    <td style="width: 1px;" class="text-center">
-                                        <input type="checkbox"
-                                               onclick="$('input[name*=\'selected\']').prop('checked', this.checked);"/>
-                                    </td>
-                                    <td class="text-center">序号</td>
-                                                                                  <td class="text-center">
-                                                 <if condition="$order['field'] eq 'setting_key' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'setting_key', 'type'=>'desc'])}" class="asc">程序使用的key</a>
-                                                     <elseif condition="$order['field'] eq 'setting_key' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'setting_key', 'type'=>'asc'])}" class="desc">程序使用的key</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'setting_key', 'type'=>'asc'])}" class="">程序使用的key</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'setting_name' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'setting_name', 'type'=>'desc'])}" class="asc">配置项名称</a>
-                                                     <elseif condition="$order['field'] eq 'setting_name' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'setting_name', 'type'=>'asc'])}" class="desc">配置项名称</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'setting_name', 'type'=>'asc'])}" class="">配置项名称</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'setting_value' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'setting_value', 'type'=>'desc'])}" class="asc">配置项的值</a>
-                                                     <elseif condition="$order['field'] eq 'setting_value' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'setting_value', 'type'=>'asc'])}" class="desc">配置项的值</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'setting_value', 'type'=>'asc'])}" class="">配置项的值</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'setting_type_id' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'setting_type_id', 'type'=>'desc'])}" class="asc">输入框类型id</a>
-                                                     <elseif condition="$order['field'] eq 'setting_type_id' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'setting_type_id', 'type'=>'asc'])}" class="desc">输入框类型id</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'setting_type_id', 'type'=>'asc'])}" class="">输入框类型id</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'setting_group_id' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'setting_group_id', 'type'=>'desc'])}" class="asc">分组id</a>
-                                                     <elseif condition="$order['field'] eq 'setting_group_id' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'setting_group_id', 'type'=>'asc'])}" class="desc">分组id</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'setting_group_id', 'type'=>'asc'])}" class="">分组id</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'setting_sort' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'setting_sort', 'type'=>'desc'])}" class="asc">排序</a>
-                                                     <elseif condition="$order['field'] eq 'setting_sort' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'setting_sort', 'type'=>'asc'])}" class="desc">排序</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'setting_sort', 'type'=>'asc'])}" class="">排序</a>
-                                                 </if>
-                                              </td>
-
-                                    <td class="text-right">管理</td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <volist name="rows" id="row">
-                                    <tr>
-                                        <td class="text-center">
-                                            <input type="checkbox" name="selected[]" value="{$row['setting_id']}"/>
-                                        </td>
-                                        <td class="text-center">{$i}</td>
-
-                                                                                         <td class="text-center">{$row['setting_key']}</td>
-
-                                                 <td class="text-center">{$row['setting_name']}</td>
-
-                                                 <td class="text-center">{$row['setting_value']}</td>
-
-                                                 <td class="text-center">{$row['setting_type_id']}</td>
-
-                                                 <td class="text-center">{$row['setting_group_id']}</td>
-
-                                                 <td class="text-center">{$row['setting_sort']}</td>
-
-
-                                        <td class="text-right">
-                                            <a href="{:U('edit', ['setting_id'=>
-                                                    $row['setting_id']])}" data-toggle="tooltip" title="编辑"
-                                               class="btn btn-primary">
-                                                <i class="fa fa-pencil"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </volist>
-                                </tbody>
-                            </table>
-                        </div>
-                    </form>
-                    <div class="row">{$page_html}</div>
                 </div>
             </div>
         </div>
     </div>
+</block>
+
+<block name="js">
+    <script src="__PUBLIC__/Back/validate/jquery.validate.min.js"></script>
+    <script src="__PUBLIC__/Back/validate/additional-methods.min.js"></script>
+    <script src="__PUBLIC__/Back/validate/localization/messages_zh.min.js"></script>
+
+    <script>
+        $(function () {
+            $('#form-setting').validate({
+                // 规则
+                rules: {
+                    setting_key: {
+                        required: true,
+                        remote: {
+                            'url': "{:U('ajax')}",
+                            'data': {
+                                'operate': 'checksetting_key',
+                                'setting_id': $('#input_setting_id').val()
+                            }
+                        }
+                    },
+                    setting_name: {
+                        required: true,
+                        remote: {
+                            'url': "{:U('ajax')}",
+                            'data': {
+                                'operate': 'checksetting_name',
+                                'setting_id': $('#input_setting_id').val()
+                            }
+                        }
+                    },
+                    setting_value: {
+                        required: true,
+                        remote: {
+                            'url': "{:U('ajax')}",
+                            'data': {
+                                'operate': 'checksetting_value',
+                                'setting_id': $('#input_setting_id').val()
+                            }
+                        }
+                    },
+
+                    event_sort: {
+                        digits: true
+                    }
+                },
+                // 错误信息
+                messages: {
+
+                    setting_key: {
+                        required: '不能为空',
+                        remote: '已经存在, 请重新填写'
+                    },
+                    setting_name: {
+                        required: '不能为空',
+                        remote: '已经存在, 请重新填写'
+                    },
+                    setting_value: {
+                        required: '不能为空',
+                        remote: '已经存在, 请重新填写'
+                    },
+
+                    event_sort: {
+                        digits: '排序字段要求为整数'
+                    }
+                }
+            });
+        });
+
+    </script>
 </block>

@@ -4,7 +4,7 @@ namespace Back\Controller;
 use Think\Controller;
 use Think\Page;
 
-class BrandController extends Controller
+class StockStatusController extends Controller
 {
     /**
      * 添加动作
@@ -14,7 +14,7 @@ class BrandController extends Controller
         // 判断是否为POST数据提交
         if (IS_POST) {
             // 数据处理
-            $model = D('Brand');
+            $model = D('StockStatus');
             $result = $model->create();    //创建数据对象
 
             if (!$result) {
@@ -40,7 +40,7 @@ class BrandController extends Controller
      */
     public function lists()
     {
-        $model = D('Brand');
+        $model = D('StockStatus');
 
         // 分页, 搜索, 排序等
         // 搜索, 筛选, 过滤
@@ -50,15 +50,15 @@ class BrandController extends Controller
         $cond = [];// 初始条件
 
         //搜索处理
-        $filter['filter_brand_name'] = I('get.filter_brand_name', '', 'trim');   //获取搜索关键词
-        if ($filter['filter_brand_name'] !== '') {
+        $filter['filter_stock_status_name'] = I('get.filter_stock_status_name', '', 'trim');   //获取搜索关键词
+        if ($filter['filter_stock_status_name'] !== '') {
 
-            //需要搜索的字段brand_name,brand_logo,brand_logo_ori
-            $fd = explode(',', "brand_name,brand_logo,brand_logo_ori");
+            //需要搜索的字段stock_status_name
+            $fd = explode(',', "stock_status_name");
             $cond['_logic'] = 'or';       //搜索条件之间为or（或）
             //遍历模糊搜索条件
             foreach ($fd as $f) {
-                $cond[$f] = ['like', '%' . $filter['filter_brand_name'] . '%'];// 适当考虑索引问题
+                $cond[$f] = ['like', '%' . $filter['filter_stock_status_name'] . '%'];// 适当考虑索引问题
             }
         }
         // 分配筛选数据, 到模板, 为了展示搜索条件
@@ -66,7 +66,7 @@ class BrandController extends Controller
 
         // 排序
         // 考虑用户所传递的排序方式和字段
-        $order['field'] = I('get.field', 'brand_sort', 'trim');// 初始排序, 字段
+        $order['field'] = I('get.field', 'stock_status_id', 'trim');// 初始排序, 字段
         $order['type'] = I('get.type', 'asc', 'trim');// 初始排序, 方式
 
         $sort = [$order['field'] => $order['type']];
@@ -106,7 +106,7 @@ class BrandController extends Controller
 
         if (IS_POST) {
 
-            $model = D('Brand');
+            $model = D('StockStatus');
             $result = $model->create();
 
             if (!$result) {
@@ -123,8 +123,8 @@ class BrandController extends Controller
         } else {
 
             // 获取当前编辑的内容
-            $brand_id = I('get.brand_id', '', 'trim');
-            $this->assign('row', M('Brand')->find($brand_id));
+            $stock_status_id = I('get.stock_status_id', '', 'trim');
+            $this->assign('row', M('StockStatus')->find($stock_status_id));
 
             // 展示模板
             $this->display();
@@ -145,8 +145,8 @@ class BrandController extends Controller
         switch ($operate) {
             case 'delete':
                 // 使用in条件, 删除全部的品牌
-                $cond = ['brand_id' => ['in', $selected]];
-                M('Brand')->where($cond)->delete();
+                $cond = ['stock_status_id' => ['in', $selected]];
+                M('StockStatus')->where($cond)->delete();
                 $this->redirect('lists', [], 0);
                 break;
             default:
@@ -167,8 +167,8 @@ class BrandController extends Controller
         if (is_null($operate)) {
             return;
         }
-        //需要搜索的字段brand_name,brand_logo,brand_logo_ori
-        $fd = explode(',', "brand_name,brand_logo,brand_logo_ori");
+        //需要搜索的字段stock_status_name
+        $fd = explode(',', "stock_status_name");
 
         //循环生成多个if判断语句针对ajax异步验证
         foreach ($fd as $v){
@@ -177,14 +177,14 @@ class BrandController extends Controller
                 // 获取填写的品牌名称
                 $title = I('request.'.$v, '');
                 $cond[$v] = $title;
-                // 判断是否传递了brand_id
-                $brand_id = I('request.brand_id', null);
-                if (!is_null($brand_id)) {
+                // 判断是否传递了stock_status_id
+                $stock_status_id = I('request.stock_status_id', null);
+                if (!is_null($stock_status_id)) {
                     // 存在, 则匹配与当前ID不相同的记录
-                    $cond['brand_id'] = ['neq', $brand_id];
+                    $cond['stock_status_id'] = ['neq', $stock_status_id];
                 }
                 // 获取模型后, 利用条件获取匹配的记录数
-                $count = M('Brand')->where($cond)->count();
+                $count = M('StockStatus')->where($cond)->count();
                 // 如果记录数>0, 条件为真, 说明存在记录, 重复, 验证未通过, 响应false
                 echo $count ? 'false' : 'true';
             }

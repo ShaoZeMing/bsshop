@@ -53,8 +53,8 @@ class CategoryController extends Controller
         $filter['filter_category_name'] = I('get.filter_category_name', '', 'trim');   //获取搜索关键词
         if ($filter['filter_category_name'] !== '') {
 
-            //需要搜索的字段category_name,category_image,category_image_thumb,category_meta_title,category_meta_keywords,category_meta_description
-            $fd = explode(',', "category_name,category_image,category_image_thumb,category_meta_title,category_meta_keywords,category_meta_description");
+            //需要搜索的字段category_name,category_image,category_image_thumb,category_meta_name,category_meta_keywords,category_meta_description
+            $fd = explode(',', "category_name,category_image,category_image_thumb,category_meta_name,category_meta_keywords,category_meta_description");
             $cond['_logic'] = 'or';       //搜索条件之间为or（或）
             //遍历模糊搜索条件
             foreach ($fd as $f) {
@@ -167,8 +167,8 @@ class CategoryController extends Controller
         if (is_null($operate)) {
             return;
         }
-        //需要搜索的字段category_name,category_image,category_image_thumb,category_meta_title,category_meta_keywords,category_meta_description
-        $fd = explode(',', "category_name,category_image,category_image_thumb,category_meta_title,category_meta_keywords,category_meta_description");
+        //需要搜索的字段category_name,category_image,category_image_thumb,category_meta_name,category_meta_keywords,category_meta_description
+        $fd = explode(',', "category_name,category_image,category_image_thumb,category_meta_name,category_meta_keywords,category_meta_description");
 
         //循环生成多个if判断语句针对ajax异步验证
         foreach ($fd as $v){

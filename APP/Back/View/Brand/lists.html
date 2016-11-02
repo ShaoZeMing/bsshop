@@ -1,25 +1,27 @@
-<extend name="Layout/Back" />
+<extend name="Layout/Back"/>
 
-<block name="content" >
+<block name="content">
 
     <div id="content">
         <div class="page-header">
             <div class="container-fluid">
                 <div class="pull-right">
-                    <a href="{:U('add')}" data-toggle="tooltip" title="新增" class="btn btn-primary"> <i class="fa fa-plus"></i>
+                    <a href="{:U('add')}" data-toggle="tooltip" title="新增" class="btn btn-primary"> <i
+                            class="fa fa-plus"></i>
                     </a>
 
-                    <button type="button" data-toggle="tooltip" title="删除" class="btn btn-danger" onclick="confirm('确认？') ? $('#form-brand').submit() : false;"> <i class="fa fa-trash-o"></i>
+                    <button type="button" data-toggle="tooltip" title="删除" class="btn btn-danger"
+                            onclick="confirm('确认？') ? $('#form-brand').submit() : false;"><i class="fa fa-trash-o"></i>
                     </button>
 
                 </div>
-                <h1>品牌管理</h1>
+                <h1>品牌管理管理</h1>
                 <ul class="breadcrumb">
                     <li>
-                        <a href="{U('Manage/index')}">首页</a>
+                        <a href="{:U('Index/index')}">首页</a>
                     </li>
                     <li>
-                        <a href="javascript:;">品牌列表</a>
+                        <a href="javascript:;">品牌管理列表</a>
                     </li>
                 </ul>
             </div>
@@ -29,30 +31,32 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         <i class="fa fa-list"></i>
-                        品牌列表
+                        品牌管理列表
                     </h3>
                 </div>
                 <div class="panel-body">
                     <form action="{:U('lists')}" method="GET">
-                    <div class="well">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label class="control-label" for="input-title">品牌名称</label>
-                                    <input type="text" name="filter_brand_name" value="{$filter['filter_brand_name']}" placeholder="品牌名称" id="input-title" class="form-control" />
+                        <div class="well">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label class="control-label" for="input-title">搜索关键字</label>
+                                        <input type="text" name="filter_brand_name"
+                                               value="{$filter['filter_brand_name']}" placeholder="搜索内容"
+                                               id="input-title" class="form-control"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <button type="submit" id="button-filter" class="btn btn-primary pull-right">
+                                        <i class="fa fa-search"></i>
+                                        筛选
+                                    </button>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <button type="submit" id="button-filter" class="btn btn-primary pull-right">
-                                    <i class="fa fa-search"></i>
-                                    筛选
-                            </button>
-                            </div>
-                        </div>
-                    </div>
                     </form>
 
                     <form action="{:U('multi')}" method="post" enctype="multipart/form-data" id="form-brand">
@@ -60,53 +64,100 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">
                                 <thead>
-                                    <tr>
-                                        <td style="width: 1px;" class="text-center">
-                                            <input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" />
-                                        </td>
-                                        <td class="text-center">LOGO</td>
-                                        <td class="text-left">
-                                        <if condition="$order['field'] eq 'brand_name' AND $order['type'] eq 'asc'">
-                                            <a href="{:U('lists', $filter+['field'=>'brand_name', 'type'=>'desc'])}" class="asc">品牌</a>
-                                        <elseif condition="$order['field'] eq 'brand_name' AND $order['type'] eq 'desc'" />
-                                            <a href="{:U('lists', $filter+['field'=>'brand_name', 'type'=>'asc'])}" class="desc">品牌</a>
-                                        <else />
-                                            <a href="{:U('lists', $filter+['field'=>'brand_name', 'type'=>'asc'])}" class="">品牌</a>
-                                        </if>
-                                        </td>
-                                        <td class="text-right">
-                                        <if condition="$order['field'] eq 'brand_sort' AND $order['type'] eq 'asc'">
-                                            <a href="{:U('lists', $filter+['field'=>'brand_sort', 'type'=>'desc'])}" class="asc">排序</a>
-                                        <elseif condition="$order['field'] eq 'brand_sort' AND $order['type'] eq 'desc'" />
-                                            <a href="{:U('lists', $filter+['field'=>'brand_sort', 'type'=>'asc'])}" class="desc">排序</a>
-                                        <else />
-                                            <a href="{:U('lists', $filter+['field'=>'brand_sort', 'type'=>'asc'])}" class="">排序</a>
-                                        </if>
-                                        </td>
+                                <tr>
+                                    <td style="width: 1px;" class="text-center">
+                                        <input type="checkbox"
+                                               onclick="$('input[name*=\'selected\']').prop('checked', this.checked);"/>
+                                    </td>
+                                    <td class="text-center">序号</td>
+                                                                                  <td class="text-center">
+                                                 <if condition="$order['field'] eq 'brand_name' AND $order['type'] eq 'asc'">
+                                                    <a href="{:U('lists', $filter+['field'=>'brand_name', 'type'=>'desc'])}" class="asc">品牌名称</a>
+                                                     <elseif condition="$order['field'] eq 'brand_name' AND $order['type'] eq 'desc'"/>
+                                                     <a href="{:U('lists', $filter+['field'=>'brand_name', 'type'=>'asc'])}" class="desc">品牌名称</a>
+                                                     <else/>
+                                                     <a href="{:U('lists', $filter+['field'=>'brand_name', 'type'=>'asc'])}" class="">品牌名称</a>
+                                                 </if>
+                                              </td>
+                                              <td class="text-center">
+                                                 <if condition="$order['field'] eq 'brand_logo' AND $order['type'] eq 'asc'">
+                                                    <a href="{:U('lists', $filter+['field'=>'brand_logo', 'type'=>'desc'])}" class="asc">品牌logo</a>
+                                                     <elseif condition="$order['field'] eq 'brand_logo' AND $order['type'] eq 'desc'"/>
+                                                     <a href="{:U('lists', $filter+['field'=>'brand_logo', 'type'=>'asc'])}" class="desc">品牌logo</a>
+                                                     <else/>
+                                                     <a href="{:U('lists', $filter+['field'=>'brand_logo', 'type'=>'asc'])}" class="">品牌logo</a>
+                                                 </if>
+                                              </td>
+                                              <td class="text-center">
+                                                 <if condition="$order['field'] eq 'brand_logo_ori' AND $order['type'] eq 'asc'">
+                                                    <a href="{:U('lists', $filter+['field'=>'brand_logo_ori', 'type'=>'desc'])}" class="asc">品牌logo原图</a>
+                                                     <elseif condition="$order['field'] eq 'brand_logo_ori' AND $order['type'] eq 'desc'"/>
+                                                     <a href="{:U('lists', $filter+['field'=>'brand_logo_ori', 'type'=>'asc'])}" class="desc">品牌logo原图</a>
+                                                     <else/>
+                                                     <a href="{:U('lists', $filter+['field'=>'brand_logo_ori', 'type'=>'asc'])}" class="">品牌logo原图</a>
+                                                 </if>
+                                              </td>
+                                              <td class="text-center">
+                                                 <if condition="$order['field'] eq 'brand_sort' AND $order['type'] eq 'asc'">
+                                                    <a href="{:U('lists', $filter+['field'=>'brand_sort', 'type'=>'desc'])}" class="asc">排序</a>
+                                                     <elseif condition="$order['field'] eq 'brand_sort' AND $order['type'] eq 'desc'"/>
+                                                     <a href="{:U('lists', $filter+['field'=>'brand_sort', 'type'=>'asc'])}" class="desc">排序</a>
+                                                     <else/>
+                                                     <a href="{:U('lists', $filter+['field'=>'brand_sort', 'type'=>'asc'])}" class="">排序</a>
+                                                 </if>
+                                              </td>
+                                              <td class="text-center">
+                                                 <if condition="$order['field'] eq 'brand_created_at' AND $order['type'] eq 'asc'">
+                                                    <a href="{:U('lists', $filter+['field'=>'brand_created_at', 'type'=>'desc'])}" class="asc">创建时间</a>
+                                                     <elseif condition="$order['field'] eq 'brand_created_at' AND $order['type'] eq 'desc'"/>
+                                                     <a href="{:U('lists', $filter+['field'=>'brand_created_at', 'type'=>'asc'])}" class="desc">创建时间</a>
+                                                     <else/>
+                                                     <a href="{:U('lists', $filter+['field'=>'brand_created_at', 'type'=>'asc'])}" class="">创建时间</a>
+                                                 </if>
+                                              </td>
+                                              <td class="text-center">
+                                                 <if condition="$order['field'] eq 'brand_updated_at' AND $order['type'] eq 'asc'">
+                                                    <a href="{:U('lists', $filter+['field'=>'brand_updated_at', 'type'=>'desc'])}" class="asc">修改时间</a>
+                                                     <elseif condition="$order['field'] eq 'brand_updated_at' AND $order['type'] eq 'desc'"/>
+                                                     <a href="{:U('lists', $filter+['field'=>'brand_updated_at', 'type'=>'asc'])}" class="desc">修改时间</a>
+                                                     <else/>
+                                                     <a href="{:U('lists', $filter+['field'=>'brand_updated_at', 'type'=>'asc'])}" class="">修改时间</a>
+                                                 </if>
+                                              </td>
 
-                                        <td class="text-right">管理</td>
-                                    </tr>
+                                    <td class="text-right">管理</td>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    <volist name="rows" id="row">
-                                        <tr>
-                                            <td class="text-center">
-                                                <input type="checkbox" name="selected[]" value="{$row['brand_id']}" />
-                                            </td>
-                                            <td class="text-center">
-                                                <img src="__PUBLIC__/Back/image/avatar.png" alt="HEAD" class="img-thumbnail" style="max-width: 40px"/>
-                                            </td>
-                                            <td class="text-left">{$row['brand_name']}</td>
+                                <volist name="rows" id="row">
+                                    <tr>
+                                        <td class="text-center">
+                                            <input type="checkbox" name="selected[]" value="{$row['brand_id']}"/>
+                                        </td>
+                                        <td class="text-center">{$i}</td>
 
-                                            <td class="text-right">{$row['brand_sort']}</td>
-                                            <td class="text-right">
-                                                <a href="{:U('edit', ['brand_id'=>
-                                                    $row['brand_id']])}" data-toggle="tooltip" title="编辑" class="btn btn-primary">
-                                                    <i class="fa fa-pencil"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    </volist>
+                                                                                         <td class="text-center">{$row['brand_name']}</td>
+
+                                                 <td class="text-center">{$row['brand_logo']}</td>
+
+                                                 <td class="text-center">{$row['brand_logo_ori']}</td>
+
+                                                 <td class="text-center">{$row['brand_sort']}</td>
+
+                                                 <td class="text-center">{$row['brand_created_at']}</td>
+
+                                                 <td class="text-center">{$row['brand_updated_at']}</td>
+
+
+                                        <td class="text-right">
+                                            <a href="{:U('edit', ['brand_id'=>
+                                                    $row['brand_id']])}" data-toggle="tooltip" title="编辑"
+                                               class="btn btn-primary">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </volist>
                                 </tbody>
                             </table>
                         </div>

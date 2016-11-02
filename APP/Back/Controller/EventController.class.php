@@ -66,7 +66,7 @@ class EventController extends Controller
 
         // 排序
         // 考虑用户所传递的排序方式和字段
-        $order['field'] = I('get.field', 'event_sort', 'trim');// 初始排序, 字段
+        $order['field'] = I('get.field', 'event_id', 'trim');// 初始排序, 字段
         $order['type'] = I('get.type', 'asc', 'trim');// 初始排序, 方式
 
         $sort = [$order['field'] => $order['type']];

@@ -38,196 +38,298 @@
                             <li class="active">
                                 <a href="#tab-general" data-toggle="tab">基本信息</a>
                             </li>
+                            <li class="">
+                                <a href="#tab-description" data-toggle="tab">商品描述</a>
+                            </li>
+                            <li class="">
+                                <a href="#tab-seo" data-toggle="tab">SEO信息</a>
+                            </li>
+                            <li class="">
+                                <a href="#tab-linked" data-toggle="tab">关联项目</a>
+                            </li>
+                            <li class="">
+                                <a href="#tab-property" data-toggle="tab">商品属性</a>
+                            </li>
+                            <li class="">
+                                <a href="#tab-promote" data-toggle="tab">促销活动</a>
+                            </li>
+                            <li class="">
+                                <a href="#tab-price" data-toggle="tab">优惠价格</a>
+                            </li>
+                            <li class="">
+                                <a href="#tab-image" data-toggle="tab">图片设置</a>
+                            </li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab-general">
-
-                                                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-goods_name">商品名称</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="goods_name"  value="{$row['goods_name']}" placeholder="商品名称"
-                                                                    id="input-goods_name" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-goods_image">商品图片</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="goods_image"  value="{$row['goods_image']}" placeholder="商品图片"
-                                                                    id="input-goods_image" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-goods_image_thumb">商品小图</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="goods_image_thumb"  value="{$row['goods_image_thumb']}" placeholder="商品小图"
-                                                                    id="input-goods_image_thumb" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-goods_SKU">库存单位</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="goods_SKU"  value="{$row['goods_SKU']}" placeholder="库存单位"
-                                                                    id="input-goods_SKU" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-goods_UPC">商品代码</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="goods_UPC"  value="{$row['goods_UPC']}" placeholder="商品代码"
-                                                                    id="input-goods_UPC" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-goods_price">商品价格</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="goods_price"  value="{$row['goods_price']}" placeholder="商品价格"
-                                                                    id="input-goods_price" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-goods_quantity">商品库存</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="goods_quantity"  value="{$row['goods_quantity']}" placeholder="商品库存"
-                                                                    id="input-goods_quantity" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-goods_minimum">最小起订数</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="goods_minimum"  value="{$row['goods_minimum']}" placeholder="最小起订数"
-                                                                    id="input-goods_minimum" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-goods_subtract">减库存否</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="goods_subtract"  value="{$row['goods_subtract']}" placeholder="减库存否"
-                                                                    id="input-goods_subtract" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-goods_is_shipping">是否配送</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="goods_is_shipping"  value="{$row['goods_is_shipping']}" placeholder="是否配送"
-                                                                    id="input-goods_is_shipping" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-goods_date_available">供货日期</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="goods_date_available"  value="{$row['goods_date_available']}" placeholder="供货日期"
-                                                                    id="input-goods_date_available" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-goods_length">商品长度</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="goods_length"  value="{$row['goods_length']}" placeholder="商品长度"
-                                                                    id="input-goods_length" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-goods_width">商品宽度</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="goods_width"  value="{$row['goods_width']}" placeholder="商品宽度"
-                                                                    id="input-goods_width" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-goods_height">商品高度</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="goods_height"  value="{$row['goods_height']}" placeholder="商品高度"
-                                                                    id="input-goods_height" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-goods_weight">商品重量</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="goods_weight"  value="{$row['goods_weight']}" placeholder="商品重量"
-                                                                    id="input-goods_weight" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-goods_status">是否锁定</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="goods_status"  value="{$row['goods_status']}" placeholder="是否锁定"
-                                                                    id="input-goods_status" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-goods_sort">排序</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="goods_sort"  value="{$row['goods_sort']}" placeholder="排序"
-                                                                    id="input-goods_sort" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-goods_description">商品描述</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="goods_description"  value="{$row['goods_description']}" placeholder="商品描述"
-                                                                    id="input-goods_description" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-goods_is_deleted">是否已删除</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="goods_is_deleted"  value="{$row['goods_is_deleted']}" placeholder="是否已删除"
-                                                                    id="input-goods_is_deleted" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-goods_meta_name">SEO标题</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="goods_meta_name"  value="{$row['goods_meta_name']}" placeholder="SEO标题"
-                                                                    id="input-goods_meta_name" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-goods_meta_keywords">SEO关键字</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="goods_meta_keywords"  value="{$row['goods_meta_keywords']}" placeholder="SEO关键字"
-                                                                    id="input-goods_meta_keywords" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-goods_meta_description">SEO描述</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="goods_meta_description"  value="{$row['goods_meta_description']}" placeholder="SEO描述"
-                                                                    id="input-goods_meta_description" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-length_unit_id">长度单位</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="length_unit_id"  value="{$row['length_unit_id']}" placeholder="长度单位"
-                                                                    id="input-length_unit_id" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-weight_unit_id">重量单位</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="weight_unit_id"  value="{$row['weight_unit_id']}" placeholder="重量单位"
-                                                                    id="input-weight_unit_id" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-tax_id">税类型</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="tax_id"  value="{$row['tax_id']}" placeholder="税类型"
-                                                                    id="input-tax_id" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-stock_status_id">库存状态</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="stock_status_id"  value="{$row['stock_status_id']}" placeholder="库存状态"
-                                                                    id="input-stock_status_id" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-brand_id">所属品牌</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="brand_id"  value="{$row['brand_id']}" placeholder="所属品牌"
-                                                                    id="input-brand_id" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-category_id">所属分类</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="category_id"  value="{$row['category_id']}" placeholder="所属分类"
-                                                                    id="input-category_id" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-goods_created_at">创建时间</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="goods_created_at"  value="{$row['goods_created_at']}" placeholder="创建时间"
-                                                                    id="input-goods_created_at" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-goods_updated_at">修改时间</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="goods_updated_at"  value="{$row['goods_updated_at']}" placeholder="修改时间"
-                                                                    id="input-goods_updated_at" class="form-control"/>
-                                                         </div>
-                                                     </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">图片</label>
+                                    <label class="col-sm-2 control-label" for="input-name">商品名称</label>
                                     <div class="col-sm-10">
-                                        <input id="input-logo_ori" type="file" name="logo_ori" class="">
+                                        <input type="text" name="name" value="" placeholder="商品名称" id="input-name" class="form-control" />
                                     </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-image">商品图片</label>
+                                    <div class="col-sm-10">
+                                        <input type="file" id="input-image" name="image" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-SKU">SKU</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="SKU" value="" placeholder="SKU" id="input-SKU" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-UPC">UPC</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="UPC" value="" placeholder="UPC" id="input-UPC" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-price">售价</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="price" value="" placeholder="price" id="input-price" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-quantity">库存</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="quantity" value="" placeholder="库存" id="input-quantity" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-minimum">最小起订数量</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="minimum" value="1" placeholder="最少起订数量" id="input-minimum" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-subtract">是否扣减库存</label>
+                                    <div class="col-sm-10">
+                                        <select name="subtract" id="input-subtract" class="form-control">
+                                            <option value="1" selected="selected">是</option>
+                                            <option value="0">否</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" >是否可配送</label>
+                                    <div class="col-sm-10">
+                                        <label class="radio-inline">
+                                            <input name="is_shipping"  value="1" checked="checked" type="radio">是</label>
+                                        <label class="radio-inline">
+                                            <input name="is_shipping" value="0" type="radio">否</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-date_available">供货日期</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="date_available" value="" placeholder="date_available" id="input-date_available" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-length">尺寸(L x W x H)</label>
+                                    <div class="col-sm-10">
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <input name="length" value="" placeholder="长" id="input-length" class="form-control" type="text"></div>
+                                            <div class="col-sm-4">
+                                                <input name="width" value="" placeholder="宽" id="input-width" class="form-control" type="text"></div>
+                                            <div class="col-sm-4">
+                                                <input name="height" value="" placeholder="高" id="input-height" class="form-control" type="text"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-length_unit_id">长度单位</label>
+                                    <div class="col-sm-10">
+                                        <select name="length_unit_id" id="input-length_unit_id" class="form-control">
+                                            <volist name="length_unit_list" id="length_unit">
+                                                <option value="{$length_unit['length_unit_id']}">{$length_unit['title']}</option>
+                                            </volist>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-weight">重量</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="weight" value="" placeholder="重量" id="input-weight" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-weight_unit_id">重量单位</label>
+                                    <div class="col-sm-10">
+                                        <select name="weight_unit_id" id="input-weight_unit_id" class="form-control">
+                                            <volist name="weight_unit_list" id="weight_unit">
+                                                <option value="{$weight_unit['weight_unit_id']}">{$weight_unit['title']}</option>
+                                            </volist>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-status">状态</label>
+                                    <div class="col-sm-10">
+                                        <select name="status" id="input-status" class="form-control">
+                                            <option value="1" selected="selected">启用</option>
+                                            <option value="0">停用</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-sort_number">排序</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="sort_number" value="0" placeholder="排序" id="input-sort_number" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-tax_id">税类型</label>
+                                    <div class="col-sm-10">
+                                        <select name="tax_id" id="input-tax_id" class="form-control">
+                                            <volist name="tax_list" id="tax">
+                                                <option value="{$tax['tax_id']}">{$tax['title']}</option>
+                                            </volist>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-stock_status_id">库存状态</label>
+                                    <div class="col-sm-10">
+                                        <select name="stock_status_id" id="input-stock_status_id" class="form-control">
+                                            <volist name="stock_status_list" id="stock_status">
+                                                <option value="{$stock_status['stock_status_id']}">{$stock_status['title']}</option>
+                                            </volist>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="tab-pane" id="tab-description">
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-description">商品描述</label>
+                                    <div class="col-sm-10">
+                                        <textarea name="description" id="input-description" class="form-control"></textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="tab-pane" id="tab-seo">
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-meta_title">Meta Tag 标题</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="meta_title" value="" placeholder="Meta Tag 标题" id="input-meta_title" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-meta_keywords">Meta Tag 关键字</label>
+                                    <div class="col-sm-10">
+                                        <textarea name="meta_keywords" placeholder="Meta Tag 关键字" id="input-meta_keywords" class="form-control" rows="4"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-meta_description">Meta Tag 描述</label>
+                                    <div class="col-sm-10">
+                                        <textarea name="meta_description" placeholder="Meta Tag 描述" id="input-meta_description" class="form-control" rows="4"></textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="tab-pane" id="tab-linked">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-brand_id">品牌</label>
+                                    <div class="col-sm-10">
+                                        <select name="brand_id" id="input-brand_id" class="form-control">
+                                            <volist name="brand_list" id="brand">
+                                                <option value="{$brand['brand_id']}">{$brand['title']}</option>
+                                            </volist>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-category_id">分类</label>
+                                    <div class="col-sm-10">
+                                        <select name="category_id" id="input-category_id" class="form-control">
+                                            <volist name="category_list" id="category">
+                                                <option value="{$category['category_id']}">{:str_repeat('-', $category['deep']*2)}{$category['title']}</option>
+                                            </volist>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" id="tab-property">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-manufacturer"></label>
+                                    <div class="col-sm-1  text-center">选项</div>
+                                    <div class="col-sm-9"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-type-id" class="col-sm-2 control-label">
+                                        <span title="" data-toggle="tooltip" data-original-title="不同类型对应不同的属性列表">商品类型</span>
+                                    </label>
+                                    <div class="col-sm-1"></div>
+                                    <div class="col-sm-9">
+                                        <select class="form-control" id="input-goods_type_id" name="goods_type_id">
+                                            <option value="0">--未选择--</option>
+                                            <volist name="goods_type_list" id="goods_type">
+                                                <option value="{$goods_type['goods_type_id']}">{$goods_type['title']}</option>
+                                            </volist>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="tab-pane" id="tab-promote"></div>
+                            <div class="tab-pane" id="tab-price"></div>
+
+                            <div class="tab-pane" id="tab-image">
+                                <div class="table-responsive">
+                                    <table id="images" class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <td class="text-left">图片</td>
+                                            <td class="text-right">排序</td>
+                                            <td></td>
+                                        </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <td colspan="2"></td>
+                                            <td class="text-left">
+                                                <button type="button" onclick="addImage();" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="添加图片">
+                                                    <i class="fa fa-plus-circle"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
                                 </div>
 
                             </div>
@@ -250,127 +352,145 @@
             $('#form-goods').validate({
                 // 规则
                 rules: {
-                                            goods_name: {
+                    goods_name: {
                         required: true,
                         remote: {
-                        'url': "{:U('ajax')}",
-                        'data': {'operate': 'checkgoods_name',
-                        '___PK_': $('#input____PK_').val()}
-                           }
-                        },
-                        goods_image: {
+                            'url': "{:U('ajax')}",
+                            'data': {
+                                'operate': 'checkgoods_name',
+                                '___PK_': $('#input____PK_').val()
+                            }
+                        }
+                    },
+                    goods_image: {
                         required: true,
                         remote: {
-                        'url': "{:U('ajax')}",
-                        'data': {'operate': 'checkgoods_image',
-                        '___PK_': $('#input____PK_').val()}
-                           }
-                        },
-                        goods_image_thumb: {
+                            'url': "{:U('ajax')}",
+                            'data': {
+                                'operate': 'checkgoods_image',
+                                '___PK_': $('#input____PK_').val()
+                            }
+                        }
+                    },
+                    goods_image_thumb: {
                         required: true,
                         remote: {
-                        'url': "{:U('ajax')}",
-                        'data': {'operate': 'checkgoods_image_thumb',
-                        '___PK_': $('#input____PK_').val()}
-                           }
-                        },
-                        goods_SKU: {
+                            'url': "{:U('ajax')}",
+                            'data': {
+                                'operate': 'checkgoods_image_thumb',
+                                '___PK_': $('#input____PK_').val()
+                            }
+                        }
+                    },
+                    goods_SKU: {
                         required: true,
                         remote: {
-                        'url': "{:U('ajax')}",
-                        'data': {'operate': 'checkgoods_SKU',
-                        '___PK_': $('#input____PK_').val()}
-                           }
-                        },
-                        goods_UPC: {
+                            'url': "{:U('ajax')}",
+                            'data': {
+                                'operate': 'checkgoods_SKU',
+                                '___PK_': $('#input____PK_').val()
+                            }
+                        }
+                    },
+                    goods_UPC: {
                         required: true,
                         remote: {
-                        'url': "{:U('ajax')}",
-                        'data': {'operate': 'checkgoods_UPC',
-                        '___PK_': $('#input____PK_').val()}
-                           }
-                        },
-                        goods_description: {
+                            'url': "{:U('ajax')}",
+                            'data': {
+                                'operate': 'checkgoods_UPC',
+                                '___PK_': $('#input____PK_').val()
+                            }
+                        }
+                    },
+                    goods_description: {
                         required: true,
                         remote: {
-                        'url': "{:U('ajax')}",
-                        'data': {'operate': 'checkgoods_description',
-                        '___PK_': $('#input____PK_').val()}
-                           }
-                        },
-                        goods_meta_name: {
+                            'url': "{:U('ajax')}",
+                            'data': {
+                                'operate': 'checkgoods_description',
+                                '___PK_': $('#input____PK_').val()
+                            }
+                        }
+                    },
+                    goods_meta_name: {
                         required: true,
                         remote: {
-                        'url': "{:U('ajax')}",
-                        'data': {'operate': 'checkgoods_meta_name',
-                        '___PK_': $('#input____PK_').val()}
-                           }
-                        },
-                        goods_meta_keywords: {
+                            'url': "{:U('ajax')}",
+                            'data': {
+                                'operate': 'checkgoods_meta_name',
+                                '___PK_': $('#input____PK_').val()
+                            }
+                        }
+                    },
+                    goods_meta_keywords: {
                         required: true,
                         remote: {
-                        'url': "{:U('ajax')}",
-                        'data': {'operate': 'checkgoods_meta_keywords',
-                        '___PK_': $('#input____PK_').val()}
-                           }
-                        },
-                        goods_meta_description: {
+                            'url': "{:U('ajax')}",
+                            'data': {
+                                'operate': 'checkgoods_meta_keywords',
+                                '___PK_': $('#input____PK_').val()
+                            }
+                        }
+                    },
+                    goods_meta_description: {
                         required: true,
                         remote: {
-                        'url': "{:U('ajax')}",
-                        'data': {'operate': 'checkgoods_meta_description',
-                        '___PK_': $('#input____PK_').val()}
-                           }
-                        },
+                            'url': "{:U('ajax')}",
+                            'data': {
+                                'operate': 'checkgoods_meta_description',
+                                '___PK_': $('#input____PK_').val()
+                            }
+                        }
+                    },
 
                     event_sort: {
-                digits: true
-            }
-        },
-            // 错误信息
-            messages: {
+                        digits: true
+                    }
+                },
+                // 错误信息
+                messages: {
 
-                                 goods_name: {
-                 required: '不能为空',
-                 remote: '已经存在, 请重新填写'
-                 },
-                 goods_image: {
-                 required: '不能为空',
-                 remote: '已经存在, 请重新填写'
-                 },
-                 goods_image_thumb: {
-                 required: '不能为空',
-                 remote: '已经存在, 请重新填写'
-                 },
-                 goods_SKU: {
-                 required: '不能为空',
-                 remote: '已经存在, 请重新填写'
-                 },
-                 goods_UPC: {
-                 required: '不能为空',
-                 remote: '已经存在, 请重新填写'
-                 },
-                 goods_description: {
-                 required: '不能为空',
-                 remote: '已经存在, 请重新填写'
-                 },
-                 goods_meta_name: {
-                 required: '不能为空',
-                 remote: '已经存在, 请重新填写'
-                 },
-                 goods_meta_keywords: {
-                 required: '不能为空',
-                 remote: '已经存在, 请重新填写'
-                 },
-                 goods_meta_description: {
-                 required: '不能为空',
-                 remote: '已经存在, 请重新填写'
-                 },
+                    goods_name: {
+                        required: '不能为空',
+                        remote: '已经存在, 请重新填写'
+                    },
+                    goods_image: {
+                        required: '不能为空',
+                        remote: '已经存在, 请重新填写'
+                    },
+                    goods_image_thumb: {
+                        required: '不能为空',
+                        remote: '已经存在, 请重新填写'
+                    },
+                    goods_SKU: {
+                        required: '不能为空',
+                        remote: '已经存在, 请重新填写'
+                    },
+                    goods_UPC: {
+                        required: '不能为空',
+                        remote: '已经存在, 请重新填写'
+                    },
+                    goods_description: {
+                        required: '不能为空',
+                        remote: '已经存在, 请重新填写'
+                    },
+                    goods_meta_name: {
+                        required: '不能为空',
+                        remote: '已经存在, 请重新填写'
+                    },
+                    goods_meta_keywords: {
+                        required: '不能为空',
+                        remote: '已经存在, 请重新填写'
+                    },
+                    goods_meta_description: {
+                        required: '不能为空',
+                        remote: '已经存在, 请重新填写'
+                    },
 
-                event_sort: {
-                    digits: '排序字段要求为整数'
+                    event_sort: {
+                        digits: '排序字段要求为整数'
+                    }
                 }
-            }
             });
         });
 

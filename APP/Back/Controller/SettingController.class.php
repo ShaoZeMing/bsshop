@@ -40,11 +40,11 @@ class SettingController extends Controller
      */
     public function lists()
     {
-        if(IS_POST){
+        if (IS_POST) {
 
             p($_POST);
-        }else{
-
+        } else {
+            $m_setting = D('Setting');
             // 分页, 搜索, 排序等
             // 搜索, 筛选, 过滤
             // 判断用户传输的搜索条件, 进行处理
@@ -74,17 +74,26 @@ class SettingController extends Controller
 //        $sort = [$order['field'] => $order['type']];
 //        $this->assign('order', $order);
 
-
             /********获取配置项值*********/
-            $setting=D('Setting')->select();
-            $setting_group=D('SettingGroup')->select();
-            $setting_option=D('SettingOption')->select();
-            $setting_type=D('SettingType')->select();
+            //获取分组的值
+            $setting_group = D('SettingGroup')->select();
 
-            $this->assign('setting',$setting);
-            $this->assign('setting_group',$setting_group);
-            $this->assign('setting_option',$setting_option);
-            $this->assign('setting_type',$setting_type);
+            //获取配置项的值和属性并将其值遍历处理，将多选框属性的值进行装换数组
+            $setting = $m_setting->alias('s')
+                ->join("left join __SETTING_TYPE__ st using(setting_type_id)")
+                ->Relation(true)->select();
+
+            $setting_rows = [];//定义一个空数组接收分组过后的值
+            foreach ($setting as $set) {
+                if ($set['setting_type_name'] == 'select-multi') {
+                    $set['setting_value_arr'] = explode(',', $set['setting_value']);
+                }
+                $setting_rows[$set['setting_group_id']][] = $set;
+            }
+//            p($setting_rows);die;
+
+            $this->assign('setting_rows', $setting_rows);
+            $this->assign('setting_group', $setting_group);
 
 //        // 分页
 //        $page = I('get.p', '1');// 当前页码
@@ -111,6 +120,50 @@ class SettingController extends Controller
         }
 
     }
+    ///*
+    //修改保存配置项
+    //*/
+    public function save()
+    {
+        // 数据处理
+        $setting = I('post.setting');
+//            p($_POST);die();
+        $m_setting = M('Setting');
+        $cond['setting_type_name'] = 'select-multi';
+        $s_rows = $m_setting->alias('s')
+            ->join('left join __SETTING_TYPE__ st Using(setting_type_id)')
+            ->where($cond)->getField('setting_id', true);
+//        p($s_rows);
+
+        //如果用户没有选择任何多选项目，将数据更新为空
+        foreach ($s_rows as $v) {
+            if (!isset($setting[$v])) {
+                $setting[$v] = '';
+            }
+        }
+//        p($setting);die;
+        //循环插入数据
+        foreach ($setting as $k=>$v){
+            if(is_array($v)){
+                $v=implode(',',$v);
+            }
+            $data['setting_id']=$k;
+            $data['setting_value']=$v;
+            $m_setting->save($data);
+        }
+
+        //删除以前的缓存项
+        S(['type' =>'file']);
+        foreach ($m_setting->getField('setting_key',true) as $v){
+            S($v,null);
+        }
+
+        $this->redirect('lists');
+
+
+
+    }
+
 
     /**
      * 编辑
@@ -185,11 +238,11 @@ class SettingController extends Controller
         $fd = explode(',', "setting_key,setting_name,setting_value");
 
         //循环生成多个if判断语句针对ajax异步验证
-        foreach ($fd as $v){
-            if ($operate=='check'.$v) {
+        foreach ($fd as $v) {
+            if ($operate == 'check' . $v) {
                 // 验证品牌名称唯一的操作
                 // 获取填写的品牌名称
-                $title = I('request.'.$v, '');
+                $title = I('request.' . $v, '');
                 $cond[$v] = $title;
                 // 判断是否传递了setting_id
                 $setting_id = I('request.setting_id', null);

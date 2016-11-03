@@ -1,0 +1,109 @@
+<Extend name="Layout/Back"/>
+
+<block name="content">
+  <div id="content">
+    <div class="page-header">
+      <div class="container-fluid">
+        <div class="pull-right">
+          <button type="submit" form="form-goods_type" data-toggle="tooltip" title="保存" class="btn btn-primary">
+            <i class="fa fa-save"></i>
+          </button>
+          <a href="{:U('lists')}" data-toggle="tooltip" title="取消" class="btn btn-default">
+            <i class="fa fa-reply"></i>
+          </a>
+        </div>
+        <h1>商品类型</h1>
+        <ul class="breadcrumb">
+          <li>
+            <a href="{:U('Index/index')}">首页</a>
+          </li>
+          <li>
+            <a href="">商品类型</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <i class="fa fa-pencil"></i>
+            编辑商品类型
+          </h3>
+        </div>
+        <div class="panel-body">
+          <form action="{:U('edit')}" method="post" enctype="multipart/form-data" id="form-goods_type"
+                class="form-horizontal">
+            <input type="hidden" name="goods_type_id" id="input_goods_type_id" value="{$row['goods_type_id']}" >
+            <ul class="nav nav-tabs">
+              <li class="active">
+                <a href="#tab-general" data-toggle="tab">基本信息</a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab-general">
+
+                                                                     <div class="form-group required">
+                                                         <label class="col-sm-2 control-label" for="input-goods_type_name">类型名称</label>
+                                                         <div class="col-sm-10">
+                                                             <input type="text" name="goods_type_name"  value="{$row['goods_type_name']}" placeholder="类型名称"
+                                                                    id="input-goods_type_name" class="form-control"/>
+                                                         </div>
+                                                     </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">图片</label>
+                  <div class="col-sm-10">
+                    <input id="input-logo_ori" type="file" name="logo_ori" class="">
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</block>
+
+<block name="js">
+  <script src="__PUBLIC__/Back/validate/jquery.validate.min.js"></script>
+  <script src="__PUBLIC__/Back/validate/additional-methods.min.js"></script>
+  <script src="__PUBLIC__/Back/validate/localization/messages_zh.min.js"></script>
+
+  <script>
+    $(function () {
+      $('#form-goods_type').validate({
+        // 规则
+        rules: {
+                                  goods_type_name: {
+                        required: true,
+                        remote: {
+                        'url': "{:U('ajax')}",
+                        'data': {'operate': 'checkgoods_type_name',
+                        'goods_type_id': $('#input_goods_type_id').val()}
+                           }
+                        },
+
+          event_sort: {
+        digits: true
+      }
+    },
+      // 错误信息
+      messages: {
+
+                         goods_type_name: {
+                 required: '不能为空',
+                 remote: '已经存在, 请重新填写'
+                 },
+
+        event_sort: {
+          digits: '排序字段要求为整数'
+        }
+      }
+    });
+    });
+
+  </script>
+</block>

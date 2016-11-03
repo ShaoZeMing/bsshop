@@ -320,3 +320,134 @@ create table ming_goods (
 	index (goods_price),
 	unique key (goods_UPC)
 ) charset=utf8;
+
+
+drop table if exists ming_goods_image;
+
+-- 商品图片
+create table ming_goods_image (
+	goods_image_id int unsigned auto_increment COMMENT '修改时间',
+	goods_id int unsigned not null default 0 COMMENT '修改时间', -- 对应商品ID
+	goods_image varchar(255) not null default '' COMMENT '修改时间', -- 商品原始图像
+	goods_image_small varchar(255) not null default '' COMMENT '修改时间', -- 商品小图像
+	goods_image_medium varchar(255) not null default '' COMMENT '修改时间', -- 商品中图像
+	goods_image_big varchar(255) not null default '' COMMENT '修改时间', -- 商品大图像
+	goods_sort int not null default 0 COMMENT '修改时间', -- 排序
+	primary key (goods_image_id),
+	index (goods_id),
+	index (goods_sort)
+) charset=utf8;
+
+
+drop table if exists ming_goods_type;
+-- 商品属性类型
+create table ming_goods_type (
+	goods_type_id int unsigned auto_increment COMMENT 'ID',
+	goods_type_name varchar(32) not null default '' COMMENT '类型名称', -- 标题
+	primary key (goods_type_id)
+) charset=utf8;
+insert into ming_goods_type values (1, '笔记本');
+insert into ming_goods_type values (2, '眼镜');
+insert into ming_goods_type values (3, '图书');
+
+
+drop table if exists ming_goods_attribute;
+	-- 商品属性
+create table ming_goods_attribute (
+	goods_attribute_id int unsigned auto_increment COMMENT 'ID',
+	goods_attribute_name varchar(32) not null default '' COMMENT '商品属性名称', -- 标题
+	goods_sort int not null default 0 COMMENT '排序', -- 排序
+	goods_type_id int not null default 0 COMMENT '所属商品类型', -- 所属商品类型ID
+	attribute_type_id int not null default 0 COMMENT '属型类型', -- 所属类型ID
+	primary key (goods_attribute_id),
+	index (goods_type_id),
+	index (goods_sort),
+	index (attribute_type_id)
+) charset=utf8;
+insert into ming_goods_attribute values (null, '内存', 0, 1, 2);
+insert into ming_goods_attribute values (null, '镜片材质', 0, 2, 1);
+insert into ming_goods_attribute values (null, '镜框材质', 0, 2, 1);
+insert into ming_goods_attribute values (null, '作者', 0, 3, 1);
+insert into ming_goods_attribute values (null, '出版社', 0, 3, 1);
+insert into ming_goods_attribute values (null, '页数', 0, 3, 1);
+
+drop table if exists ming_goods_attribute_value;
+-- 商品与属性关联
+create table ming_goods_attribute_value (
+	goods_attribute_value_id int unsigned auto_increment COMMENT 'ID',
+	goods_id int unsigned not null default 0 COMMENT '商品ID', -- 商品ID
+	goods_attribute_id int unsigned not null default 0 COMMENT '属性ID', -- 属性ID
+	goods_attribute_value varchar(255) not null default '' COMMENT '商品属性的值', -- 商品属性的值
+	is_option tinyint not null default 0 COMMENT '是否是可选项', -- 是否是可选项
+	primary key (goods_attribute_value_id),
+	index (goods_id),
+	index (goods_attribute_id)
+) charset=utf8;
+
+
+drop table if exists ming_attribute_type;
+-- 商品属性类型
+create table ming_attribute_type (
+	attribute_type_id int unsigned auto_increment COMMENT 'ID',
+	attribute_type_name varchar(32) not null default '' COMMENT '属性类型名称', -- 类型名
+	primary key (attribute_type_id)
+) charset=utf8;
+insert into ming_attribute_type values (1, 'text'); -- 文本
+insert into ming_attribute_type values (2, 'select'); -- 选择(多选)
+
+
+-- 表的结构 `ming_goods_group`
+--
+drop table if exists `ming_goods_group`;
+
+CREATE TABLE `ming_goods_group` (
+  `goods_group_id` int(10) UNSIGNED NOT NULL COMMENT 'ID',
+  `goods_group_name` varchar(100) NOT NULL DEFAULT '' COMMENT '分组名称',
+   PRIMARY KEY (`goods_group_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='添加商品栏目分组';
+
+
+drop table if exists ming_attribute_option;
+-- 商品选项类属性的预设值
+create table ming_attribute_option (
+	attribute_option_id int unsigned auto_increment COMMENT 'ID',
+	goods_attribute_id int unsigned not null default 0 COMMENT '所属商品属性', -- 所属的商品属性
+	attribute_option_name varchar(255) not null default '' COMMENT '预设值', -- 预设值值部分
+	primary key (attribute_option_id),
+	index (goods_attribute_id)
+) charset=utf8;
+-- // 内存预设值测试数据
+insert into ming_attribute_option values (null, 1, '4G');
+insert into ming_attribute_option values (null, 1, '8G');
+insert into ming_attribute_option values (null, 1, '16G');
+insert into ming_attribute_option values (null, 1, '2G');
+insert into ming_attribute_option values (null, 1, '12G');
+insert into ming_attribute_option values (null, 1, '32G');
+
+
+drop table if exists ming_goods_product;
+-- 货品表
+create table ming_goods_product
+(
+	goods_product_id int unsigned auto_increment COMMENT '修改时间',
+	goods_id int unsigned not null default 0 COMMENT '对应商品',
+	goods_product_quantity int not null default 0 COMMENT '库存量', 
+	goods_product_price decimal(10, 2) not null default 0.0 COMMENT '货品价格',
+	goods_price_operate enum('=', '-', '+') not null default '+' COMMENT '改价规则',
+	goods_price_enabled tinyint not null default 1 COMMENT '是否启用',
+	primary key (goods_product_id),
+	index (goods_id)
+) charset=utf8;
+
+
+drop table if exists ming_product_option;
+-- 货品选项表
+create table ming_product_option
+(
+	product_option_id int unsigned auto_increment COMMENT 'ID',
+	goods_product_id int unsigned not null default 0 COMMENT '货品所属',
+	attribute_option_id int unsigned not null default 0 COMMENT '属性选项ID',
+	primary key (product_option_id),
+	index (goods_product_id),
+	index (attribute_option_id)
+)charset=utf8;

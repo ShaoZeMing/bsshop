@@ -1,0 +1,148 @@
+<extend name="Layout/Back"/>
+
+<block name="content">
+
+    <div id="content">
+        <div class="page-header">
+            <div class="container-fluid">
+                <div class="pull-right">
+                    <a href="{:U('add')}" data-toggle="tooltip" title="新增" class="btn btn-primary"> <i
+                            class="fa fa-plus"></i>
+                    </a>
+
+                    <button type="button" data-toggle="tooltip" title="删除" class="btn btn-danger"
+                            onclick="confirm('确认？') ? $('#form-brand').submit() : false;"><i class="fa fa-trash-o"></i>
+                    </button>
+
+                </div>
+                <h1>商品属性管理</h1>
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="{:U('Index/index')}">首页</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">商品属性列表</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="fa fa-list"></i>
+                        商品属性列表
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <form action="{:U('lists')}" method="GET">
+                        <div class="well">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label class="control-label" for="input-title">搜索关键字</label>
+                                        <input type="text" name="filter_goods_attribute_name"
+                                               value="{$filter['filter_goods_attribute_name']}" placeholder="搜索内容"
+                                               id="input-title" class="form-control"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <button type="submit" id="button-filter" class="btn btn-primary pull-right">
+                                        <i class="fa fa-search"></i>
+                                        筛选
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <form action="{:U('multi')}" method="post" enctype="multipart/form-data" id="form-brand">
+                        <input type="hidden" id="input-operate_type" name="operate_type" value="">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <td style="width: 1px;" class="text-center">
+                                        <input type="checkbox"
+                                               onclick="$('input[name*=\'selected\']').prop('checked', this.checked);"/>
+                                    </td>
+                                    <td class="text-center">序号</td>
+                                                                                  <td class="text-center">
+                                                 <if condition="$order['field'] eq 'goods_attribute_name' AND $order['type'] eq 'asc'">
+                                                    <a href="{:U('lists', $filter+['field'=>'goods_attribute_name', 'type'=>'desc'])}" class="asc">商品属性名称</a>
+                                                     <elseif condition="$order['field'] eq 'goods_attribute_name' AND $order['type'] eq 'desc'"/>
+                                                     <a href="{:U('lists', $filter+['field'=>'goods_attribute_name', 'type'=>'asc'])}" class="desc">商品属性名称</a>
+                                                     <else/>
+                                                     <a href="{:U('lists', $filter+['field'=>'goods_attribute_name', 'type'=>'asc'])}" class="">商品属性名称</a>
+                                                 </if>
+                                              </td>
+                                              <td class="text-center">
+                                                 <if condition="$order['field'] eq 'goods_sort' AND $order['type'] eq 'asc'">
+                                                    <a href="{:U('lists', $filter+['field'=>'goods_sort', 'type'=>'desc'])}" class="asc">排序</a>
+                                                     <elseif condition="$order['field'] eq 'goods_sort' AND $order['type'] eq 'desc'"/>
+                                                     <a href="{:U('lists', $filter+['field'=>'goods_sort', 'type'=>'asc'])}" class="desc">排序</a>
+                                                     <else/>
+                                                     <a href="{:U('lists', $filter+['field'=>'goods_sort', 'type'=>'asc'])}" class="">排序</a>
+                                                 </if>
+                                              </td>
+                                              <td class="text-center">
+                                                 <if condition="$order['field'] eq 'goods_type_id' AND $order['type'] eq 'asc'">
+                                                    <a href="{:U('lists', $filter+['field'=>'goods_type_id', 'type'=>'desc'])}" class="asc">所属商品类型</a>
+                                                     <elseif condition="$order['field'] eq 'goods_type_id' AND $order['type'] eq 'desc'"/>
+                                                     <a href="{:U('lists', $filter+['field'=>'goods_type_id', 'type'=>'asc'])}" class="desc">所属商品类型</a>
+                                                     <else/>
+                                                     <a href="{:U('lists', $filter+['field'=>'goods_type_id', 'type'=>'asc'])}" class="">所属商品类型</a>
+                                                 </if>
+                                              </td>
+                                              <td class="text-center">
+                                                 <if condition="$order['field'] eq 'attribute_type_id' AND $order['type'] eq 'asc'">
+                                                    <a href="{:U('lists', $filter+['field'=>'attribute_type_id', 'type'=>'desc'])}" class="asc">属型类型</a>
+                                                     <elseif condition="$order['field'] eq 'attribute_type_id' AND $order['type'] eq 'desc'"/>
+                                                     <a href="{:U('lists', $filter+['field'=>'attribute_type_id', 'type'=>'asc'])}" class="desc">属型类型</a>
+                                                     <else/>
+                                                     <a href="{:U('lists', $filter+['field'=>'attribute_type_id', 'type'=>'asc'])}" class="">属型类型</a>
+                                                 </if>
+                                              </td>
+
+                                    <td class="text-right">管理</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <volist name="rows" id="row">
+                                    <tr>
+                                        <td class="text-center">
+                                            <input type="checkbox" name="selected[]" value="{$row['goods_attribute_id']}"/>
+                                        </td>
+                                        <td class="text-center">{$i}</td>
+
+                                                                                         <td class="text-center">{$row['goods_attribute_name']}</td>
+
+                                                 <td class="text-center">{$row['goods_sort']}</td>
+
+                                                 <td class="text-center">{$row['goods_type_id']}</td>
+
+                                                 <td class="text-center">{$row['attribute_type_id']}</td>
+
+
+                                        <td class="text-right">
+                                            <a href="{:U('edit', ['goods_attribute_id'=>
+                                                    $row['goods_attribute_id']])}" data-toggle="tooltip" title="编辑"
+                                               class="btn btn-primary">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </volist>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                    <div class="row">{$page_html}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>

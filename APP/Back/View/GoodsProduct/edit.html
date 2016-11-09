@@ -1,0 +1,102 @@
+<Extend name="Layout/Back"/>
+
+<block name="content">
+    <div id="content">
+        <div class="page-header">
+            <div class="container-fluid">
+                <div class="pull-right">
+                    <button type="submit" form="form-goods_product" data-toggle="tooltip" title="保存"
+                            class="btn btn-primary">
+                        <i class="fa fa-save"></i>
+                    </button>
+                    <a href="{:U('lists')}" data-toggle="tooltip" title="取消" class="btn btn-default">
+                        <i class="fa fa-reply"></i>
+                    </a>
+                </div>
+                <h1>货品</h1>
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="{:U('Index/index')}">首页</a>
+                    </li>
+                    <li>
+                        <a href="">货品</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="fa fa-pencil"></i>
+                        编辑货品
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <form action="{:U('edit')}" method="post" enctype="multipart/form-data" id="form-goods_product"
+                          class="form-horizontal">
+                        <input type="hidden" name="goods_product_id" id="input_goods_product_id"
+                               value="{$row['goods_product_id']}">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#tab-general" data-toggle="tab">基本信息</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab-general">
+
+                                <div class="form-group required">
+                                    <label class="col-sm-2 control-label" for="input-goods_id">对应商品</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="goods_id" value="{$row['goods_id']}" placeholder="对应商品"
+                                               id="input-goods_id" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group required">
+                                    <label class="col-sm-2 control-label" for="input-goods_product_quantity">库存量</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="goods_product_quantity"
+                                               value="{$row['goods_product_quantity']}" placeholder="库存量"
+                                               id="input-goods_product_quantity" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group required">
+                                    <label class="col-sm-2 control-label" for="input-goods_product_price">货品价格</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="goods_product_price"
+                                               value="{$row['goods_product_price']}" placeholder="货品价格"
+                                               id="input-goods_product_price" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group required">
+                                    <label class="col-sm-2 control-label" for="input-goods_price_operate">改价规则</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="goods_price_operate"
+                                               value="{$row['goods_price_operate']}" placeholder="改价规则"
+                                               id="input-goods_price_operate" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group required">
+                                    <label class="col-sm-2 control-label" for="input-goods_price_enabled">是否启用</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="goods_price_enabled"
+                                               value="{$row['goods_price_enabled']}" placeholder="是否启用"
+                                               id="input-goods_price_enabled" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">图片</label>
+                                    <div class="col-sm-10">
+                                        <input id="input-logo_ori" type="file" name="logo_ori" class="">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>

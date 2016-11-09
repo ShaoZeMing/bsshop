@@ -30,6 +30,8 @@ class CategoryController extends Controller
             $this->redirect('lists', [], 0);
         } else {
             // 表单展示
+            $this->assign('category',D('Category')->getTreeList());
+//            p(D('Category')->getTreeList());
             $this->display();
         }
     }
@@ -41,18 +43,11 @@ class CategoryController extends Controller
     public function lists()
     {
         $model = D('Category');
-
         // 分页, 搜索, 排序等
-        // 搜索, 筛选, 过滤
-        // 判断用户传输的搜索条件, 进行处理
-        // $filter 表示用户输入的内容
-        // $cond 表示用在模型中查询条件
         $cond = [];// 初始条件
-
         //搜索处理
         $filter['filter_category_name'] = I('get.filter_category_name', '', 'trim');   //获取搜索关键词
         if ($filter['filter_category_name'] !== '') {
-
             //需要搜索的字段category_name,category_image,category_image_thumb,category_meta_name,category_meta_keywords,category_meta_description
             $fd = explode(',', "category_name,category_image,category_image_thumb,category_meta_name,category_meta_keywords,category_meta_description");
             $cond['_logic'] = 'or';       //搜索条件之间为or（或）
@@ -61,24 +56,16 @@ class CategoryController extends Controller
                 $cond[$f] = ['like', '%' . $filter['filter_category_name'] . '%'];// 适当考虑索引问题
             }
         }
-        // 分配筛选数据, 到模板, 为了展示搜索条件
-        $this->assign('filter', $filter);
 
-        // 排序
-        // 考虑用户所传递的排序方式和字段
-        $order['field'] = I('get.field', 'category_sort', 'trim');// 初始排序, 字段
-        $order['type'] = I('get.type', 'asc', 'trim');// 初始排序, 方式
-
-        $sort = [$order['field'] => $order['type']];
-        // $sort = $order['field'] . ' ' . $order['type'];
-        $this->assign('order', $order);
-
+        $rows = $model->where($cond)->select();
+        $rows = $model->getTreeList($rows);
         // 分页
         $page = I('get.p', '1');// 当前页码
-        $pagesize = 8;// 每页记录数\\
-
+        $pagesize = 20;// 每页记录数\\
+        $count = count($rows);// 合计
+        $rows=array_slice($rows,($page-1)*$pagesize,$pagesize);
         // 获取总记录数
-        $count = $model->where($cond)->count();// 合计
+
         $t_page = new Page($count, $pagesize);// use Think\Page;
         // 配置格式
         $t_page->setConfig('next', '&gt;');
@@ -90,11 +77,7 @@ class CategoryController extends Controller
         // 生成HTML代码
         $page_html = $t_page->show();
         $this->assign('page_html', $page_html);
-
-        $rows = $model->where($cond)->order($sort)->page("$page, $pagesize")->select();
         $this->assign('rows', $rows);
-
-
         $this->display();
     }
 

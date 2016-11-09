@@ -2,7 +2,9 @@
 namespace Back\Controller;
 
 use Think\Controller;
+use Think\Image;
 use Think\Page;
+use Think\Upload;
 
 class BrandController extends Controller
 {
@@ -13,6 +15,9 @@ class BrandController extends Controller
     {
         // 判断是否为POST数据提交
         if (IS_POST) {
+            //调用方法上传文件
+                    $_POST['brand_logo'] = $this->upload($_FILES['logo_ori']);
+
             // 数据处理
             $model = D('Brand');
             $result = $model->create();    //创建数据对象
@@ -54,7 +59,7 @@ class BrandController extends Controller
         if ($filter['filter_brand_name'] !== '') {
 
             //需要搜索的字段brand_name,brand_logo,brand_logo_ori
-            $fd = explode(',', "brand_name,brand_logo,brand_logo_ori");
+            $fd = explode(',', "brand_name");
             $cond['_logic'] = 'or';       //搜索条件之间为or（或）
             //遍历模糊搜索条件
             foreach ($fd as $f) {
@@ -106,6 +111,11 @@ class BrandController extends Controller
 
         if (IS_POST) {
 
+            //获取原图文件
+            $logo=I('post.logo_del');
+            //上传并删除原图片
+            $_POST['brand_logo'] = $this->upload($_FILES['logo_ori'],$logo);
+
             $model = D('Brand');
             $result = $model->create();
 
@@ -129,6 +139,54 @@ class BrandController extends Controller
             // 展示模板
             $this->display();
         }
+    }
+
+
+    public function upload($file,$save=false){
+
+
+            // 数据处理
+            // 文件上传
+            $t_upload = new Upload;
+            // 配置上传的属性
+            $t_upload->rootPath = APP_PATH . 'Upload/';
+            $t_upload->savePath = 'Brand/';
+            $t_upload->exts = ['jpeg', 'jpg', 'gif', 'png'];
+            $t_upload->maxSize = 1*1024*1024;// 1M
+
+
+            @mkdir( $t_upload->rootPath.$t_upload->savePath,0775,true);
+            // 执行上传
+            $upload_info = $t_upload->uploadOne($file);
+//                 dump($upload_info); die;
+            if ($upload_info) {
+                // LOGO上传成功
+                $_POST['brand_logo_ori'] = $upload_info['savepath'] . $upload_info['savename'];
+                // 制作缩略图
+                $t_image = new Image();
+                $t_image->open(APP_PATH . 'Upload/' . $_POST['brand_logo_ori']);
+                $w = getConfig('brand_thumb_width', 100);
+                $h = getConfig('brand_thumb_height', 100);
+                // 确定缩略图存储位置
+                $thumb_root = './Public/Thumb/';
+                $thumb_path =  $thumb_root . $upload_info['savepath'];
+                // 保证目录存在
+
+                if (! is_dir ($thumb_path)) {
+                    mkdir ($thumb_path, 0775, true);
+                }
+                $thumb_file = $thumb_path . 'thumb_' . $w . 'x'. $h . '_' . $upload_info['savename'];
+                $t_image->thumb($w, $h)->save($thumb_file);
+
+                //如果是更新，则利用自定义函数del_File删除原来图片
+                if($save){
+                        del_File($thumb_root.$save[0]);
+                        del_File(APP_PATH . 'Upload/'.$save[1]);
+                }
+                // 记录缩略图地址
+                return $upload_info['savepath'] . 'thumb_' . $w . 'x'. $h . '_' . $upload_info['savename'];
+            }
+
     }
 
 
@@ -168,7 +226,7 @@ class BrandController extends Controller
             return;
         }
         //需要搜索的字段brand_name,brand_logo,brand_logo_ori
-        $fd = explode(',', "brand_name,brand_logo,brand_logo_ori");
+        $fd = explode(',', "brand_name");
 
         //循环生成多个if判断语句针对ajax异步验证
         foreach ($fd as $v){

@@ -1,223 +1,190 @@
 <Extend name="Layout/Back"/>
 
 <block name="content">
-  <div id="content">
-    <div class="page-header">
-      <div class="container-fluid">
-        <div class="pull-right">
-          <button type="submit" form="form-category" data-toggle="tooltip" title="保存" class="btn btn-primary">
-            <i class="fa fa-save"></i>
-          </button>
-          <a href="{:U('lists')}" data-toggle="tooltip" title="取消" class="btn btn-default">
-            <i class="fa fa-reply"></i>
-          </a>
-        </div>
-        <h1>分类</h1>
-        <ul class="breadcrumb">
-          <li>
-            <a href="{:U('Index/index')}">首页</a>
-          </li>
-          <li>
-            <a href="">分类</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="container-fluid">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">
-            <i class="fa fa-pencil"></i>
-            编辑分类
-          </h3>
-        </div>
-        <div class="panel-body">
-          <form action="{:U('edit')}" method="post" enctype="multipart/form-data" id="form-category"
-                class="form-horizontal">
-            <input type="hidden" name="category_id" id="input_category_id" value="{$row['category_id']}" >
-            <ul class="nav nav-tabs">
-              <li class="active">
-                <a href="#tab-general" data-toggle="tab">基本信息</a>
-              </li>
-            </ul>
-            <div class="tab-content">
-              <div class="tab-pane active" id="tab-general">
-
-                                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-category_name">分类名称</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="category_name"  value="{$row['category_name']}" placeholder="分类名称"
-                                                                    id="input-category_name" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-category_parent_id">父类ID</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="category_parent_id"  value="{$row['category_parent_id']}" placeholder="父类ID"
-                                                                    id="input-category_parent_id" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-category_sort">排序</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="category_sort"  value="{$row['category_sort']}" placeholder="排序"
-                                                                    id="input-category_sort" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-category_image">分类图片</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="category_image"  value="{$row['category_image']}" placeholder="分类图片"
-                                                                    id="input-category_image" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-category_image_thumb">分类小图</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="category_image_thumb"  value="{$row['category_image_thumb']}" placeholder="分类小图"
-                                                                    id="input-category_image_thumb" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-category_is_used">是否习惯</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="category_is_used"  value="{$row['category_is_used']}" placeholder="是否习惯"
-                                                                    id="input-category_is_used" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-category_is_nav">顶级分类</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="category_is_nav"  value="{$row['category_is_nav']}" placeholder="顶级分类"
-                                                                    id="input-category_is_nav" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-category_meta_name">SEO标题</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="category_meta_name"  value="{$row['category_meta_name']}" placeholder="SEO标题"
-                                                                    id="input-category_meta_name" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-category_meta_keywords">SEO关键字</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="category_meta_keywords"  value="{$row['category_meta_keywords']}" placeholder="SEO关键字"
-                                                                    id="input-category_meta_keywords" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-category_meta_description">SEO描述</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="category_meta_description"  value="{$row['category_meta_description']}" placeholder="SEO描述"
-                                                                    id="input-category_meta_description" class="form-control"/>
-                                                         </div>
-                                                     </div>
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">图片</label>
-                  <div class="col-sm-10">
-                    <input id="input-logo_ori" type="file" name="logo_ori" class="">
-                  </div>
+    <div id="content">
+        <div class="page-header">
+            <div class="container-fluid">
+                <div class="pull-right">
+                    <button type="submit" form="form-category" data-toggle="tooltip" title="保存" class="btn btn-primary">
+                        <i class="fa fa-save"></i>
+                    </button>
+                    <a href="{:U('lists')}" data-toggle="tooltip" title="取消" class="btn btn-default">
+                        <i class="fa fa-reply"></i>
+                    </a>
                 </div>
-
-              </div>
-
+                <h1>分类</h1>
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="{:U('Index/index')}">首页</a>
+                    </li>
+                    <li>
+                        <a href="">分类</a>
+                    </li>
+                </ul>
             </div>
-          </form>
         </div>
-      </div>
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="fa fa-pencil"></i>
+                        编辑分类
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <form action="{:U('edit')}" method="post" enctype="multipart/form-data" id="form-category"
+                          class="form-horizontal">
+                        <input type="hidden" name="category_id" id="input_category_id" value="{$row['category_id']}">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#tab-general" data-toggle="tab">基本信息</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab-general">
+
+                                <div class="form-group required">
+                                    <label class="col-sm-2 control-label" for="input-category_name">分类名称</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="category_name" value="{$row['category_name']}"
+                                               placeholder="分类名称"
+                                               id="input-category_name" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group required">
+                                    <label class="col-sm-2 control-label" for="input-category_parent_id">父类ID</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="category_parent_id"
+                                               value="{$row['category_parent_id']}" placeholder="父类ID"
+                                               id="input-category_parent_id" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group required">
+                                    <label class="col-sm-2 control-label" for="input-category_sort">排序</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="category_sort" value="{$row['category_sort']}"
+                                               placeholder="排序"
+                                               id="input-category_sort" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group required">
+                                    <label class="col-sm-2 control-label" for="input-category_is_used">是否习惯</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="category_is_used" value="{$row['category_is_used']}"
+                                               placeholder="是否习惯"
+                                               id="input-category_is_used" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group required">
+                                    <label class="col-sm-2 control-label" for="input-category_is_nav">顶级分类</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="category_is_nav" value="{$row['category_is_nav']}"
+                                               placeholder="顶级分类"
+                                               id="input-category_is_nav" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group required">
+                                    <label class="col-sm-2 control-label" for="input-category_meta_name">SEO标题</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="category_meta_name"
+                                               value="{$row['category_meta_name']}" placeholder="SEO标题"
+                                               id="input-category_meta_name" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group required">
+                                    <label class="col-sm-2 control-label"
+                                           for="input-category_meta_keywords">SEO关键字</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="category_meta_keywords"
+                                               value="{$row['category_meta_keywords']}" placeholder="SEO关键字"
+                                               id="input-category_meta_keywords" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group required">
+                                    <label class="col-sm-2 control-label"
+                                           for="input-category_meta_description">SEO描述</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="category_meta_description"
+                                               value="{$row['category_meta_description']}" placeholder="SEO描述"
+                                               id="input-category_meta_description" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">图片</label>
+                                    <div class="col-sm-10">
+                                        <input id="input-logo_ori" type="file" name="logo_ori" class="">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </block>
 
 <block name="js">
-  <script src="__PUBLIC__/Back/validate/jquery.validate.min.js"></script>
-  <script src="__PUBLIC__/Back/validate/additional-methods.min.js"></script>
-  <script src="__PUBLIC__/Back/validate/localization/messages_zh.min.js"></script>
+    <script src="__PUBLIC__/Back/validate/jquery.validate.min.js"></script>
+    <script src="__PUBLIC__/Back/validate/additional-methods.min.js"></script>
+    <script src="__PUBLIC__/Back/validate/localization/messages_zh.min.js"></script>
 
-  <script>
-    $(function () {
-      $('#form-category').validate({
-        // 规则
-        rules: {
-                                  category_name: {
+    <script>
+        $(function () {
+            $('#form-category').validate({
+                // 规则
+                rules: {
+                    category_name: {
                         required: true,
                         remote: {
-                        'url': "{:U('ajax')}",
-                        'data': {'operate': 'checkcategory_name',
-                        'category_id': $('#input_category_id').val()}
-                           }
-                        },
-                        category_image: {
-                        required: true,
-                        remote: {
-                        'url': "{:U('ajax')}",
-                        'data': {'operate': 'checkcategory_image',
-                        'category_id': $('#input_category_id').val()}
-                           }
-                        },
-                        category_image_thumb: {
-                        required: true,
-                        remote: {
-                        'url': "{:U('ajax')}",
-                        'data': {'operate': 'checkcategory_image_thumb',
-                        'category_id': $('#input_category_id').val()}
-                           }
-                        },
-                        category_meta_name: {
-                        required: true,
-                        remote: {
-                        'url': "{:U('ajax')}",
-                        'data': {'operate': 'checkcategory_meta_name',
-                        'category_id': $('#input_category_id').val()}
-                           }
-                        },
-                        category_meta_keywords: {
-                        required: true,
-                        remote: {
-                        'url': "{:U('ajax')}",
-                        'data': {'operate': 'checkcategory_meta_keywords',
-                        'category_id': $('#input_category_id').val()}
-                           }
-                        },
-                        category_meta_description: {
-                        required: true,
-                        remote: {
-                        'url': "{:U('ajax')}",
-                        'data': {'operate': 'checkcategory_meta_description',
-                        'category_id': $('#input_category_id').val()}
-                           }
-                        },
+                            'url': "{:U('ajax')}",
+                            'data': {
+                                'operate': 'checkcategory_name',
+                                'category_id': $('#input_category_id').val()
+                            }
+                        }
+                    },
 
-          event_sort: {
-        digits: true
-      }
-    },
-      // 错误信息
-      messages: {
+                    event_sort: {
+                        digits: true
+                    }
+                },
+                // 错误信息
+                messages: {
 
-                         category_name: {
-                 required: '不能为空',
-                 remote: '已经存在, 请重新填写'
-                 },
-                 category_image: {
-                 required: '不能为空',
-                 remote: '已经存在, 请重新填写'
-                 },
-                 category_image_thumb: {
-                 required: '不能为空',
-                 remote: '已经存在, 请重新填写'
-                 },
-                 category_meta_name: {
-                 required: '不能为空',
-                 remote: '已经存在, 请重新填写'
-                 },
-                 category_meta_keywords: {
-                 required: '不能为空',
-                 remote: '已经存在, 请重新填写'
-                 },
-                 category_meta_description: {
-                 required: '不能为空',
-                 remote: '已经存在, 请重新填写'
-                 },
+                    category_name: {
+                        required: '不能为空',
+                        remote: '已经存在, 请重新填写'
+                    },
+                    category_image: {
+                        required: '不能为空',
+                        remote: '已经存在, 请重新填写'
+                    },
+                    category_image_thumb: {
+                        required: '不能为空',
+                        remote: '已经存在, 请重新填写'
+                    },
+                    category_meta_name: {
+                        required: '不能为空',
+                        remote: '已经存在, 请重新填写'
+                    },
+                    category_meta_keywords: {
+                        required: '不能为空',
+                        remote: '已经存在, 请重新填写'
+                    },
+                    category_meta_description: {
+                        required: '不能为空',
+                        remote: '已经存在, 请重新填写'
+                    },
 
-        event_sort: {
-          digits: '排序字段要求为整数'
-        }
-      }
-    });
-    });
+                    event_sort: {
+                        digits: '排序字段要求为整数'
+                    }
+                }
+            });
+        });
 
-  </script>
+    </script>
 </block>

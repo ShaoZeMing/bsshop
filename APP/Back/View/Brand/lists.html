@@ -70,60 +70,54 @@
                                                onclick="$('input[name*=\'selected\']').prop('checked', this.checked);"/>
                                     </td>
                                     <td class="text-center">序号</td>
-                                                                                  <td class="text-center">
-                                                 <if condition="$order['field'] eq 'brand_name' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'brand_name', 'type'=>'desc'])}" class="asc">品牌名称</a>
-                                                     <elseif condition="$order['field'] eq 'brand_name' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'brand_name', 'type'=>'asc'])}" class="desc">品牌名称</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'brand_name', 'type'=>'asc'])}" class="">品牌名称</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'brand_logo' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'brand_logo', 'type'=>'desc'])}" class="asc">品牌logo</a>
-                                                     <elseif condition="$order['field'] eq 'brand_logo' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'brand_logo', 'type'=>'asc'])}" class="desc">品牌logo</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'brand_logo', 'type'=>'asc'])}" class="">品牌logo</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'brand_logo_ori' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'brand_logo_ori', 'type'=>'desc'])}" class="asc">品牌logo原图</a>
-                                                     <elseif condition="$order['field'] eq 'brand_logo_ori' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'brand_logo_ori', 'type'=>'asc'])}" class="desc">品牌logo原图</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'brand_logo_ori', 'type'=>'asc'])}" class="">品牌logo原图</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'brand_sort' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'brand_sort', 'type'=>'desc'])}" class="asc">排序</a>
-                                                     <elseif condition="$order['field'] eq 'brand_sort' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'brand_sort', 'type'=>'asc'])}" class="desc">排序</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'brand_sort', 'type'=>'asc'])}" class="">排序</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'brand_created_at' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'brand_created_at', 'type'=>'desc'])}" class="asc">创建时间</a>
-                                                     <elseif condition="$order['field'] eq 'brand_created_at' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'brand_created_at', 'type'=>'asc'])}" class="desc">创建时间</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'brand_created_at', 'type'=>'asc'])}" class="">创建时间</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'brand_updated_at' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'brand_updated_at', 'type'=>'desc'])}" class="asc">修改时间</a>
-                                                     <elseif condition="$order['field'] eq 'brand_updated_at' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'brand_updated_at', 'type'=>'asc'])}" class="desc">修改时间</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'brand_updated_at', 'type'=>'asc'])}" class="">修改时间</a>
-                                                 </if>
-                                              </td>
+                                    <td class="text-center">
+                                        <if condition="$order['field'] eq 'brand_name' AND $order['type'] eq 'asc'">
+                                            <a href="{:U('lists', $filter+['field'=>'brand_name', 'type'=>'desc'])}"
+                                               class="asc">品牌名称</a>
+                                            <elseif condition="$order['field'] eq 'brand_name' AND $order['type'] eq 'desc'"/>
+                                            <a href="{:U('lists', $filter+['field'=>'brand_name', 'type'=>'asc'])}"
+                                               class="desc">品牌名称</a>
+                                            <else/>
+                                            <a href="{:U('lists', $filter+['field'=>'brand_name', 'type'=>'asc'])}"
+                                               class="">品牌名称</a>
+                                        </if>
+                                    </td>
+                                    <td class="text-center">
+                                        <if condition="$order['field'] eq 'brand_logo' AND $order['type'] eq 'asc'">
+                                            <a href="{:U('lists', $filter+['field'=>'brand_logo', 'type'=>'desc'])}"
+                                               class="asc">品牌logo</a>
+                                            <elseif condition="$order['field'] eq 'brand_logo' AND $order['type'] eq 'desc'"/>
+                                            <a href="{:U('lists', $filter+['field'=>'brand_logo', 'type'=>'asc'])}"
+                                               class="desc">品牌logo</a>
+                                            <else/>
+                                            <a href="{:U('lists', $filter+['field'=>'brand_logo', 'type'=>'asc'])}"
+                                               class="">品牌logo</a>
+                                        </if>
+                                    </td>
+                                    <td class="text-center">
+                                        <if condition="$order['field'] eq 'brand_created_at' AND $order['type'] eq 'asc'">
+                                            <a href="{:U('lists', $filter+['field'=>'brand_created_at', 'type'=>'desc'])}"
+                                               class="asc">创建时间</a>
+                                            <elseif condition="$order['field'] eq 'brand_created_at' AND $order['type'] eq 'desc'"/>
+                                            <a href="{:U('lists', $filter+['field'=>'brand_created_at', 'type'=>'asc'])}"
+                                               class="desc">创建时间</a>
+                                            <else/>
+                                            <a href="{:U('lists', $filter+['field'=>'brand_created_at', 'type'=>'asc'])}"
+                                               class="">创建时间</a>
+                                        </if>
+                                    </td>
+                                    <td class="text-center">
+                                        <if condition="$order['field'] eq 'brand_updated_at' AND $order['type'] eq 'asc'">
+                                            <a href="{:U('lists', $filter+['field'=>'brand_updated_at', 'type'=>'desc'])}"
+                                               class="asc">修改时间</a>
+                                            <elseif condition="$order['field'] eq 'brand_updated_at' AND $order['type'] eq 'desc'"/>
+                                            <a href="{:U('lists', $filter+['field'=>'brand_updated_at', 'type'=>'asc'])}"
+                                               class="desc">修改时间</a>
+                                            <else/>
+                                            <a href="{:U('lists', $filter+['field'=>'brand_updated_at', 'type'=>'asc'])}"
+                                               class="">修改时间</a>
+                                        </if>
+                                    </td>
 
                                     <td class="text-right">管理</td>
                                 </tr>
@@ -136,17 +130,14 @@
                                         </td>
                                         <td class="text-center">{$i}</td>
 
-                                                                                         <td class="text-center">{$row['brand_name']}</td>
+                                        <td class="text-center">{$row['brand_name']}</td>
 
-                                                 <td class="text-center">{$row['brand_logo']}</td>
+                                        <td class="text-center"><img src="__PUBLIC__/Thumb/{$row['brand_logo']}"></td>
 
-                                                 <td class="text-center">{$row['brand_logo_ori']}</td>
 
-                                                 <td class="text-center">{$row['brand_sort']}</td>
+                                        <td class="text-center">{$row['brand_created_at']|date="Y-m-d",###}</td>
 
-                                                 <td class="text-center">{$row['brand_created_at']}</td>
-
-                                                 <td class="text-center">{$row['brand_updated_at']}</td>
+                                        <td class="text-center">{$row['brand_updated_at']|date="Y/m/d",###}</td>
 
 
                                         <td class="text-right">

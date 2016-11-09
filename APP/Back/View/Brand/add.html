@@ -42,43 +42,23 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab-general">
 
-                                                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-brand_name">品牌名称</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="brand_name"  value="{$row['brand_name']}" placeholder="品牌名称"
-                                                                    id="input-brand_name" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-brand_logo">品牌logo</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="brand_logo"  value="{$row['brand_logo']}" placeholder="品牌logo"
-                                                                    id="input-brand_logo" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-brand_logo_ori">品牌logo原图</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="brand_logo_ori"  value="{$row['brand_logo_ori']}" placeholder="品牌logo原图"
-                                                                    id="input-brand_logo_ori" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-brand_sort">排序</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="brand_sort"  value="{$row['brand_sort']}" placeholder="排序"
-                                                                    id="input-brand_sort" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-brand_created_at">创建时间</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="brand_created_at"  value="{$row['brand_created_at']}" placeholder="创建时间"
-                                                                    id="input-brand_created_at" class="form-control"/>
-                                                         </div>
-                                                     </div>                                                     <div class="form-group required">
-                                                         <label class="col-sm-2 control-label" for="input-brand_updated_at">修改时间</label>
-                                                         <div class="col-sm-10">
-                                                             <input type="text" name="brand_updated_at"  value="{$row['brand_updated_at']}" placeholder="修改时间"
-                                                                    id="input-brand_updated_at" class="form-control"/>
-                                                         </div>
-                                                     </div>
+                                <div class="form-group required">
+                                    <label class="col-sm-2 control-label" for="input-brand_name">品牌名称</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="brand_name" value="{$row['brand_name']}"
+                                               placeholder="品牌名称"
+                                               id="input-brand_name" class="form-control"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group required">
+                                    <label class="col-sm-2 control-label" for="input-brand_sort">排序</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="brand_sort" value="{$row['brand_sort']}"
+                                               placeholder="排序"
+                                               id="input-brand_sort" class="form-control"/>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">图片</label>
                                     <div class="col-sm-10">
@@ -106,55 +86,34 @@
             $('#form-brand').validate({
                 // 规则
                 rules: {
-                                            brand_name: {
+                    brand_name: {
                         required: true,
                         remote: {
-                        'url': "{:U('ajax')}",
-                        'data': {'operate': 'checkbrand_name',
-                        '___PK_': $('#input____PK_').val()}
-                           }
-                        },
-                        brand_logo: {
-                        required: true,
-                        remote: {
-                        'url': "{:U('ajax')}",
-                        'data': {'operate': 'checkbrand_logo',
-                        '___PK_': $('#input____PK_').val()}
-                           }
-                        },
-                        brand_logo_ori: {
-                        required: true,
-                        remote: {
-                        'url': "{:U('ajax')}",
-                        'data': {'operate': 'checkbrand_logo_ori',
-                        '___PK_': $('#input____PK_').val()}
-                           }
-                        },
+                            'url': "{:U('ajax')}",
+                            'data': {
+                                'operate': 'checkbrand_name',
+                                'brand_id': $('#input_brand_id').val()
+                            }
+                        }
+                    },
+
 
                     event_sort: {
-                digits: true
-            }
-        },
-            // 错误信息
-            messages: {
+                        digits: true
+                    }
+                },
+                // 错误信息
+                messages: {
 
-                                 brand_name: {
-                 required: '不能为空',
-                 remote: '已经存在, 请重新填写'
-                 },
-                 brand_logo: {
-                 required: '不能为空',
-                 remote: '已经存在, 请重新填写'
-                 },
-                 brand_logo_ori: {
-                 required: '不能为空',
-                 remote: '已经存在, 请重新填写'
-                 },
+                    brand_name: {
+                        required: '不能为空',
+                        remote: '已经存在, 请重新填写'
+                    },
 
-                event_sort: {
-                    digits: '排序字段要求为整数'
+                    event_sort: {
+                        digits: '排序字段要求为整数'
+                    }
                 }
-            }
             });
         });
 

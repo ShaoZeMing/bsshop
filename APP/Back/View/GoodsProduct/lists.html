@@ -1,0 +1,210 @@
+<extend name="Layout/Back"/>
+
+<block name="content" >
+
+    <div id="content">
+        <div class="page-header">
+            <div class="container-fluid">
+                <div class="pull-right">
+                    <button type="submit" form="form-GoodsProduct" data-toggle="tooltip" title="保存" class="btn btn-primary"><i class="fa fa-save"></i></button>
+
+                    <button type="button" data-toggle="tooltip" title="删除" class="btn btn-danger" id="button-delete"> <i class="fa fa-trash-o"></i>
+                    </button>
+
+                </div>
+                <h1>货品管理</h1>
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="{U('Manage/index')}">首页</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">货品列表</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="fa fa-list"></i>
+                        {$goods['goods_name']} 商品的货品列表
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <!-- <form action="{:U('list')}" method="GET">
+                    <div class="well">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label" for="input-field">搜索字段标题</label>
+                                    <input type="text" name="filter_field" value="{$filter['filter_field']}" placeholder="搜索字段标题" id="input-field" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button type="submit" id="button-filter" class="btn btn-primary pull-right">
+                                    <i class="fa fa-search"></i>
+                                    筛选
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                -->
+                <form action="{:U('edit')}" method="post" enctype="multipart/form-data" id="form-GoodsProduct">
+                    <input type="hidden" id="input-operate_type" name="operate_type" value="">
+                    <input type="hidden" name="goods_id" value="{$goods['goods_id']}" >
+                    <div class="table-responsive">
+                        <table id="table-product" class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <volist name="option_rows" id="option">
+                                        <td class="text-left">{$option['goods_attribute_name']}</td>
+                                    </volist>
+                                    
+                                    <td class="text-right">商品数量</td>
+                                    <td class="text-right">销售价格</td>
+                                    <td>可用</td>
+                                    <td>
+                                        <input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" />删除
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <volist name="rows" id="row">
+                                    <tr id="option-value-row-{$row['goods_product_id']}">
+                                        <volist name="row['option']" id="option">
+                                        <td class="text-left"> {$option['option_title']}
+                                            <!-- <input type="hidden" name="product[{$key}][option][]" value="" > -->
+                                        </td>
+                                        </volist>
+
+                                        <td class="text-right">
+                                            <input type="text" name="option[{$row['goods_product_id']}][goods_product_quantity]" value="{$row['goods_product_quantity']}" placeholder="商品数量" class="form-control" />
+                                        </td>
+                                        <td class="text-right">
+                                            <select name="option[{$row['goods_product_id']}][goods_price_operate]" class="form-control">
+                                                <option value="+" <if condition="$row['goods_price_operate'] eq '+'">selected</if>>+</option>
+                                                <option value="-" <if condition="$row['goods_price_operate'] eq '-'">selected</if>>-</option>
+                                                <option value="=" <if condition="$row['goods_price_operate'] eq '='">selected</if>>=</option>
+                                            </select>
+                                            <input type="text" name="option[{$row['goods_product_id']}][goods_product_price]" value="{$row['goods_product_price']}" placeholder="销售价格" class="form-control" />
+                                        </td>
+
+                                        <td class="text-left">
+                                            <input type="checkbox" class="form-control" name="option[{$row['goods_product_id']}][goods_price_enabled]" value="1" <if condition="$row['goods_price_enabled'] eq '1'">checked</if>></td>
+
+                                        <td class="text-left">
+                                            <input type="checkbox" name="selected[]" value="{$row['goods_product_id']}" />
+                                        </td>
+                                    </tr>
+                                </volist>
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <volist name="option_rows" id="option">
+                                        <td>
+                                            <select name="" id="select-option-{$option['goods_attribute_value_id']}">
+                                                <volist name="option['value_list']" id="value">
+                                                    <option value="{$value['attribute_option_id']}">{$value['attribute_option_name']}</option>
+                                                </volist>
+
+                                            </select>
+                                        </td>
+                                    </volist>
+                                    <td colspan="3"></td>
+                                    <td class="text-left">
+                                        <button type="button" id="button-addProduct" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="添加货品">
+                                            <i class="fa fa-plus-circle"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </form>
+                <div class="row">{$page_html}</div>
+            </div>
+        </div>
+    </div>
+</div>
+</block>
+
+<block name="js">
+<script>
+$(function() {
+
+    var productRow = 0;
+    $('#button-addProduct').click(function(evt) {
+        // 获取选项的select 
+        var optionSelectList = $('select[id^="select-option"]');
+        var html = '<tr id="option-value-row' + productRow+'">';
+        // 通过js遍历所有的select, 处理每个选项的目的
+        optionSelectList.each(function(i) {
+            // 生成td
+            html += '<td>';
+            // 展示当前所选
+            html += $(this).find('option:selected').text();// this就是当前的DOM元素,就是select
+            // 增加隐藏域, 提交时传递数据
+            // 传递数据
+            html += '<input type="hidden" name="product['+productRow+'][option][]" value="'+ $(this).val() + '" >';
+            html += '</td>';
+        });
+        // 库存
+        html += '<td class="text-right"> <input type="text" name="product[' + productRow + '][product_quantity]" value="1" placeholder="货品数量" class="form-control" /> </td>';
+        // 价格
+        html += '<td class="text-right"> <select name="product[' + productRow + '][price_operate]" class="form-control"> <option value="+" selected="selected">+</option> <option value="=">=</option> <option value="-">-</option> </select> <input type="text" name="product[' + productRow + '][product_price]" value="0.0" placeholder="销售价格" class="form-control" /> </td>';
+        // 是否可用
+        html += '<td class="text-left"> <input type="checkbox" class="form-control" name="product[' + productRow + '][enabled]" value="1" checked></td>';
+        html += '<td class="text-left"> <button type="button" onclick="$(\'#option-value-row' + productRow + '\').remove();" data-toggle="tooltip" title="移除" class="btn btn-danger"> <i class="fa fa-minus-circle"></i> </button> </td>';
+        html += '</tr>';
+        $('#table-product tbody').append(html);
+        ++productRow;
+    });
+});
+</script>
+<script>
+$(function(){
+
+    $('#button-delete').click(function(evt) {
+        // 获取选中的货品ID
+        var selected = $('input[name*=\'selected\']:checked');
+        // console.log(selected.val());// val()方法, 获得第一个jquery对象的值
+        var selectedId = [];
+        selected.each(function(i){
+            // 元素入(数组)栈
+            selectedId.push($(this).val());
+        });
+        if (selectedId.length == 0) {
+            return ;
+        }
+        // console.log(selectedId);
+
+        // 二: 向服务器发送ajax请求, 删除数据库中货品
+        var url = '{:U('ajax', ['operate'=>'delete'])}';
+        var data = {
+            'goods_product_id': selectedId,
+        };
+        $.post(url, data, function(response) {
+           // 三: 如果服务器删除成, 将页面的tr清除掉.
+           if (response.error == 0) {
+                // 没错成功
+                // 遍历数组, 获取每个选中的ID值
+                $.each(selectedId, function(index, value) {
+                    // index索引, value元素值
+                    $('#option-value-row-' + value).remove();
+                });
+           }  else {
+                console.log(response.errroInfo);
+           }
+        }, 'json');
+    });
+});
+</script>
+
+</block>

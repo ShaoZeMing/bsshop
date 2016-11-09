@@ -30,6 +30,8 @@ class AttributeOptionController extends Controller
             $this->redirect('lists', [], 0);
         } else {
             // 表单展示
+
+            $this->assign('goods_attribute',M('GoodsAttribute')->select());
             $this->display();
         }
     }

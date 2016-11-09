@@ -7,9 +7,14 @@ return array(
     'URL_MODEL'             =>  2,       // URL访问模式,可选参数0、1、2、3,代表以下四种模式：
     'URL_ROUTER_ON'         =>  true,   // 是否开启URL路由
     'URL_ROUTE_RULES'       =>  array(
-        'login' =>'Member/login',
-        'register' =>'Member/register',
-        'center' =>'Member/center',
-        'verify' =>'Member/verify',
+        'login' =>'Member/login',    //登陆
+        'register' =>'Member/register', //注册
+        'center' =>'Member/center',   //用户中心
+        'verify' =>'Member/verify',   //验证码
+        'logout'	=> 'Member/logout', // 退出
+        'index' => 'Shop/index',    //商品主页
+
+        // 带参数的路由
+        'goods/:goods_id\d'   => 'Shop/goods'
     ), // 默认路由规则 针对模块
 );

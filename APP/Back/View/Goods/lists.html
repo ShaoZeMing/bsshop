@@ -70,277 +70,126 @@
                                                onclick="$('input[name*=\'selected\']').prop('checked', this.checked);"/>
                                     </td>
                                     <td class="text-center">序号</td>
-                                                                                  <td class="text-center">
-                                                 <if condition="$order['field'] eq 'goods_name' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'goods_name', 'type'=>'desc'])}" class="asc">商品名称</a>
-                                                     <elseif condition="$order['field'] eq 'goods_name' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_name', 'type'=>'asc'])}" class="desc">商品名称</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_name', 'type'=>'asc'])}" class="">商品名称</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'goods_image' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'goods_image', 'type'=>'desc'])}" class="asc">商品图片</a>
-                                                     <elseif condition="$order['field'] eq 'goods_image' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_image', 'type'=>'asc'])}" class="desc">商品图片</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_image', 'type'=>'asc'])}" class="">商品图片</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'goods_image_thumb' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'goods_image_thumb', 'type'=>'desc'])}" class="asc">商品小图</a>
-                                                     <elseif condition="$order['field'] eq 'goods_image_thumb' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_image_thumb', 'type'=>'asc'])}" class="desc">商品小图</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_image_thumb', 'type'=>'asc'])}" class="">商品小图</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'goods_SKU' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'goods_SKU', 'type'=>'desc'])}" class="asc">库存单位</a>
-                                                     <elseif condition="$order['field'] eq 'goods_SKU' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_SKU', 'type'=>'asc'])}" class="desc">库存单位</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_SKU', 'type'=>'asc'])}" class="">库存单位</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'goods_UPC' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'goods_UPC', 'type'=>'desc'])}" class="asc">商品代码</a>
-                                                     <elseif condition="$order['field'] eq 'goods_UPC' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_UPC', 'type'=>'asc'])}" class="desc">商品代码</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_UPC', 'type'=>'asc'])}" class="">商品代码</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'goods_price' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'goods_price', 'type'=>'desc'])}" class="asc">商品价格</a>
-                                                     <elseif condition="$order['field'] eq 'goods_price' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_price', 'type'=>'asc'])}" class="desc">商品价格</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_price', 'type'=>'asc'])}" class="">商品价格</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'goods_quantity' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'goods_quantity', 'type'=>'desc'])}" class="asc">商品库存</a>
-                                                     <elseif condition="$order['field'] eq 'goods_quantity' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_quantity', 'type'=>'asc'])}" class="desc">商品库存</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_quantity', 'type'=>'asc'])}" class="">商品库存</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'goods_minimum' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'goods_minimum', 'type'=>'desc'])}" class="asc">最小起订数</a>
-                                                     <elseif condition="$order['field'] eq 'goods_minimum' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_minimum', 'type'=>'asc'])}" class="desc">最小起订数</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_minimum', 'type'=>'asc'])}" class="">最小起订数</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'goods_subtract' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'goods_subtract', 'type'=>'desc'])}" class="asc">减库存否</a>
-                                                     <elseif condition="$order['field'] eq 'goods_subtract' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_subtract', 'type'=>'asc'])}" class="desc">减库存否</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_subtract', 'type'=>'asc'])}" class="">减库存否</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'goods_is_shipping' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'goods_is_shipping', 'type'=>'desc'])}" class="asc">是否配送</a>
-                                                     <elseif condition="$order['field'] eq 'goods_is_shipping' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_is_shipping', 'type'=>'asc'])}" class="desc">是否配送</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_is_shipping', 'type'=>'asc'])}" class="">是否配送</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'goods_date_available' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'goods_date_available', 'type'=>'desc'])}" class="asc">供货日期</a>
-                                                     <elseif condition="$order['field'] eq 'goods_date_available' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_date_available', 'type'=>'asc'])}" class="desc">供货日期</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_date_available', 'type'=>'asc'])}" class="">供货日期</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'goods_length' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'goods_length', 'type'=>'desc'])}" class="asc">商品长度</a>
-                                                     <elseif condition="$order['field'] eq 'goods_length' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_length', 'type'=>'asc'])}" class="desc">商品长度</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_length', 'type'=>'asc'])}" class="">商品长度</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'goods_width' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'goods_width', 'type'=>'desc'])}" class="asc">商品宽度</a>
-                                                     <elseif condition="$order['field'] eq 'goods_width' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_width', 'type'=>'asc'])}" class="desc">商品宽度</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_width', 'type'=>'asc'])}" class="">商品宽度</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'goods_height' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'goods_height', 'type'=>'desc'])}" class="asc">商品高度</a>
-                                                     <elseif condition="$order['field'] eq 'goods_height' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_height', 'type'=>'asc'])}" class="desc">商品高度</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_height', 'type'=>'asc'])}" class="">商品高度</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'goods_weight' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'goods_weight', 'type'=>'desc'])}" class="asc">商品重量</a>
-                                                     <elseif condition="$order['field'] eq 'goods_weight' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_weight', 'type'=>'asc'])}" class="desc">商品重量</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_weight', 'type'=>'asc'])}" class="">商品重量</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'goods_status' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'goods_status', 'type'=>'desc'])}" class="asc">是否锁定</a>
-                                                     <elseif condition="$order['field'] eq 'goods_status' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_status', 'type'=>'asc'])}" class="desc">是否锁定</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_status', 'type'=>'asc'])}" class="">是否锁定</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'goods_sort' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'goods_sort', 'type'=>'desc'])}" class="asc">排序</a>
-                                                     <elseif condition="$order['field'] eq 'goods_sort' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_sort', 'type'=>'asc'])}" class="desc">排序</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_sort', 'type'=>'asc'])}" class="">排序</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'goods_description' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'goods_description', 'type'=>'desc'])}" class="asc">商品描述</a>
-                                                     <elseif condition="$order['field'] eq 'goods_description' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_description', 'type'=>'asc'])}" class="desc">商品描述</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_description', 'type'=>'asc'])}" class="">商品描述</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'goods_is_deleted' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'goods_is_deleted', 'type'=>'desc'])}" class="asc">是否已删除</a>
-                                                     <elseif condition="$order['field'] eq 'goods_is_deleted' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_is_deleted', 'type'=>'asc'])}" class="desc">是否已删除</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_is_deleted', 'type'=>'asc'])}" class="">是否已删除</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'goods_meta_name' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'goods_meta_name', 'type'=>'desc'])}" class="asc">SEO标题</a>
-                                                     <elseif condition="$order['field'] eq 'goods_meta_name' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_meta_name', 'type'=>'asc'])}" class="desc">SEO标题</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_meta_name', 'type'=>'asc'])}" class="">SEO标题</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'goods_meta_keywords' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'goods_meta_keywords', 'type'=>'desc'])}" class="asc">SEO关键字</a>
-                                                     <elseif condition="$order['field'] eq 'goods_meta_keywords' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_meta_keywords', 'type'=>'asc'])}" class="desc">SEO关键字</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_meta_keywords', 'type'=>'asc'])}" class="">SEO关键字</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'goods_meta_description' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'goods_meta_description', 'type'=>'desc'])}" class="asc">SEO描述</a>
-                                                     <elseif condition="$order['field'] eq 'goods_meta_description' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_meta_description', 'type'=>'asc'])}" class="desc">SEO描述</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_meta_description', 'type'=>'asc'])}" class="">SEO描述</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'length_unit_id' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'length_unit_id', 'type'=>'desc'])}" class="asc">长度单位</a>
-                                                     <elseif condition="$order['field'] eq 'length_unit_id' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'length_unit_id', 'type'=>'asc'])}" class="desc">长度单位</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'length_unit_id', 'type'=>'asc'])}" class="">长度单位</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'weight_unit_id' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'weight_unit_id', 'type'=>'desc'])}" class="asc">重量单位</a>
-                                                     <elseif condition="$order['field'] eq 'weight_unit_id' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'weight_unit_id', 'type'=>'asc'])}" class="desc">重量单位</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'weight_unit_id', 'type'=>'asc'])}" class="">重量单位</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'tax_id' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'tax_id', 'type'=>'desc'])}" class="asc">税类型</a>
-                                                     <elseif condition="$order['field'] eq 'tax_id' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'tax_id', 'type'=>'asc'])}" class="desc">税类型</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'tax_id', 'type'=>'asc'])}" class="">税类型</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'stock_status_id' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'stock_status_id', 'type'=>'desc'])}" class="asc">库存状态</a>
-                                                     <elseif condition="$order['field'] eq 'stock_status_id' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'stock_status_id', 'type'=>'asc'])}" class="desc">库存状态</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'stock_status_id', 'type'=>'asc'])}" class="">库存状态</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'brand_id' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'brand_id', 'type'=>'desc'])}" class="asc">所属品牌</a>
-                                                     <elseif condition="$order['field'] eq 'brand_id' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'brand_id', 'type'=>'asc'])}" class="desc">所属品牌</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'brand_id', 'type'=>'asc'])}" class="">所属品牌</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'category_id' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'category_id', 'type'=>'desc'])}" class="asc">所属分类</a>
-                                                     <elseif condition="$order['field'] eq 'category_id' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'category_id', 'type'=>'asc'])}" class="desc">所属分类</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'category_id', 'type'=>'asc'])}" class="">所属分类</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'goods_created_at' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'goods_created_at', 'type'=>'desc'])}" class="asc">创建时间</a>
-                                                     <elseif condition="$order['field'] eq 'goods_created_at' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_created_at', 'type'=>'asc'])}" class="desc">创建时间</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_created_at', 'type'=>'asc'])}" class="">创建时间</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'goods_updated_at' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'goods_updated_at', 'type'=>'desc'])}" class="asc">修改时间</a>
-                                                     <elseif condition="$order['field'] eq 'goods_updated_at' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_updated_at', 'type'=>'asc'])}" class="desc">修改时间</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'goods_updated_at', 'type'=>'asc'])}" class="">修改时间</a>
-                                                 </if>
-                                              </td>
-
+                                    <td class="text-center">
+                                        <if condition="$order['field'] eq 'goods_name' AND $order['type'] eq 'asc'">
+                                            <a href="{:U('lists', $filter+['field'=>'goods_name', 'type'=>'desc'])}"
+                                               class="asc">商品名称</a>
+                                            <elseif condition="$order['field'] eq 'goods_name' AND $order['type'] eq 'desc'"/>
+                                            <a href="{:U('lists', $filter+['field'=>'goods_name', 'type'=>'asc'])}"
+                                               class="desc">商品名称</a>
+                                            <else/>
+                                            <a href="{:U('lists', $filter+['field'=>'goods_name', 'type'=>'asc'])}"
+                                               class="">商品名称</a>
+                                        </if>
+                                    </td>
+                                    <td class="text-center">
+                                        <if condition="$order['field'] eq 'goods_image_thumb' AND $order['type'] eq 'asc'">
+                                            <a href="{:U('lists', $filter+['field'=>'goods_image_thumb', 'type'=>'desc'])}"
+                                               class="asc">商品小图</a>
+                                            <elseif condition="$order['field'] eq 'goods_image_thumb' AND $order['type'] eq 'desc'"/>
+                                            <a href="{:U('lists', $filter+['field'=>'goods_image_thumb', 'type'=>'asc'])}"
+                                               class="desc">商品小图</a>
+                                            <else/>
+                                            <a href="{:U('lists', $filter+['field'=>'goods_image_thumb', 'type'=>'asc'])}"
+                                               class="">商品小图</a>
+                                        </if>
+                                    </td>
+                                    <td class="text-center">
+                                        <if condition="$order['field'] eq 'goods_UPC' AND $order['type'] eq 'asc'">
+                                            <a href="{:U('lists', $filter+['field'=>'goods_UPC', 'type'=>'desc'])}"
+                                               class="asc">商品代码</a>
+                                            <elseif condition="$order['field'] eq 'goods_UPC' AND $order['type'] eq 'desc'"/>
+                                            <a href="{:U('lists', $filter+['field'=>'goods_UPC', 'type'=>'asc'])}"
+                                               class="desc">商品代码</a>
+                                            <else/>
+                                            <a href="{:U('lists', $filter+['field'=>'goods_UPC', 'type'=>'asc'])}"
+                                               class="">商品代码</a>
+                                        </if>
+                                    </td>
+                                    <td class="text-center">
+                                        <if condition="$order['field'] eq 'goods_price' AND $order['type'] eq 'asc'">
+                                            <a href="{:U('lists', $filter+['field'=>'goods_price', 'type'=>'desc'])}"
+                                               class="asc">商品价格</a>
+                                            <elseif condition="$order['field'] eq 'goods_price' AND $order['type'] eq 'desc'"/>
+                                            <a href="{:U('lists', $filter+['field'=>'goods_price', 'type'=>'asc'])}"
+                                               class="desc">商品价格</a>
+                                            <else/>
+                                            <a href="{:U('lists', $filter+['field'=>'goods_price', 'type'=>'asc'])}"
+                                               class="">商品价格</a>
+                                        </if>
+                                    </td>
+                                    <td class="text-center">
+                                        <if condition="$order['field'] eq 'goods_date_available' AND $order['type'] eq 'asc'">
+                                            <a href="{:U('lists', $filter+['field'=>'goods_date_available', 'type'=>'desc'])}"
+                                               class="asc">供货日期</a>
+                                            <elseif condition="$order['field'] eq 'goods_date_available' AND $order['type'] eq 'desc'"/>
+                                            <a href="{:U('lists', $filter+['field'=>'goods_date_available', 'type'=>'asc'])}"
+                                               class="desc">供货日期</a>
+                                            <else/>
+                                            <a href="{:U('lists', $filter+['field'=>'goods_date_available', 'type'=>'asc'])}"
+                                               class="">供货日期</a>
+                                        </if>
+                                    </td>
+                                    <td class="text-center">
+                                        <if condition="$order['field'] eq 'goods_status' AND $order['type'] eq 'asc'">
+                                            <a href="{:U('lists', $filter+['field'=>'goods_status', 'type'=>'desc'])}"
+                                               class="asc">是否启用</a>
+                                            <elseif condition="$order['field'] eq 'goods_status' AND $order['type'] eq 'desc'"/>
+                                            <a href="{:U('lists', $filter+['field'=>'goods_status', 'type'=>'asc'])}"
+                                               class="desc">是否启用</a>
+                                            <else/>
+                                            <a href="{:U('lists', $filter+['field'=>'goods_status', 'type'=>'asc'])}"
+                                               class="">是否启用</a>
+                                        </if>
+                                    </td>
+                                    <td class="text-center">
+                                        <if condition="$order['field'] eq 'goods_is_deleted' AND $order['type'] eq 'asc'">
+                                            <a href="{:U('lists', $filter+['field'=>'goods_is_deleted', 'type'=>'desc'])}"
+                                               class="asc">是否已删除</a>
+                                            <elseif condition="$order['field'] eq 'goods_is_deleted' AND $order['type'] eq 'desc'"/>
+                                            <a href="{:U('lists', $filter+['field'=>'goods_is_deleted', 'type'=>'asc'])}"
+                                               class="desc">是否已删除</a>
+                                            <else/>
+                                            <a href="{:U('lists', $filter+['field'=>'goods_is_deleted', 'type'=>'asc'])}"
+                                               class="">是否已删除</a>
+                                        </if>
+                                    </td>
+                                    <td class="text-center">
+                                        <if condition="$order['field'] eq 'stock_status_id' AND $order['type'] eq 'asc'">
+                                            <a href="{:U('lists', $filter+['field'=>'stock_status_id', 'type'=>'desc'])}"
+                                               class="asc">库存状态</a>
+                                            <elseif condition="$order['field'] eq 'stock_status_id' AND $order['type'] eq 'desc'"/>
+                                            <a href="{:U('lists', $filter+['field'=>'stock_status_id', 'type'=>'asc'])}"
+                                               class="desc">库存状态</a>
+                                            <else/>
+                                            <a href="{:U('lists', $filter+['field'=>'stock_status_id', 'type'=>'asc'])}"
+                                               class="">库存状态</a>
+                                        </if>
+                                    </td>
+                                    <td class="text-center">
+                                        <if condition="$order['field'] eq 'brand_id' AND $order['type'] eq 'asc'">
+                                            <a href="{:U('lists', $filter+['field'=>'brand_id', 'type'=>'desc'])}"
+                                               class="asc">所属品牌</a>
+                                            <elseif condition="$order['field'] eq 'brand_id' AND $order['type'] eq 'desc'"/>
+                                            <a href="{:U('lists', $filter+['field'=>'brand_id', 'type'=>'asc'])}"
+                                               class="desc">所属品牌</a>
+                                            <else/>
+                                            <a href="{:U('lists', $filter+['field'=>'brand_id', 'type'=>'asc'])}"
+                                               class="">所属品牌</a>
+                                        </if>
+                                    </td>
+                                    <td class="text-center">
+                                        <if condition="$order['field'] eq 'category_id' AND $order['type'] eq 'asc'">
+                                            <a href="{:U('lists', $filter+['field'=>'category_id', 'type'=>'desc'])}"
+                                               class="asc">所属分类</a>
+                                            <elseif condition="$order['field'] eq 'category_id' AND $order['type'] eq 'desc'"/>
+                                            <a href="{:U('lists', $filter+['field'=>'category_id', 'type'=>'asc'])}"
+                                               class="desc">所属分类</a>
+                                            <else/>
+                                            <a href="{:U('lists', $filter+['field'=>'category_id', 'type'=>'asc'])}"
+                                               class="">所属分类</a>
+                                        </if>
+                                    </td>
                                     <td class="text-right">管理</td>
                                 </tr>
                                 </thead>
@@ -352,72 +201,26 @@
                                         </td>
                                         <td class="text-center">{$i}</td>
 
-                                                                                         <td class="text-center">{$row['goods_name']}</td>
+                                        <td class="text-center">{$row['goods_name']}</td>
+                                        <td class="text-center">{$row['goods_image_thumb']}</td>
+                                        <td class="text-center">{$row['goods_UPC']}</td>
+                                        <td class="text-center">{$row['goods_price']}</td>
+                                        <td class="text-center">{$row['goods_date_available']}</td>
+                                        <td class="text-center">{$row['goods_status']}</td>
+                                        <td class="text-center">{$row['goods_is_deleted']}</td>
+                                        <td class="text-center">{$row['stock_status_id']}</td>
 
-                                                 <td class="text-center">{$row['goods_image']}</td>
-
-                                                 <td class="text-center">{$row['goods_image_thumb']}</td>
-
-                                                 <td class="text-center">{$row['goods_SKU']}</td>
-
-                                                 <td class="text-center">{$row['goods_UPC']}</td>
-
-                                                 <td class="text-center">{$row['goods_price']}</td>
-
-                                                 <td class="text-center">{$row['goods_quantity']}</td>
-
-                                                 <td class="text-center">{$row['goods_minimum']}</td>
-
-                                                 <td class="text-center">{$row['goods_subtract']}</td>
-
-                                                 <td class="text-center">{$row['goods_is_shipping']}</td>
-
-                                                 <td class="text-center">{$row['goods_date_available']}</td>
-
-                                                 <td class="text-center">{$row['goods_length']}</td>
-
-                                                 <td class="text-center">{$row['goods_width']}</td>
-
-                                                 <td class="text-center">{$row['goods_height']}</td>
-
-                                                 <td class="text-center">{$row['goods_weight']}</td>
-
-                                                 <td class="text-center">{$row['goods_status']}</td>
-
-                                                 <td class="text-center">{$row['goods_sort']}</td>
-
-                                                 <td class="text-center">{$row['goods_description']}</td>
-
-                                                 <td class="text-center">{$row['goods_is_deleted']}</td>
-
-                                                 <td class="text-center">{$row['goods_meta_name']}</td>
-
-                                                 <td class="text-center">{$row['goods_meta_keywords']}</td>
-
-                                                 <td class="text-center">{$row['goods_meta_description']}</td>
-
-                                                 <td class="text-center">{$row['length_unit_id']}</td>
-
-                                                 <td class="text-center">{$row['weight_unit_id']}</td>
-
-                                                 <td class="text-center">{$row['tax_id']}</td>
-
-                                                 <td class="text-center">{$row['stock_status_id']}</td>
-
-                                                 <td class="text-center">{$row['brand_id']}</td>
-
-                                                 <td class="text-center">{$row['category_id']}</td>
-
-                                                 <td class="text-center">{$row['goods_created_at']}</td>
-
-                                                 <td class="text-center">{$row['goods_updated_at']}</td>
-
-
+                                        <td class="text-center">{$row['brand_id']}</td>
+                                        <td class="text-center">{$row['category_id']}</td>
                                         <td class="text-right">
                                             <a href="{:U('edit', ['goods_id'=>
                                                     $row['goods_id']])}" data-toggle="tooltip" title="编辑"
                                                class="btn btn-primary">
                                                 <i class="fa fa-pencil"></i>
+                                            </a>
+                                            <a href="{:U('GoodsProduct/lists', ['goods_id'=>
+                                                    $row['goods_id']])}" data-toggle="tooltip" title="货品管理" class="btn btn-primary">
+                                                货
                                             </a>
                                         </td>
                                     </tr>

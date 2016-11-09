@@ -15,10 +15,13 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <block name="title"></block>
-    <meta name="description" content="BuyPlus(败家Shopping）"/>
-    <meta name="keywords" content="BuyPlus(败家Shopping）"/>
-    <block name="meta"></block>
+    <block name="title">
+        <title>{:getConfig('shop_name')}</title>
+    </block>
+    <block name="meta">
+        <meta name="description" content="{:getConfig('mate_description')}"/>
+        <meta name="keywords" content="{:getConfig('mate_description')}"/>
+    </block>
 
     <link href="__PUBLIC__/Home/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
     <link href="__PUBLIC__/Home/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
@@ -32,10 +35,55 @@
     <script src="__PUBLIC__/Home/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="__PUBLIC__/Home/javascript/common.js" type="text/javascript"></script>
     <link href="__PUBLIC__/Home/image/cart.png" rel="icon"/>
-    <script src="__PUBLIC__/Home/owl-carousel/owl.carousel.min.js"
-            type="text/javascript"></script>
+    <script src="__PUBLIC__/Home/owl-carousel/owl.carousel.min.js" type="text/javascript"></script>
     <block name="js"></block>
 
+    <script>
+        //异步获取分类栏目
+        $(function () {
+            var html= '<ul class="main-menu"><li class="parent"> <a href="/">首页</a> </li>';
+            // 二: 向服务器发送ajax请求, 删除数据库中货品
+            var url = '{:U("Common/commonAjax")}';
+            var data = {
+                'operate':'category'
+            };
+            $.post(url, data, function(response) {
+                // 三: 如果服务器删除成, 将页面的tr清除掉.
+//                console.log(response.msg);
+                if (response.error == 0) {
+                    // 没错
+                    $.each(response.msg,function (i,v) {
+//                        console.log(v);
+                        html +='<li class="parent with-sub-menu">';
+                        html +='<a href="'+v.category_id+'">'+v.category_name+'</a>';
+                        html +='<div class="open-sub-menu">+</div>';
+                        html +='<ul class="sub-menu">';
+                        $.each(v.children,function (ii,vv) {
+                            html +='<li><a href="'+vv.category_id+'">'+vv.category_name+'</a>';
+                            html +='<div class="open-sub-menu">+</div>';
+                            html +='<ul class="second-menu">';
+                            $.each(vv.children,function (iii,vvv) {
+//                                console.log(vvv.category_name);
+                                html +='<li><a href="'+vvv.category_id+'">'+ vvv.category_name +'</a></li>';
+                            })
+                            html +='</ul></li>';
+                        })
+                        html +='</ul></li>';
+                    })
+                    html +='<li class="parent "><a href="">海外购</a></li>';
+                    html +='<li class="parent "><a href="">轻松购</a></li>';
+                    html +='<li class="parent "><a href="">专业版购买</a></li></ul>';
+                    $('#common-category').append(html);
+                    $('.sub-menu>li').mouseenter(function (e) {
+                        $(this).parent().find('ul.second-menu').hide().eq($(this).index()).show();
+                    });
+                    // 遍历数组, 获取每个选中的ID值
+                }  else {
+                    console.log(response.errroInfo);
+                }
+            }, 'json');
+        })
+    </script>
 
 </head>
 <nav id="top">
@@ -45,7 +93,7 @@
                 <li>
                     <a href=""> <i class="fa fa-phone"></i>
                     </a>
-                    <span class="hidden-xs hidden-sm hidden-md">15196986135</span>
+                    <span class="hidden-xs hidden-sm hidden-md">{getConfig('')}</span>
                 </li>
                 <li class="dropdown">
                     <a href="" title="会员中心" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-user"></i>
@@ -121,180 +169,8 @@
               <i class="fa fa-bars"></i>
             </span>
         </div>
-        <div class="main-menu-container">
-            <ul class="main-menu">
-                <li class="parent">
-                    <a href="/">首页</a>
-                </li>
-                <li class="parent with-sub-menu">
-                    <a href="">男士眼镜</a>
-                    <div class="open-sub-menu">+</div>
-                    <ul class="sub-menu">
-                        <li>
-                            <a href="">帕森</a>
-                            <div class="open-sub-menu">+</div>
-                            <ul class="second-menu">
-                                <li>
-                                    <a href="">shes茜子</a>
-                                </li>
-                                <li>
-                                    <a href="">帕森新</a>
-                                </li>
-                                <li>
-                                    <a href="">暴龙</a>
-                                </li>
-                                <li>
-                                    <a href="">艾唯莎</a>
-                                </li>
-                                <li>
-                                    <a href="">名匠</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="">暴龙</a>
-                            <div class="open-sub-menu">+</div>
-                            <ul class="second-menu">
-                                <li>
-                                    <a href="">shes茜子</a>
-                                </li>
-                                <li>
-                                    <a href="">帕森新</a>
-                                </li>
-                                <li>
-                                    <a href="">暴龙</a>
-                                </li>
-                                <li>
-                                    <a href="">艾唯莎</a>
-                                </li>
-                                <li>
-                                    <a href="">名匠</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="">派丽蒙</a>
-                            <div class="open-sub-menu">+</div>
-                            <ul class="second-menu">
-                                <li>
-                                    <a href="">shes茜子</a>
-                                </li>
-                                <li>
-                                    <a href="">帕森新</a>
-                                </li>
-                                <li>
-                                    <a href="">暴龙</a>
-                                </li>
-                                <li>
-                                    <a href="">艾唯莎</a>
-                                </li>
-                                <li>
-                                    <a href="">名匠</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="">海伦凯勒</a>
-                            <div class="open-sub-menu">+</div>
-                            <ul class="second-menu">
-                                <li>
-                                    <a href="">shes茜子</a>
-                                </li>
-                                <li>
-                                    <a href="">帕森新</a>
-                                </li>
-                                <li>
-                                    <a href="">暴龙</a>
-                                </li>
-                                <li>
-                                    <a href="">艾唯莎</a>
-                                </li>
-                                <li>
-                                    <a href="">名匠</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="">邦士度</a>
-                            <div class="open-sub-menu">+</div>
-                            <ul class="second-menu">
-                                <li>
-                                    <a href="">shes茜子</a>
-                                </li>
-                                <li>
-                                    <a href="">帕森新</a>
-                                </li>
-                                <li>
-                                    <a href="">暴龙</a>
-                                </li>
-                                <li>
-                                    <a href="">艾唯莎</a>
-                                </li>
-                                <li>
-                                    <a href="">名匠</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li class="parent with-sub-menu">
-                    <a href="">女士眼镜</a>
-                    <div class="open-sub-menu">+</div>
-                    <ul class="sub-menu">
-                        <li>
-                            <a href="">shes茜子</a>
-                        </li>
-                        <li>
-                            <a href="">帕森新</a>
-                        </li>
-                        <li>
-                            <a href="">暴龙</a>
-                        </li>
-                        <li>
-                            <a href="">艾唯莎</a>
-                        </li>
-                        <li>
-                            <a href="">名匠</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="parent with-sub-menu">
-                    <a href="">驾驶镜</a>
-                    <div class="open-sub-menu">+</div>
-                    <ul class="sub-menu">
-                        <li>
-                            <a href="">暴龙</a>
-                        </li>
-                        <li>
-                            <a href="">AHT</a>
-                        </li>
-                        <li>
-                            <a href="">pueerizi</a>
-                        </li>
-                        <li>
-                            <a href="">暴龙</a>
-                        </li>
-                        <li>
-                            <a href="">阿木</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="parent ">
-                    <a href="">海外购</a>
-                </li>
-                <li class="parent ">
-                    <a href="">轻松购</a>
-                </li>
-                <li class="parent ">
-                    <a href="">专业版购买</a>
-                </li>
-            </ul>
+        <div class="main-menu-container" id="common-category">
         </div>
-        <script>
-            $('.sub-menu>li').mouseenter(function (e) {
-                $(this).parent().find('ul.second-menu').hide().eq($(this).index()).show();
-            });
-        </script>
         <div id="search" class="input-group">
             <input type="text" name="search" value="" placeholder="搜索" class="form-control"/>
             <span class="input-group-btn">

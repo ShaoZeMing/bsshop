@@ -17,6 +17,7 @@ class GoodsAttributeController extends Controller
             $model = D('GoodsAttribute');
             $result = $model->create();    //创建数据对象
 
+
             if (!$result) {
                 $this->error('数据添加失败: ' . $model->getError(), U('add'));
             }
@@ -26,13 +27,19 @@ class GoodsAttributeController extends Controller
             if (!$result) {
                 $this->error('数据添加失败:' . $model->getError(), U('add'));
             }
+
+
             // 成功重定向到list页
             $this->redirect('lists', [], 0);
         } else {
             // 表单展示
+            $this->assign('goods_type',M('GoodsType')->select());
+            $this->assign('attribute_type',M('AttributeType')->select());
             $this->display();
         }
     }
+
+
 
 
     /**
@@ -66,7 +73,7 @@ class GoodsAttributeController extends Controller
 
         // 排序
         // 考虑用户所传递的排序方式和字段
-        $order['field'] = I('get.field', 'goods_sort', 'trim');// 初始排序, 字段
+        $order['field'] = I('get.field', 'goods_attribute_sort', 'trim');// 初始排序, 字段
         $order['type'] = I('get.type', 'asc', 'trim');// 初始排序, 方式
 
         $sort = [$order['field'] => $order['type']];

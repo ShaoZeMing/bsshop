@@ -5,11 +5,11 @@
         <div class="page-header">
             <div class="container-fluid">
                 <div class="pull-right">
-                    <button type="submit" form="form-goods" data-toggle="tooltip" title="保存" class="btn btn-primary">
-                        <i class="fa fa-save"></i>
+                    <button type="submit" form="form-Goods" data-toggle="tooltip" title="保存" class="btn btn-primary"><i
+                            class="fa fa-save"></i>
                     </button>
-                    <a href="{:U('lists')}" data-toggle="tooltip" title="取消" class="btn btn-default">
-                        <i class="fa fa-reply"></i>
+                    <a href="{:U('lists')}" data-toggle="tooltip" title="取消" class="btn btn-default"> <i
+                            class="fa fa-reply"></i>
                     </a>
                 </div>
                 <h1>商品</h1>
@@ -32,7 +32,7 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    <form action="{:U('add')}" method="post" enctype="multipart/form-data" id="form-goods"
+                    <form action="{:U('add')}" method="post" enctype="multipart/form-data" id="form-Goods"
                           class="form-horizontal">
                         <ul class="nav nav-tabs">
                             <li class="active">
@@ -65,56 +65,69 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" for="input-name">商品名称</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="name" value="" placeholder="商品名称" id="input-name" class="form-control" />
+                                        <input type="text" name="goods_name" value="" placeholder="商品名称" id="input-name"
+                                               class="form-control"/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" for="input-image">商品图片</label>
                                     <div class="col-sm-10">
-                                        <input type="file" id="input-image" name="image" />
+                                        <input type="file" id="input-image" name="goods_logo"/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" for="input-SKU">SKU</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="SKU" value="" placeholder="SKU" id="input-SKU" class="form-control" />
+                                        <input type="text" name="goods_SKU" value="" placeholder="SKU" id="input-SKU"
+                                               class="form-control"/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" for="input-UPC">UPC</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="UPC" value="" placeholder="UPC" id="input-UPC" class="form-control" />
+                                        <input type="text" name="goods_UPC" value="" placeholder="UPC" id="input-UPC"
+                                               class="form-control"/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" for="input-price">售价</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="price" value="" placeholder="price" id="input-price" class="form-control" />
+                                        <input type="text" name="goods_price" value="" placeholder="价格"
+                                               id="input-price" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="input-scj">市场价</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="goods_scj" value="" placeholder="市场价"
+                                               id="input-scj" class="form-control"/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" for="input-quantity">库存</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="quantity" value="" placeholder="库存" id="input-quantity" class="form-control" />
+                                        <input type="text" name="goods_quantity" value="" placeholder="库存"
+                                               id="input-quantity" class="form-control"/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" for="input-minimum">最小起订数量</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="minimum" value="1" placeholder="最少起订数量" id="input-minimum" class="form-control" />
+                                        <input type="text" name="goods_minimum" value="1" placeholder="最少起订数量"
+                                               id="input-minimum" class="form-control"/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" for="input-subtract">是否扣减库存</label>
                                     <div class="col-sm-10">
-                                        <select name="subtract" id="input-subtract" class="form-control">
+                                        <select name="goods_subtract" id="input-subtract" class="form-control">
                                             <option value="1" selected="selected">是</option>
                                             <option value="0">否</option>
                                         </select>
@@ -122,19 +135,26 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label" >是否可配送</label>
+                                    <label class="col-sm-2 control-label">是否可配送</label>
                                     <div class="col-sm-10">
                                         <label class="radio-inline">
-                                            <input name="is_shipping"  value="1" checked="checked" type="radio">是</label>
+                                            <input name="goods_is_shipping" value="1" checked="checked"
+                                                   type="radio">是</label>
                                         <label class="radio-inline">
                                             <input name="is_shipping" value="0" type="radio">否</label>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="input-date_available">供货日期</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="date_available" value="" placeholder="date_available" id="input-date_available" class="form-control" />
+                                    <label class="col-sm-2 control-label" for="input-date-available">供货日期</label>
+                                    <div class="col-sm-3">
+                                        <div class="input-group date">
+                                            <input type="text" name="goods_date_available" value="2016-07-10"
+                                                   placeholder="供货日期" data-date-format="YYYY-MM-DD"
+                                                   id="input-date-available" class="form-control"/>
+                                            <span class="input-group-btn">
+                                      <button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button></span>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -143,11 +163,14 @@
                                     <div class="col-sm-10">
                                         <div class="row">
                                             <div class="col-sm-4">
-                                                <input name="length" value="" placeholder="长" id="input-length" class="form-control" type="text"></div>
+                                                <input name="goods_length" value="" placeholder="长" id="input-length"
+                                                       class="form-control" type="text"></div>
                                             <div class="col-sm-4">
-                                                <input name="width" value="" placeholder="宽" id="input-width" class="form-control" type="text"></div>
+                                                <input name="goods_width" value="" placeholder="宽" id="input-width"
+                                                       class="form-control" type="text"></div>
                                             <div class="col-sm-4">
-                                                <input name="height" value="" placeholder="高" id="input-height" class="form-control" type="text"></div>
+                                                <input name="goods_height" value="" placeholder="高" id="input-height"
+                                                       class="form-control" type="text"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -155,9 +178,11 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" for="input-length_unit_id">长度单位</label>
                                     <div class="col-sm-10">
-                                        <select name="length_unit_id" id="input-length_unit_id" class="form-control">
+                                        <select name="goods_weight" id="input-length_unit_id" class="form-control">
                                             <volist name="length_unit_list" id="length_unit">
-                                                <option value="{$length_unit['length_unit_id']}">{$length_unit['title']}</option>
+                                                <option value="{$length_unit['length_unit_id']}">
+                                                    {$length_unit['length_unit_name']}
+                                                </option>
                                             </volist>
                                         </select>
                                     </div>
@@ -166,16 +191,19 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" for="input-weight">重量</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="weight" value="" placeholder="重量" id="input-weight" class="form-control" />
+                                        <input type="text" name="goods_weight" value="" placeholder="重量" id="input-weight"
+                                               class="form-control"/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" for="input-weight_unit_id">重量单位</label>
                                     <div class="col-sm-10">
-                                        <select name="weight_unit_id" id="input-weight_unit_id" class="form-control">
+                                        <select name="length_unit_id" id="input-weight_unit_id" class="form-control">
                                             <volist name="weight_unit_list" id="weight_unit">
-                                                <option value="{$weight_unit['weight_unit_id']}">{$weight_unit['title']}</option>
+                                                <option value="{$weight_unit['weight_unit_id']}">
+                                                    {$weight_unit['weight_unit_name']}
+                                                </option>
                                             </volist>
                                         </select>
                                     </div>
@@ -184,7 +212,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" for="input-status">状态</label>
                                     <div class="col-sm-10">
-                                        <select name="status" id="input-status" class="form-control">
+                                        <select name="goods_status" id="input-status" class="form-control">
                                             <option value="1" selected="selected">启用</option>
                                             <option value="0">停用</option>
                                         </select>
@@ -194,7 +222,8 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" for="input-sort_number">排序</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="sort_number" value="0" placeholder="排序" id="input-sort_number" class="form-control" />
+                                        <input type="text" name="goods_sort" value="0" placeholder="排序"
+                                               id="input-sort_number" class="form-control"/>
                                     </div>
                                 </div>
 
@@ -203,7 +232,7 @@
                                     <div class="col-sm-10">
                                         <select name="tax_id" id="input-tax_id" class="form-control">
                                             <volist name="tax_list" id="tax">
-                                                <option value="{$tax['tax_id']}">{$tax['title']}</option>
+                                                <option value="{$tax['tax_id']}">{$tax['tax_name']}</option>
                                             </volist>
                                         </select>
                                     </div>
@@ -214,7 +243,9 @@
                                     <div class="col-sm-10">
                                         <select name="stock_status_id" id="input-stock_status_id" class="form-control">
                                             <volist name="stock_status_list" id="stock_status">
-                                                <option value="{$stock_status['stock_status_id']}">{$stock_status['title']}</option>
+                                                <option value="{$stock_status['stock_status_id']}">
+                                                    {$stock_status['stock_status_name']}
+                                                </option>
                                             </volist>
                                         </select>
                                     </div>
@@ -226,7 +257,8 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" for="input-description">商品描述</label>
                                     <div class="col-sm-10">
-                                        <textarea name="description" id="input-description" class="form-control"></textarea>
+                                        <textarea name="goods_description" id="input-description"
+                                                  class="form-control"></textarea>
                                     </div>
                                 </div>
 
@@ -237,21 +269,25 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" for="input-meta_title">Meta Tag 标题</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="meta_title" value="" placeholder="Meta Tag 标题" id="input-meta_title" class="form-control" />
+                                        <input type="text" name="goods_meta_name" value="" placeholder="Meta Tag 标题"
+                                               id="input-meta_title" class="form-control"/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" for="input-meta_keywords">Meta Tag 关键字</label>
                                     <div class="col-sm-10">
-                                        <textarea name="meta_keywords" placeholder="Meta Tag 关键字" id="input-meta_keywords" class="form-control" rows="4"></textarea>
+                                        <textarea name="goods_meta_keywords" placeholder="Meta Tag 关键字"
+                                                  id="input-meta_keywords" class="form-control" rows="4"></textarea>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="input-meta_description">Meta Tag 描述</label>
+                                    <label class="col-sm-2 control-label" for="input-meta_description">Meta Tag
+                                        描述</label>
                                     <div class="col-sm-10">
-                                        <textarea name="meta_description" placeholder="Meta Tag 描述" id="input-meta_description" class="form-control" rows="4"></textarea>
+                                        <textarea name="goods_meta_description" placeholder="Meta Tag 描述"
+                                                  id="input-meta_description" class="form-control" rows="4"></textarea>
                                     </div>
                                 </div>
 
@@ -263,7 +299,7 @@
                                     <div class="col-sm-10">
                                         <select name="brand_id" id="input-brand_id" class="form-control">
                                             <volist name="brand_list" id="brand">
-                                                <option value="{$brand['brand_id']}">{$brand['title']}</option>
+                                                <option value="{$brand['brand_id']}">{$brand['brand_name']}</option>
                                             </volist>
                                         </select>
                                     </div>
@@ -274,7 +310,9 @@
                                     <div class="col-sm-10">
                                         <select name="category_id" id="input-category_id" class="form-control">
                                             <volist name="category_list" id="category">
-                                                <option value="{$category['category_id']}">{:str_repeat('-', $category['deep']*2)}{$category['title']}</option>
+                                                <option value="{$category['category_id']}">{:str_repeat('-',
+                                                    $category['deep']*2)}{$category['category_name']}
+                                                </option>
                                             </volist>
                                         </select>
                                     </div>
@@ -289,14 +327,17 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="input-type-id" class="col-sm-2 control-label">
-                                        <span title="" data-toggle="tooltip" data-original-title="不同类型对应不同的属性列表">商品类型</span>
+                                        <span title="" data-toggle="tooltip"
+                                              data-original-title="不同类型对应不同的属性列表">商品类型</span>
                                     </label>
                                     <div class="col-sm-1"></div>
                                     <div class="col-sm-9">
                                         <select class="form-control" id="input-goods_type_id" name="goods_type_id">
                                             <option value="0">--未选择--</option>
                                             <volist name="goods_type_list" id="goods_type">
-                                                <option value="{$goods_type['goods_type_id']}">{$goods_type['title']}</option>
+                                                <option value="{$goods_type['goods_type_id']}">
+                                                    {$goods_type['goods_type_name']}
+                                                </option>
                                             </volist>
                                         </select>
                                     </div>
@@ -323,7 +364,8 @@
                                         <tr>
                                             <td colspan="2"></td>
                                             <td class="text-left">
-                                                <button type="button" onclick="addImage();" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="添加图片">
+                                                <button type="button" onclick="addImage();" data-toggle="tooltip"
+                                                        title="" class="btn btn-primary" data-original-title="添加图片">
                                                     <i class="fa fa-plus-circle"></i>
                                                 </button>
                                             </td>
@@ -358,27 +400,7 @@
                             'url': "{:U('ajax')}",
                             'data': {
                                 'operate': 'checkgoods_name',
-                                '___PK_': $('#input____PK_').val()
-                            }
-                        }
-                    },
-                    goods_image: {
-                        required: true,
-                        remote: {
-                            'url': "{:U('ajax')}",
-                            'data': {
-                                'operate': 'checkgoods_image',
-                                '___PK_': $('#input____PK_').val()
-                            }
-                        }
-                    },
-                    goods_image_thumb: {
-                        required: true,
-                        remote: {
-                            'url': "{:U('ajax')}",
-                            'data': {
-                                'operate': 'checkgoods_image_thumb',
-                                '___PK_': $('#input____PK_').val()
+                                'goods_id': $('#input_goods_id').val()
                             }
                         }
                     },
@@ -388,7 +410,7 @@
                             'url': "{:U('ajax')}",
                             'data': {
                                 'operate': 'checkgoods_SKU',
-                                '___PK_': $('#input____PK_').val()
+                                'goods_id': $('#input_goods_id').val()
                             }
                         }
                     },
@@ -398,50 +420,14 @@
                             'url': "{:U('ajax')}",
                             'data': {
                                 'operate': 'checkgoods_UPC',
-                                '___PK_': $('#input____PK_').val()
+                                'goods_id': $('#input_goods_id').val()
                             }
                         }
                     },
                     goods_description: {
                         required: true,
-                        remote: {
-                            'url': "{:U('ajax')}",
-                            'data': {
-                                'operate': 'checkgoods_description',
-                                '___PK_': $('#input____PK_').val()
-                            }
-                        }
                     },
-                    goods_meta_name: {
-                        required: true,
-                        remote: {
-                            'url': "{:U('ajax')}",
-                            'data': {
-                                'operate': 'checkgoods_meta_name',
-                                '___PK_': $('#input____PK_').val()
-                            }
-                        }
-                    },
-                    goods_meta_keywords: {
-                        required: true,
-                        remote: {
-                            'url': "{:U('ajax')}",
-                            'data': {
-                                'operate': 'checkgoods_meta_keywords',
-                                '___PK_': $('#input____PK_').val()
-                            }
-                        }
-                    },
-                    goods_meta_description: {
-                        required: true,
-                        remote: {
-                            'url': "{:U('ajax')}",
-                            'data': {
-                                'operate': 'checkgoods_meta_description',
-                                '___PK_': $('#input____PK_').val()
-                            }
-                        }
-                    },
+
 
                     event_sort: {
                         digits: true
@@ -454,14 +440,7 @@
                         required: '不能为空',
                         remote: '已经存在, 请重新填写'
                     },
-                    goods_image: {
-                        required: '不能为空',
-                        remote: '已经存在, 请重新填写'
-                    },
-                    goods_image_thumb: {
-                        required: '不能为空',
-                        remote: '已经存在, 请重新填写'
-                    },
+
                     goods_SKU: {
                         required: '不能为空',
                         remote: '已经存在, 请重新填写'
@@ -472,25 +451,89 @@
                     },
                     goods_description: {
                         required: '不能为空',
-                        remote: '已经存在, 请重新填写'
-                    },
-                    goods_meta_name: {
-                        required: '不能为空',
-                        remote: '已经存在, 请重新填写'
-                    },
-                    goods_meta_keywords: {
-                        required: '不能为空',
-                        remote: '已经存在, 请重新填写'
-                    },
-                    goods_meta_description: {
-                        required: '不能为空',
-                        remote: '已经存在, 请重新填写'
                     },
 
                     event_sort: {
                         digits: '排序字段要求为整数'
                     }
                 }
+            });
+        });
+
+    </script>
+
+    <script type="text/javascript">
+    var image_row = 0;
+    function addImage() {
+        html = '<tr id="image-row' + image_row + '">';
+        html += '  <td class="text-left"><input type="file" name="goods_image[' + image_row + ']" id="input-image' + image_row + '" /></td>';
+        html += '  <td class="text-right"><input type="text" name="goods_image[' + image_row + '][sort_number]" value="" placeholder="排序" class="form-control" /></td>';
+        html += '  <td class="text-left"><button type="button" onclick="$(\'#image-row' + image_row + '\').remove();" data-toggle="tooltip" title="移除" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
+        html += '</tr>';
+
+        $('#images tbody').append(html);
+
+        image_row++;
+    }
+  </script>
+
+    <script>
+        $(function () {
+
+            $('#input-goods_type_id').change(function (evt) {
+                // 只要值改变，　都需要清空
+                // 先清空已有的属性, 找到从第三个索引值为2的开始，删除即可
+                $('#tab-property div.form-group:gt(1)').remove();
+                var sel = $(this);
+                if (sel.val() == '0') {
+                    // 清除当前的选项
+                    return;
+                }
+
+                var url = '{:U('ajax', ['operate'=>'getAttribute'])}';
+                var data = {
+                    'goods_type_id': sel.val()
+                };
+                // 发出ajax请求，　获取用户get
+                $.get(url, data, function (response) {
+                    if (response.error != 0) {
+                        // 有错误
+                        console.log(response.errorInfo);
+                        return;
+                    }
+                    console.log(response);
+
+                    var rows = response.rows;// 属性列表
+                    for (var i = 0; i < rows.length; ++i) {
+                        var attr = rows[i];
+                        var containerDiv = '<div class="form-group">';
+                        containerDiv += '<label class="col-sm-2 control-label" for="input-attribute-' + attr.goods_attribute_id + '"><span  data-toggle="tooltip" data-original-title="多值请使用|||分割, 例如:土豪金|||玫瑰紫" >' + attr.goods_attribute_name + '</span></label>';
+                        containerDiv += '<div class="col-sm-1 text-center">';
+                        containerDiv += '<label class="control-label">';
+                        containerDiv += '<input type="checkbox" name="is_option[]" value="' + attr.goods_attribute_id + '"  class="form-control"></label>';
+                        containerDiv += '</div>';
+                        containerDiv += '<div class="col-sm-9">';
+                        if (attr.attribute_type_name == 'text') {
+                            containerDiv += '<input name="attribute[' + attr.goods_attribute_id + ']" value="" placeholder="属性值" id="input-attribute-' + attr.goods_attribute_id + '" class="form-control" type="text">';
+                        } else if (attr.attribute_type_name == 'select') {
+
+                            containerDiv += '<select rows="8" multiple name="attribute[' + attr.goods_attribute_id + '][]" id="input-attribute-' + attr.goods_attribute_id + '" class="form-control">';
+                            for (var j = 0; j < attr.option.length; ++j) {
+                                containerDiv += '<option value="' + attr.option[j].attribute_option_id + '">' + attr.option[j].attribute_option_name + '</option>';
+                            }
+                            containerDiv += '</select>';
+                        }
+
+                        containerDiv += '</div>';
+                        containerDiv += '</div>';
+
+                        // 加入属性容器中
+                        $('#tab-property').append(containerDiv);
+                    }
+
+                }, 'json');
+
+
             });
         });
 

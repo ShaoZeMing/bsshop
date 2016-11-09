@@ -118,8 +118,8 @@ class MakeController extends Controller
             $fd_arr = explode(',',$fd);
             $rules_html = $message_html = '';
             foreach ($fd_arr as $v) {
-                $search = ['___JFD_'];
-                $replace = [$v];
+                $search = ['___JFD_','___PK_'];
+                $replace = [$v,$pk];
                 $rules_html .= str_replace($search, $replace, $ajax_rules_html);
                 $message_html .= str_replace($search, $replace, $ajax_message_html);
             }

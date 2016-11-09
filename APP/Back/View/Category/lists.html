@@ -70,97 +70,11 @@
                                                onclick="$('input[name*=\'selected\']').prop('checked', this.checked);"/>
                                     </td>
                                     <td class="text-center">序号</td>
-                                                                                  <td class="text-center">
-                                                 <if condition="$order['field'] eq 'category_name' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'category_name', 'type'=>'desc'])}" class="asc">分类名称</a>
-                                                     <elseif condition="$order['field'] eq 'category_name' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'category_name', 'type'=>'asc'])}" class="desc">分类名称</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'category_name', 'type'=>'asc'])}" class="">分类名称</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'category_parent_id' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'category_parent_id', 'type'=>'desc'])}" class="asc">父类ID</a>
-                                                     <elseif condition="$order['field'] eq 'category_parent_id' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'category_parent_id', 'type'=>'asc'])}" class="desc">父类ID</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'category_parent_id', 'type'=>'asc'])}" class="">父类ID</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'category_sort' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'category_sort', 'type'=>'desc'])}" class="asc">排序</a>
-                                                     <elseif condition="$order['field'] eq 'category_sort' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'category_sort', 'type'=>'asc'])}" class="desc">排序</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'category_sort', 'type'=>'asc'])}" class="">排序</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'category_image' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'category_image', 'type'=>'desc'])}" class="asc">分类图片</a>
-                                                     <elseif condition="$order['field'] eq 'category_image' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'category_image', 'type'=>'asc'])}" class="desc">分类图片</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'category_image', 'type'=>'asc'])}" class="">分类图片</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'category_image_thumb' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'category_image_thumb', 'type'=>'desc'])}" class="asc">分类小图</a>
-                                                     <elseif condition="$order['field'] eq 'category_image_thumb' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'category_image_thumb', 'type'=>'asc'])}" class="desc">分类小图</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'category_image_thumb', 'type'=>'asc'])}" class="">分类小图</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'category_is_used' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'category_is_used', 'type'=>'desc'])}" class="asc">是否习惯</a>
-                                                     <elseif condition="$order['field'] eq 'category_is_used' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'category_is_used', 'type'=>'asc'])}" class="desc">是否习惯</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'category_is_used', 'type'=>'asc'])}" class="">是否习惯</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'category_is_nav' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'category_is_nav', 'type'=>'desc'])}" class="asc">顶级分类</a>
-                                                     <elseif condition="$order['field'] eq 'category_is_nav' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'category_is_nav', 'type'=>'asc'])}" class="desc">顶级分类</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'category_is_nav', 'type'=>'asc'])}" class="">顶级分类</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'category_meta_name' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'category_meta_name', 'type'=>'desc'])}" class="asc">SEO标题</a>
-                                                     <elseif condition="$order['field'] eq 'category_meta_name' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'category_meta_name', 'type'=>'asc'])}" class="desc">SEO标题</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'category_meta_name', 'type'=>'asc'])}" class="">SEO标题</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'category_meta_keywords' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'category_meta_keywords', 'type'=>'desc'])}" class="asc">SEO关键字</a>
-                                                     <elseif condition="$order['field'] eq 'category_meta_keywords' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'category_meta_keywords', 'type'=>'asc'])}" class="desc">SEO关键字</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'category_meta_keywords', 'type'=>'asc'])}" class="">SEO关键字</a>
-                                                 </if>
-                                              </td>
-                                              <td class="text-center">
-                                                 <if condition="$order['field'] eq 'category_meta_description' AND $order['type'] eq 'asc'">
-                                                    <a href="{:U('lists', $filter+['field'=>'category_meta_description', 'type'=>'desc'])}" class="asc">SEO描述</a>
-                                                     <elseif condition="$order['field'] eq 'category_meta_description' AND $order['type'] eq 'desc'"/>
-                                                     <a href="{:U('lists', $filter+['field'=>'category_meta_description', 'type'=>'asc'])}" class="desc">SEO描述</a>
-                                                     <else/>
-                                                     <a href="{:U('lists', $filter+['field'=>'category_meta_description', 'type'=>'asc'])}" class="">SEO描述</a>
-                                                 </if>
-                                              </td>
-
+                                    <td class="text-center">分类名称</td>
+                                    <td class="text-center">所属分类</td>
+                                    <td class="text-center">分类小图</td>
+                                    <td class="text-center">是否导航</td>
+                                    <td class="text-center">SEO标题</td>
                                     <td class="text-right">管理</td>
                                 </tr>
                                 </thead>
@@ -172,25 +86,16 @@
                                         </td>
                                         <td class="text-center">{$i}</td>
 
-                                                                                         <td class="text-center">{$row['category_name']}</td>
+                                        <td class="text-left">{:str_repeat('-', $row['deep']*8)}{$row['category_name']}</td>
 
-                                                 <td class="text-center">{$row['category_parent_id']}</td>
+                                        <td class="text-center">{$row['category_parent_id']}</td>
 
-                                                 <td class="text-center">{$row['category_sort']}</td>
+                                        <td class="text-center">{$row['category_image_thumb']}</td>
 
-                                                 <td class="text-center">{$row['category_image']}</td>
+                                        <td class="text-center">{$row['category_is_nav']}</td>
 
-                                                 <td class="text-center">{$row['category_image_thumb']}</td>
+                                        <td class="text-center">{$row['category_meta_name']}</td>
 
-                                                 <td class="text-center">{$row['category_is_used']}</td>
-
-                                                 <td class="text-center">{$row['category_is_nav']}</td>
-
-                                                 <td class="text-center">{$row['category_meta_name']}</td>
-
-                                                 <td class="text-center">{$row['category_meta_keywords']}</td>
-
-                                                 <td class="text-center">{$row['category_meta_description']}</td>
 
 
                                         <td class="text-right">

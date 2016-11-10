@@ -40,7 +40,15 @@ class CommonController extends Controller
                 } else {
                     $this->ajaxReturn(['error'=>1, 'errorInfo'=>D('Category')->getError()]);
                 }
+                break;
+            // 获取商品详情数据
+            case 'goods':
 
+                if ($cat=D('Goods')->getNested()) {
+                    $this->ajaxReturn(['error'=>0,'msg' =>$cat]);
+                } else {
+                    $this->ajaxReturn(['error'=>1, 'errorInfo'=>D('Category')->getError()]);
+                }
                 break;
         }
     }

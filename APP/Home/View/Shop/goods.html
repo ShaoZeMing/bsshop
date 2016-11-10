@@ -25,27 +25,8 @@
 
     <div class="product-detail">
         <div class="row">
-            <div class="col-sm-5">
-                <!--elevate zoom start-->
-                <div class="elevate-zoom-wrapper">
-                    <!-- 当前中图, 默认为第一张图的中图-->
-                    <div class="elevate-zoom-preview">
-                        <a href="javascript:;">
-                            <img id="elevate-zoom" src="__PUBLIC__/Thumb/{$image_list[0]['goods_image_medium']}" data-zoom-image="__PUBLIC__/Thumb/{$image_list[0]['goods_image_big']}" class="img-responsive"></a>
-                    </div>
+            <div class="col-sm-5" id="ajax_img">
 
-                    <!-- 小图列表 -->
-                    <div id="product-thumbnail-gallery">
-                        <volist name="image_list" id="image">
-                            <a data-zoom-image="__PUBLIC__/Thumb/{$image['goods_image_big']}"
-                               data-image="__PUBLIC__/Thumb/{$image['goods_image_medium']}"
-                               data-upate="" class="elevatezoom-gallery <if condition="$i eq 1">active</if> href="__PUBLIC__/Thumb/{$image['goods_image_big']}">
-                                <img src="__PUBLIC__/Thumb/{$image['goods_image_medium']}" style="max-height:60px; max-width:60px">
-                            </a>
-                        </volist>
-                    </div>
-                </div>
-                <!--elevate zoom end--> 
             </div>
 
 
@@ -70,24 +51,7 @@
                 </div>
                 <hr>
                 <div id="product">
-                    <h3>选项</h3>
-                    <div class="form-group required">
-                        <label class="control-label">Radio</label>
-                        <div id="input-option230">
-                            <label class="radio">
-                                <input type="radio" name="option[230]" value="17" />
-                                <span>Small</span>
-                            </label>
-                            <label class="radio">
-                                <input type="radio" name="option[230]" value="19" />
-                                <span>Medium</span>
-                            </label>
-                            <label class="radio">
-                                <input type="radio" name="option[230]" value="18" />
-                                <span>Large</span>
-                            </label>
-                        </div>
-                    </div>
+
                     <h3>配件</h3>
                     <div class="form-group required">
                         <label class="control-label">Checkbox</label>
@@ -182,28 +146,12 @@
 
         <div class="tab-content">
             <div class="tab-pane active" id="tab-description">
-                {$goods['goods_description']}
-                <volist name="image_list" id="image">
-                   <a>
-                    <img class="center-block" src="__PUBLIC__/Thumb/{$image['goods_image_big']}">
-                    </a>
-                </volist>
+                <!--====js实现图片详情代码====-->
             </div>
-
-
             <div class="tab-pane" id="tab-specification">
                 <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <td colspan="2"> <strong>Processor</strong>
-                            </td>
-                        </tr>
-                    </thead>
                     <tbody>
-                        <tr>
-                            <td>时钟频率</td>
-                            <td>100mhz</td>
-                        </tr>
+
                     </tbody>
                 </table>
             </div>
@@ -259,36 +207,165 @@
 <block name="js" >
     <script src="__PUBLIC__/Home/elevateZoom/jquery.elevateZoom.min.js" type="text/javascript"></script>
     <script src="__PUBLIC__/Home/fancybox/jquery.fancybox.js" type="text/javascript"></script>
-
+    <!--================异步获取数据商品数据=====================-->
+    <!--=========获取图片列表============-->
     <script>
-        $(document).ready(function(){
-          if ($(window).width() >= 768) {
-            $('#elevate-zoom').elevateZoom({
-                zoomWindowFadeIn: 500,//镜头窗口淡入速度 
-                zoomWindowFadeOut: 500,//镜头窗口淡出速度 
-                lensFadeIn: 500,//透镜淡入速度 
-                lensFadeOut: 500,//透镜淡出速度 
-                // lensShape: 'basic', lensSize: 150,
-                zoomWindowOffetx: 10,
-                // zoomWindowWidth: 450, zoomWindowHeight: 450,
-                borderSize: 1,
-                borderColour: '#eaeaea',
-                gallery: 'product-thumbnail-gallery',
-                galleryActiveClass: 'active',
-                cursor:'pointer',
-            });
-            $('#elevate-zoom').bind('click', function(e) {
-              var ez = $('#elevate-zoom').data('elevateZoom');
-                $.fancybox(ez.getGalleryList());
-              return false;
-            });
-          } else {
-            $('.elevatezoom-gallery').fancybox();
-            $('.elevate-zoom-preview a').bind('click', function(e) {
-              $('.elevatezoom-gallery').eq(0).trigger('click');
-              return false;
-            });
-          }
-        });
+        $(function () {
+            var url = "{:U('ajax')}";
+            var data_i ={
+                'operate':'goods_image',
+                'goods_id': {$goods['goods_id']}
+            };
+            $.post(url,data_i,function (res) {
+//                console.log(res);
+                if(res.error == 0){
+                    var img_html='<div class="elevate-zoom-wrapper"> <div class="elevate-zoom-preview"><a href="javascript:;">';
+                       img_html +='<img id="elevate-zoom" src="__PUBLIC__/Thumb/'+res.msg[0].goods_image_medium +'" data-zoom-image="__PUBLIC__/Thumb/'+res.msg[0].goods_image_big +'" class="img-responsive"></a></div>';
+                       img_html +='<div id="product-thumbnail-gallery">';
+                    $.each(res.msg,function (i,v) {
+                        img_html += '<a data-zoom-image="__PUBLIC__/Thumb/'+v.goods_image_big+'"';
+                        img_html += ' data-image="__PUBLIC__/Thumb/'+v.goods_image_medium+'" data-upate="" class="elevatezoom-gallery';
+                        if(i==1){ img_html +='active"'};
+                        img_html += '" href="__PUBLIC__/Thumb/'+v.goods_image_big+'">';
+                        img_html += '<img src="__PUBLIC__/Thumb/'+v.goods_image_medium+'" style="max-height:60px; max-width:60px"> </a>';
+                    })
+                    img_html +='</div></div>'
+                    //添加图片html
+                    $('.col-sm-5').html(img_html);
+
+                    //商品详情图片
+                    var img_html_i='';
+                    $.each(res.msg,function (i,v) {
+                        img_html_i += '<a><img class="center-block" src="__PUBLIC__/Thumb/' + v.goods_image_big + '"></a>'
+                    });
+                    $('#tab-description').append(img_html_i);
+
+                    //放大镜插件
+                    $(document).ready(function(){
+                        if ($(window).width() >= 768) {
+                            $('#elevate-zoom').elevateZoom({
+                                zoomWindowFadeIn: 500,//镜头窗口淡入速度
+                                zoomWindowFadeOut: 500,//镜头窗口淡出速度
+                                lensFadeIn: 500,//透镜淡入速度
+                                lensFadeOut: 500,//透镜淡出速度
+                                // lensShape: 'basic', lensSize: 150,
+                                zoomWindowOffetx: 10,
+                                // zoomWindowWidth: 450, zoomWindowHeight: 450,
+                                borderSize: 1,
+                                borderColour: '#eaeaea',
+                                gallery: 'product-thumbnail-gallery',
+                                galleryActiveClass: 'active',
+                                cursor:'pointer',
+                            });
+                            $('#elevate-zoom').bind('click', function(e) {
+                                var ez = $('#elevate-zoom').data('elevateZoom');
+                                $.fancybox(ez.getGalleryList());
+                                return false;
+                            });
+                        } else {
+                            $('.elevatezoom-gallery').fancybox();
+                            $('.elevate-zoom-preview a').bind('click', function(e) {
+                                $('.elevatezoom-gallery').eq(0).trigger('click');
+                                return false;
+                            });
+                        }
+                    });
+                }
+            },'json')
+        })
     </script>
+<!--========获取商品属性===========-->
+    <script>
+        $(function () {
+            var url = "{:U('ajax')}";
+            var data_i ={
+                'operate':'goods_attr',
+                'goods_id': {$goods['goods_id']}
+            };
+            $.post(url,data_i,function (res) {
+                console.log(res);
+                if(res.error == 0) {
+
+                    //商品选项
+                    var attr_html='<h3>选项</h3>';
+                    var k=1; //判断先后点击
+                    $.each(res.msg ,function (i,v) {
+                        attr_html += '<div class="form-group required order-'+k+'" order="'+k+'" data-order="'+k+'">'
+                        attr_html += ' <label class="control-label">'+v.goods_attribute_name+'</label>';
+                        attr_html += '<div id="input-option'+v.goods_attribute_id+'">';
+                        $.each(v.option,function (ii,vv) {
+                            attr_html += '<label class="radio option ming-'+vv.attribute_option_id+'">';
+                            attr_html += '<input type="radio" name="option'+vv.goods_attribute_id+'" value="'+vv.attribute_option_id+'" />';
+                            attr_html += '<span style="margin-left: 5px">'+vv.attribute_option_name+'</span></label>';
+                        })
+                        attr_html += '</div></div>';
+                        k++;
+                    })
+                    $('#product').prepend(attr_html);
+
+                    //货品确定
+                    var prod=[];
+                    $.each(res.pro,function (i ,v) {
+                        var pro=[];
+                        $.each(v.option,function (ii,vv) {
+                            if(vv.goods_product_id==v.goods_product_id){
+                                pro.push(vv.attribute_option_id);
+                            }
+                        })
+                        prod.push(pro);
+                    })
+
+                    $('#product input').click(function (evt) {
+                        var arr=[];
+                        var va=$(this).val();
+                        var yes=[],no=[];
+                        $.map(prod,function (n) {
+                            $.each(n,function (i,v) {
+                                $('.ming-'+v).show();
+                            })
+                            if($.inArray(va,n) == -1){
+                                $.each(n,function (i,v) {
+                                    no.push(v);
+                                })
+                            }else{
+                                $.each(n,function (i,v) {
+                                    yes.push(v);
+                                })
+                            }
+                            yes.push(n[0]);
+                            })
+                       var xxx= $.grep( no, function(n,i){
+                            return ($.inArray(n,yes)==-1);
+                        });
+//                        console.log(yes);
+                        console.log(arr);
+                        console.log(xxx);
+                        $.each(xxx,function (i,v) {
+                            $('.ming-'+v).hide();
+                        })
+
+                    })
+                    console.log($(prod));
+
+                    //商品属性详情页
+                    var attr_html_i;
+                    $.each(res.msg ,function (i,v) {
+                        attr_html_i += '<tr><td>'+v.goods_attribute_name+'</td><td>';
+                        if(v.attribute_type_name =='select'){
+                            $.each(v.option,function (ii,vv) {
+                                attr_html_i += vv.attribute_option_name+'　';
+                            })
+                        }else {
+                            attr_html_i += v.goods_attribute_value;
+                        }
+                        attr_html_i += '</td></tr>';
+                    });
+                    $('#tab-specification tbody').prepend(attr_html_i);
+
+                }
+
+            },'json')
+        })
+    </script>
+
 </block>

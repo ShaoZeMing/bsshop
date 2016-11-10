@@ -49,7 +49,7 @@ class GoodsModel extends Model
         $parents[] = $category;
         if ($category['category_parent_id'] != '0') {
             // 不是顶级分类, 递归查找
-            $this->getParents($category[' category_parent_id']);
+            $this->getParents($category['category_parent_id']);
         }
 
         return $parents;
@@ -90,7 +90,8 @@ class GoodsModel extends Model
 
         // 会员价格
         // 活动价格
-
         return $real_price;
     }
+
+
 }

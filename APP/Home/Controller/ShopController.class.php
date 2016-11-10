@@ -8,7 +8,7 @@ class ShopController extends CommonController
 
     public function index()
     {
-              
+
         // 推荐商品数据
         $m_goods = D('Goods');
 //        p( $m_goods->getPromote());die;
@@ -16,7 +16,7 @@ class ShopController extends CommonController
 
         // 展示首页模板
         $this->display();
-        
+
     }
 
     /**
@@ -51,10 +51,10 @@ class ShopController extends CommonController
         // 如果搜索匹配数量较少, 给出用户建议:
         if ($count <= 3) {
             // 需要给出建议
-           $words1 = $search->getExpandedQuery($query, 3);
-           $words2 = $search->getCorrectedQuery($query);
-           // 合并两组词, 取出重复词即可
-           $words = array_unique(array_merge($words1, $words2));
+            $words1 = $search->getExpandedQuery($query, 3);
+            $words2 = $search->getCorrectedQuery($query);
+            // 合并两组词, 取出重复词即可
+            $words = array_unique(array_merge($words1, $words2));
         }
 
     }
@@ -64,12 +64,10 @@ class ShopController extends CommonController
      */
     public function goods()
     {
-
         $goods_id = I('get.goods_id', 0, 'trim');
         if ($goods_id == 0) {
             $this->redirect('/index', [], 0);
         }
-
 //        p($goods_id);die;
         $m_goods = D('Goods');
 
@@ -82,10 +80,62 @@ class ShopController extends CommonController
         $breadcrumb = $m_goods->getBreadcrumb($goods_id);
         $this->assign('breadcrumb', $breadcrumb);
         // dump($breadcrumb);die;
-         
-        // 图像展示
-        $this->assign('image_list', M('GoodsImage')->where(['goods_id'=>$goods_id])->select());
 
+        //利用了AJAX展示图像这个就不用了
+        // 图像展示
+      // $this->assign('image_list', M('GoodsImage')->where(['goods_id' => $goods_id])->order('goods_sort')->select());
+
+        //获取所有属性
+        $m_AVView = D('AttributeValueView');
+        $goods_attr = $m_AVView->getAttribute($goods_id);
+//        $product_list = D('GoodsProduct')->where(['goods_id'=>$goods_id])->relation(true)->select();
+
+//        p($product_list);die;
+        $this->assign('goods_attr', $goods_attr);
         $this->display();
+    }
+
+    public function ajax()
+    {
+        $operate = I('request.operate', null, 'trim');
+
+        if (is_null($operate)) {
+            $this->ajaxReturn(['error'=>1, 'errorInfo'=>'没有对应方法']);
+
+        }
+        switch ($operate) {
+            // 获取商品属性值
+            case 'goods_attr':
+                $goods_id = I('request.goods_id', null);
+                $goods_attr = D('AttributeValueView')->getAttribute($goods_id);
+                $product_list = D('GoodsProduct')->where(['goods_id'=>$goods_id])->relation(true)->select();
+                if ($goods_attr) {
+                    $this->ajaxReturn(['error' => 0, 'msg' => $goods_attr,'pro'=> $product_list]);
+                } else {
+                    $this->ajaxReturn(['error' => 1, 'errorInfo' => '获取数据失败']);
+                }
+                break;
+            // 获取商品图片
+            case 'goods_image':
+                $goods_id = I('request.goods_id', null);
+                $image = M('GoodsImage')->where(['goods_id' => $goods_id])->order('goods_sort')->select();
+                if ($image) {
+                    $this->ajaxReturn(['error' => 0, 'msg' => $image]);
+                } else {
+                    $this->ajaxReturn(['error' => 1, 'errorInfo' => M('GoodsImage')->getError()]);
+                }
+                break;
+            // 获取商品货品对应值
+            case 'getProduct':
+                $goods_id = I('request.goods_id', null);
+                $product_list = D('GoodsProduct')->where(['goods_id'=>$goods_id])->relation(true)->select();
+                if ($product_list) {
+                    $this->ajaxReturn(['error'=>0, 'rows'=>$product_list]);
+                } else {
+                    $this->ajaxReturn(['error'=>1, 'errorInfo'=>'当前商品不存在选项货品']);
+                }
+                break;
+        }
+
     }
 }

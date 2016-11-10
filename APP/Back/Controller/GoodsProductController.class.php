@@ -112,7 +112,7 @@ class GoodsProductController extends Controller
                 $rows[$key]['option'][$k]['option_title'] = $m_attribute_option->where($cond)->getField('attribute_option_name');
             }
         }
-        p($option_rows);
+//        p($option_rows);
 
 //        p($rows);die;
         $this->assign('rows', $rows);

@@ -27,6 +27,8 @@ class MakeController extends Controller
             //获得表字段详情
             $field_info = M()->query('SHOW FULL COLUMNS FROM ' . C('DB_PREFIX') . $table_i);
             //遍历获得每个字段描述信息储存到一个数组中。
+
+            p($field_info);die;
             $fd = '';        //接收定义搜索字段
             foreach ($field_info as $v) {
                 //查询主键字段

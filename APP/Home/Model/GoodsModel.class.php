@@ -64,7 +64,6 @@ class GoodsModel extends Model
      */
     public function getPrice($goods_id, $goods_product_id=0, $member_id=0)
     {
-
         // 商品价格
         $goods_price = $this->where(['goods_id'=>$goods_id])->getField('goods_price');
         $real_price = $goods_price;

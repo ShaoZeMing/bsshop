@@ -11,7 +11,6 @@ class ShopController extends CommonController
 
         // 推荐商品数据
         $m_goods = D('Goods');
-//        p( $m_goods->getPromote());die;
         $this->assign('promote_goods_list', $m_goods->getPromote());
 
         // 展示首页模板
@@ -68,30 +67,26 @@ class ShopController extends CommonController
         if ($goods_id == 0) {
             $this->redirect('/index', [], 0);
         }
-//        p($goods_id);die;
         $m_goods = D('Goods');
-
         // 获取商品信息
         $goods = $m_goods->find($goods_id);
         $this->assign('goods', $goods);
 
-//        p($goods);die;
-        // 面包屑信息
-        $breadcrumb = $m_goods->getBreadcrumb($goods_id);
-        $this->assign('breadcrumb', $breadcrumb);
-        // dump($breadcrumb);die;
+/*        p($goods);die;
 
-        //利用了AJAX展示图像这个就不用了
-        // 图像展示
-      // $this->assign('image_list', M('GoodsImage')->where(['goods_id' => $goods_id])->order('goods_sort')->select());
+         dump($breadcrumb);die;
 
-        //获取所有属性
+        利用了AJAX展示图像这个就不用了
+         图像展示
+       $this->assign('image_list', M('GoodsImage')->where(['goods_id' => $goods_id])->order('goods_sort')->select());
+
+        获取所有属性
         $m_AVView = D('AttributeValueView');
         $goods_attr = $m_AVView->getAttribute($goods_id);
-//        $product_list = D('GoodsProduct')->where(['goods_id'=>$goods_id])->relation(true)->select();
+        $product_list = D('GoodsProduct')->where(['goods_id'=>$goods_id])->relation(true)->select();
 
-//        p($product_list);die;
-        $this->assign('goods_attr', $goods_attr);
+        p($product_list);die;
+        $this->assign('goods_attr', $goods_attr);*/
         $this->display();
     }
 
@@ -107,7 +102,9 @@ class ShopController extends CommonController
             // 获取商品属性值
             case 'goods_attr':
                 $goods_id = I('request.goods_id', null);
+                //获取商品所有属性
                 $goods_attr = D('AttributeValueView')->getAttribute($goods_id);
+                //获取货品所有属性与值
                 $product_list = D('GoodsProduct')->where(['goods_id'=>$goods_id])->relation(true)->select();
                 if ($goods_attr) {
                     $this->ajaxReturn(['error' => 0, 'msg' => $goods_attr,'pro'=> $product_list]);
@@ -118,21 +115,14 @@ class ShopController extends CommonController
             // 获取商品图片
             case 'goods_image':
                 $goods_id = I('request.goods_id', null);
+                //获取所有图片
                 $image = M('GoodsImage')->where(['goods_id' => $goods_id])->order('goods_sort')->select();
+               //获取面包陷导航
+                $breadcrumb = D('Goods')->getBreadcrumb($goods_id);
                 if ($image) {
-                    $this->ajaxReturn(['error' => 0, 'msg' => $image]);
+                    $this->ajaxReturn(['error' => 0, 'msg' => $image ,'bre'=>$breadcrumb]);
                 } else {
                     $this->ajaxReturn(['error' => 1, 'errorInfo' => M('GoodsImage')->getError()]);
-                }
-                break;
-            // 获取商品货品对应值
-            case 'getProduct':
-                $goods_id = I('request.goods_id', null);
-                $product_list = D('GoodsProduct')->where(['goods_id'=>$goods_id])->relation(true)->select();
-                if ($product_list) {
-                    $this->ajaxReturn(['error'=>0, 'rows'=>$product_list]);
-                } else {
-                    $this->ajaxReturn(['error'=>1, 'errorInfo'=>'当前商品不存在选项货品']);
                 }
                 break;
         }

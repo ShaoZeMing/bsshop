@@ -39,8 +39,6 @@ class GoodsController extends Controller
     {
         // 判断是否为POST数据提交
         if (IS_POST) {
-
-
             // 商品相册图像数据添加
             $t_upload = new Upload();
             // 配置上传信息
@@ -60,15 +58,12 @@ class GoodsController extends Controller
             // 尺寸定义
             $w_s = getConfig('goods_small_width', 100);
             $h_s = getConfig('goods_small_height', 100);
-
             $w_m = getConfig('goods_medium_width', 300);
             $h_m = getConfig('goods_medium_height', 300);
-
             $w_b = getConfig('goods_big_width', 800);
             $h_b = getConfig('goods_big_height', 800);
-
             //压缩首页排序默认图
-            $m_file = $goods_logo['savepath'] . '300_' . $goods_logo['savename'];
+            $m_file = $goods_logo['savepath'] . 'logo_' . $goods_logo['savename'];
             $t_image->open(APP_PATH . 'Upload/' . $goods_logo['savepath'] . $goods_logo['savename']);
             $t_image->thumb($w_m, $h_m)->save($thumb_root . $m_file);
 
@@ -82,19 +77,16 @@ class GoodsController extends Controller
             if (!$result) {
                 $this->error('数据添加失败: ' . $model->getError(), U('add'));
             }
-
 //            p($_POST);die;
             //添加数据
             $goods_id = $model->add();
             if (!$goods_id) {
                 $this->error('数据添加失败:' . $model->getError(), U('add'));
             }
-
             // 商品的本身数据添加添加成功
 
             // 自动更新当前商品对应的索引
             // $this->addIndex($goods_id);
-
 
             // 为每个上传图像生成缩略图
             foreach ($goods_image_list as $key => $image) {
@@ -123,11 +115,9 @@ class GoodsController extends Controller
                     'goods_image_big' => $b_file,
                     'goods_sort' => I('post.goods_image.' . $key . '.sort_number'),
                 ];
-
             }
             // 一次插入多条goods_image数据记录
             M('GoodsImage')->addAll($data_image);
-
 
             // 商品的属性
             $attr_list = I('post.attribute');
@@ -150,16 +140,13 @@ class GoodsController extends Controller
                             // 不需要继续添加了
                             continue;
                         }
-
                         // 获取每个属性选项的ID
                         $new_option_id[] = $m_attr_option->add($option_data);
                     }
-
                     // 将value设置数组类型, 下面的连接就可以通用
                     $value = $new_option_id;
                     unset($new_option_id);  //必须删除数据以前元素，否则报错
                 }
-
                 // 是否为多选列表数组型
                 $is_option = 0;// 初始化为非选项
                 if (is_array($value)) {
@@ -172,7 +159,6 @@ class GoodsController extends Controller
                         $is_option = 1;
                     }
                 }
-
                 //
                 $value_data[] = [
                     'goods_id' => $goods_id,
@@ -184,10 +170,10 @@ class GoodsController extends Controller
             // 建立关联数据
             M('GoodsAttributeValue')->addAll($value_data);
 
-
-            p($_POST);
             // 日志层面管理
             // 成功重定向到list页
+            $this->staticGoods($goods_id);
+
             $this->redirect('lists', [], 0);
         } else {
             // 表单展示
@@ -209,6 +195,7 @@ class GoodsController extends Controller
             $this->assign('goods_type_list', M('GoodsType')->select());
 
             // 二: 表单展示
+
             $this->display();
 
         }
@@ -353,12 +340,15 @@ class GoodsController extends Controller
                 $m_goodsAttributeValue->where($cond)->delete();
                 //获取商品对应的货品ID
                 $product_id_arr = $m_goodsProduct->where($cond)->getField('goods_product_id', true);
-                //删除商品对应货品
-                $m_goodsProduct->where($cond)->delete();
+                //判断是否有货品并删除商品对应货品
+                if(!empty($product_id_arr)){
+                    $m_goodsProduct->where($cond)->delete();
+                    //删除商品货品对应的选项记录
+                    $m_productOption->where(['goods_product_id' => ['in', $product_id_arr]])->delete();
+                }
                 //删除商品对应图片数据
                 $m_goodsImage->where($cond)->delete();
-                //删除商品货品对应的选项记录
-                $m_productOption->where(['goods_product_id' => ['in', $product_id_arr]])->delete();
+
                 $this->redirect('lists', [], 0);
                 break;
             default:
@@ -422,5 +412,20 @@ class GoodsController extends Controller
             }
         }
 
+    }
+
+    public function staticGoods($goods_id){
+
+        $m_goods = D('Goods');
+        // 获取商品信息
+        $goods = $m_goods->find($goods_id);
+        $this->assign('goods', $goods);
+
+        // 模块@控制器:动作
+        $content = $this->fetch('Home@Shop:goods');
+        // dump($content);
+        // 生成静态html文件
+        $file = './goods/'.$goods_id. '.html';
+        file_put_contents($file, $content);
     }
 }

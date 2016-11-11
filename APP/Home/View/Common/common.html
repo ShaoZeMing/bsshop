@@ -43,7 +43,7 @@
         $(function () {
             var html= '<ul class="main-menu"><li class="parent"> <a href="/">首页</a> </li>';
             // 二: 向服务器发送ajax请求, 删除数据库中货品
-            var url = '{:U("Common/commonAjax")}';
+            var url = '/Common/commonAjax.html';
             var data = {
                 'operate':'category'
             };
@@ -93,7 +93,7 @@
                 <li>
                     <a href=""> <i class="fa fa-phone"></i>
                     </a>
-                    <span class="hidden-xs hidden-sm hidden-md">{getConfig('')}</span>
+                    <span class="hidden-xs hidden-sm hidden-md">{:getConfig('shop_phone',15928240096)}</span>
                 </li>
                 <li class="dropdown">
                     <a href="" title="会员中心" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-user"></i>
@@ -102,10 +102,10 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right">
                         <li>
-                            <a href="{:U('/register')}">会员注册</a>
+                            <a href="/register.html">会员注册</a>
                         </li>
                         <li>
-                            <a href="{:U('/login')}">会员登录</a>
+                            <a href="/login.html">会员登录</a>
                         </li>
                     </ul>
                 </li>

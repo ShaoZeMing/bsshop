@@ -1,6 +1,7 @@
 <?php
 
 namespace Home\Controller;
+use Home\Cart\Cart;
 use Think\Controller;
 
 
@@ -41,16 +42,24 @@ class CommonController extends Controller
                     $this->ajaxReturn(['error'=>1, 'errorInfo'=>D('Category')->getError()]);
                 }
                 break;
-            // 获取商品详情数据
-            case 'goods':
-
-                if ($cat=D('Goods')->getNested()) {
-                    $this->ajaxReturn(['error'=>0,'msg' =>$cat]);
+            // 添加购物新详情数据
+            case 'addCart':
+                $info=I('request.goodsInfo',[]);
+                $goods_id =$info['goods_id'];
+                $pro_id =$info['goods_product_id'];
+                $cart = new Cart();
+                $cart->addGoods($goods_id,$pro_id);
+                if ($cart->addGoods($goods_id,$pro_id)) {
+                    $this->ajaxReturn(['error'=>0,'msg' =>'添加购物车成功']);
                 } else {
-                    $this->ajaxReturn(['error'=>1, 'errorInfo'=>D('Category')->getError()]);
+                    $this->ajaxReturn(['error'=>1, 'errorInfo'=>'添加购物车失败！']);
                 }
                 break;
         }
+    }
+
+    public function addGoods(){
+
     }
 
 }

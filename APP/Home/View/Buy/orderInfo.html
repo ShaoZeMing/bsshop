@@ -1,0 +1,89 @@
+<extend name="Layout/Shop" />
+
+<block name="content">
+
+<div class="row">
+        <div class="col-sm-12">
+            <div class="well">
+                <h2>你的订单: <span id="span-order_sn">{$order_sn}</span></h2>
+                <p> 
+                <strong>当前状态: <span id="span-status"></span></strong>
+                </p>
+            </div>
+        </div>
+    </div>
+</block>
+
+<block name="appendJS">
+    
+    <script>
+    // // 一: 轮询执行
+    // function getOrderStatus(order_sn)
+    // {
+    //     var order_sn = order_sn || $('#span-order_sn').text();
+    //     // if (order_sn == 0) {
+    //     //     order_sn = $('#span-order_sn').text();
+    //     // }
+
+    //     var url = '{:U('ajax')}';
+    //     var data = {
+    //         operate: 'getOrderStatus',
+    //         order_sn: order_sn,
+    //     };
+    //     $.get(url, data, function(response) {
+    //         if (response.error == 0) {
+    //             // 展示订单状态(处理中, 生成成功, 库存不足生成失败)
+    //             $('#span-status').html(response.status);
+
+    //             if (response.status == '订单生成成功' || response.status == '订单失败') {
+    //                 clearInterval(status);
+    //             }
+    //         }
+    //     }, 'json');
+
+    // }
+    // // 轮询执行
+    // var status = setInterval(getOrderStatus, 1000);
+    $(function() {
+        $('#span-status').html('处理中');
+        getOrderStatusLong();
+        
+    });
+    // 二, 长轮询执行
+    function getOrderStatusLong(order_sn)
+    {
+        var order_sn = order_sn || $('#span-order_sn').text();
+
+        var url = '{:U('ajax')}';
+        var data = {
+            operate: 'getOrderStatusLong',
+            order_sn: order_sn,
+        };
+        $.ajax({
+            type: 'get',
+            url: url, 
+            data: data, 
+            success: function(response) {
+                if (response.error == 0) {
+                    // 展示订单状态(处理中, 生成成功, 库存不足生成失败)
+                    $('#span-status').html(response.status);
+
+                    if (response.status == '订单生成成功' || response.status == '订单失败') {
+                        clearInterval(status);
+                    }
+                }
+            },
+            dataType: 'json',
+            timeout: 10*1000,// 超时时间
+            // 超时意味着出错了
+            error: function (xhr, errorStatus) {
+                console.log(errorStatus);// timeout
+                // 立即发出请求
+                getOrderStatusLong();
+            }
+
+        });
+
+    }
+    </script>
+</block>

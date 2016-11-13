@@ -87,14 +87,14 @@
                         <button type="button" id="button-cart" data-loading-text="正在加载..." class="btn btn-primary">
                             加入购物车
                         </button>
-                        <input type="hidden" name="product_id" value="61"/>
+                        <input type="hidden" name="product_id" value="0"/>
                     </div>
                 </div>
                 <div class="wishlist-share">
-                    <a onclick="wishlist.add('61');"> <i class="fa fa-heart"></i>
+                    <a onclick="wishlist.add('{$goods.goods_id}');"> <i class="fa fa-heart"></i>
                         收藏
                     </a>
-                    <a onclick="compare.add('61');">
+                    <a onclick="compare.add('{$goods.goods_id}');">
                         <i class="fa fa-link"></i>
                         对比
                     </a>
@@ -286,7 +286,7 @@
                     });
                     var breadcrumb = '';
                     $.each(res.bre, function (i, v) {
-                        var u = '/category/'+v.category_id +'.html';
+                        var u = '/category/' + v.category_id + '.html';
                         breadcrumb += '<li><a href="' + u + '">' + v.category_name + '</a></li>';
                     })
                     $('.breadcrumb li:first').after(breadcrumb);
@@ -304,10 +304,12 @@
     <!--========获取商品属性===========-->
     <script>
         $(function () {
+            var proid = []; //获取货品拥有几个属性必选
+            var goods_id = {$goods['goods_id']}; //获取货品拥有几个属性必选
             var url = "/Shop/ajax.html";
             var data_i = {
                 'operate': 'goods_attr',
-                'goods_id': {$goods['goods_id']}
+                'goods_id': goods_id
             };
             $.post(url, data_i, function (res) {
                 if (res.error == 0) {
@@ -318,9 +320,11 @@
                         attr_html += '<div class="form-group required order" order="' + k + '" data-order="' + k + '">'
                         attr_html += ' <label class="control-label">' + v.goods_attribute_name + '</label>';
                         attr_html += '<div id="input-option' + v.goods_attribute_id + '">';
+
                         $.each(v.option, function (ii, vv) {
+
                             attr_html += '<label class="radio option ming-' + vv.attribute_option_id + '">';
-                            attr_html += '<input type="radio" name="option' + vv.goods_attribute_id + '" value="' + vv.attribute_option_id + '" />';
+                            attr_html += '<input type="radio" data-pid="' + v.goods_product_id + '" name="option' + vv.goods_attribute_id + '" value="' + vv.attribute_option_id + '" />';
                             attr_html += '<span style="margin-left: 5px">' + vv.attribute_option_name + '</span></label>';
                         })
                         attr_html += '</div></div>';
@@ -332,20 +336,29 @@
                     var prod = [];
                     $.each(res.pro, function (i, v) {
                         var pro = [];
+                        var nnn = [];
                         $.each(v.option, function (ii, vv) {
                             if (vv.goods_product_id == v.goods_product_id) {
                                 pro.push(vv.attribute_option_id);
+                                nnn.push(vv.attribute_option_id);
                             }
                         })
+                        nnn.push(v.goods_product_id)
+                        proid.push(nnn);
                         prod.push(pro);
                     })
+                    console.log(proid);
+                    var szm = proid;
+
+
+                    $('#button-cart').addClass('disabled');
                     if (prod.length == 0) {
                         $('#product .order label').addClass('disabled');
                         $('#pro-status').html('<span>库存状态</span><h4>缺货</h4>')
                     }
 
                     /*****点击属性选项事件处理****/
-                    $('#product input').click(function (evt) {
+                    $(':radio[name^=option]').click(function (evt) {
                         var va = $(this).val(); //获取当前点击按钮的值
                         var or = $(this).parents('.order').data('order');//获取点击属性所在排
 //                        console.log(or);
@@ -367,6 +380,7 @@
                                     yes.push(v);
                                 })
                             }
+//                            yes.push(n[0]);  //将当前点击排的所有按钮id都为可点击
                             yes.push(n[or - 1]);  //将当前点击排的所有按钮id都为可点击
                         });
                         //过滤两个数值中的有效值
@@ -378,6 +392,41 @@
                             $('.ming-' + v + ' input').removeAttr('checked');
                             $('.ming-' + v).addClass('disabled');
                         })
+                        /*****确定货品******/
+                        var sub = [];
+                        var num = $(':radio[name^=option]:checked').size()
+                        if (num == szm[0].length - 1) {
+                            $(':radio[name^=option]:checked').each(function (evt) {
+                                sub.push(($(this).val()));
+                            })
+                            $.map(szm, function (n) {
+                                console.log(n);
+                                var nn = n.pop();
+                                if (n.sort().toString() == sub.sort().toString()) {
+                                    $('#button-cart').removeClass('disabled');
+                                    console.log(nn);
+                                    $('#button-cart').click(function (evt) {
+                                        console.log(nn);
+                                        evt.preventDefault();
+                                        var addCartUrl = "/Common/commonAjax.html";
+                                        var addCartData = {
+                                            'operate': 'addCart',
+                                            'goodsInfo': {
+                                                'goods_id': goods_id,
+                                                'goods_product_id': nn
+                                            }
+                                        };
+                                        $.post(addCartUrl, addCartData, function (msg) {
+                                            console.log(msg);
+                                            if(msg.error==0){
+                                                alert(msg.msg)
+                                                window.location.href='/';
+                                            }
+                                        }, 'json')
+                                    })
+                                }
+                            })
+                        }
                     })
                     /****商品属性详情页****/
                     var attr_html_i;

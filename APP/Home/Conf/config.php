@@ -17,6 +17,14 @@ return array(
         'index' => 'Shop/index',    //商品主页
 
         // 带参数的路由
-        'goods/:goods_id\d'   => 'Shop/goods'
+        'goods/:goods_id\d'   => 'Shop/goods',
+
+        'addGoods'  => 'Buy/addGoods',
+        'cart'  => 'Buy/cart',
+        'remove'    => 'Buy/removeGoods',
+        'order' => 'Buy/order',
+        'ajax'  => 'Buy/ajax',
+        'checkout'  => 'Buy/checkout',
+        'orderInfo/:order_sn' => 'Buy/orderInfo',
     ), // 默认路由规则 针对模块
 );

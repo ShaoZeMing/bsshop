@@ -1,0 +1,118 @@
+<extend name="Home@Common:common"/>
+<block name="title"><title>购物车管理</title></block>
+
+<block name="content">
+
+    <h1>购物车内的商品                &nbsp;({:sprintf('%.2f', $total_price['total_weight']/1000)}kg)</h1>
+    <form action="http://php.kang.com/test/s/index.php?route=checkout/cart/edit" method="post" enctype="multipart/form-data">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td class="text-center">图片</td>
+                        <td class="text-left">商品名称</td>
+                        <td class="text-left">型号</td>
+                        <td class="text-left">数量</td>
+                        <td class="text-right">单价</td>
+                        <td class="text-right">总计</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <volist name="goods_list" id="goods" key="goodsI">
+                    <tr>
+                        <td class="text-center">
+                            <a href="{:U('/goods/'.$goods['goods_id'])}">
+                                <img src="__PUBLIC__/Thumb/{$goods['goods_image_thumb']}" alt="{$goods['goods_name']}" title="{$goods['goods_name']}" class="img-thumbnail" style="max-height: 60px"/>
+                            </a>
+                        </td>
+                        <td class="text-left">
+                            <a href="{:U('/goods/'.$goods['goods_id'])}">{$goods['goods_name']}</a>
+                        </td>
+                        <td class="text-left">
+                        <volist name="goods['option_list']" id="option">
+                            {$option['goods_attribute_name']}:{$option['attribute_option_name']}<br>
+                        </volist>
+                        </td>
+                        <td class="text-left">
+                            <div class="input-group btn-block" style="max-width: 200px;">
+                                <input type="text" name="quantity[87]" value="{$goods['product_num']}" size="1" class="form-control" />
+                                <span class="input-group-btn">
+                                    <button type="submit" data-toggle="tooltip" title="更新" class="btn btn-primary"> <i class="fa fa-refresh"></i>
+                                    </button>
+                                    <button type="button" data-toggle="tooltip"  class="btn btn-danger" id="button-remove-{$goodsI}" data-goods_id="{$goods['goods_id']}" data-goods_product_id="{$goods['goods_product_id']}"> <i class="fa fa-times-circle"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </td>
+                        <td class="text-right">￥{$goods['product_price']}</td>
+                        <td class="text-right">￥{$goods['product_price']*$goods['product_num']}</td>
+                    </tr>
+                    </volist>
+                </tbody>
+            </table>
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="col-sm-4 col-sm-offset-8">
+            <table class="table table-bordered">
+                <tr>
+                    <td class="text-right"> <strong>商品总额:</strong>
+                    </td>
+                    <td class="text-right">￥{$total_price['total_price']}</td>
+                </tr>
+              <!--   <tr>
+                    <td class="text-right"> <strong>运费:</strong>
+                    </td>
+                    <td class="text-right">￥5.00</td>
+                </tr>
+                <tr>
+                    <td class="text-right">
+                        <strong>订单总额:</strong>
+                    </td>
+                    <td class="text-right">￥26,905.00</td>
+                </tr> -->
+            </table>
+        </div>
+    </div>
+    <div class="buttons">
+        <div class="pull-left">
+            <a href="/" class="btn btn-default">继续购物</a>
+        </div>
+        <div class="pull-right">
+            <a href="{:U('/order')}" class="btn btn-primary">去结账</a>
+        </div>
+    </div>
+
+</block>
+
+<block name="js">
+
+<script>
+
+$(function(){
+    $('button[id^=button-remove-]').click(function(evt){
+
+        var currButton = $(this);
+        var url = '{:U('/remove')}';
+        var data = {
+            goods_id: $(this).data('goods_id'),
+            goods_product_id: $(this).data('goods_product_id'),
+        };
+
+        $.post(url, data, function(response){
+            if (response.error == 0) {
+                // 服务器端成功
+                // 
+                currButton.parents('tr').remove();
+
+            } else {
+                console.log(response.errorInfo);
+            }
+
+        }, 'json');
+    });
+
+});
+</script>
+</block>

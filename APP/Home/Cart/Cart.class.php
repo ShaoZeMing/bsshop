@@ -122,6 +122,7 @@ class Cart
     }
 
 
+
     /**
      * 合并cookie中的商品到, 数据表中.
      * @return [type] [description]
@@ -133,6 +134,7 @@ class Cart
         // 合并到goods_list属性中:
         $this->goods_list = array_merge($this->_goods_list, $goods_list ? $goods_list : []);
     }
+
 
     /*
   * s删除购物车
@@ -221,6 +223,7 @@ class Cart
 
     public function clearGoods()
     {
+
 
     }
     /*
